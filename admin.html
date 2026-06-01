@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — SmartTutors.online</title>
+  <meta name="description" content="SmartTutors internal admin panel for managing enrollment applications." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ════════════════════════════════════════════
+       CSS TOKENS — matches main site design system
+       ════════════════════════════════════════════ */
+    :root {
+      --violet:       #7C3AED;
+      --violet-light: #A855F7;
+      --coral:        #FF6B6B;
+      --coral-light:  #FF8E8E;
+      --navy:         #1E293B;
+      --navy-dark:    #0f172a;
+      --green:        #10B981;
+      --green-dark:   #059669;
+      --amber:        #F59E0B;
+      --red:          #EF4444;
+      --white:        #ffffff;
+      --gradient:     linear-gradient(135deg, #7C3AED 0%, #FF6B6B 100%);
+      --gradient-g:   linear-gradient(135deg, #059669, #10B981);
+      --glass-bg:     rgba(255,255,255,0.78);
+      --glass-border: rgba(255,255,255,0.5);
+      --glass-shadow: 0 8px 32px rgba(31,38,135,0.12);
+      --transition:   280ms cubic-bezier(0.16,1,0.3,1);
+      --radius:       16px;
+    }
+
+    .dark {
+      --glass-bg:     rgba(13,18,40,0.82);
+      --glass-border: rgba(255,255,255,0.07);
+      --glass-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #f1f5f9;
+      min-height: 100vh;
+      color: var(--navy);
+      transition: background 400ms, color 400ms;
+    }
+
+    .dark body, body.dark-mode {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.88);
+    }
+
+    body.dark-applied {
+      background: #060b1a;
+      color: rgba(255,255,255,0.88);
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, #7C3AED, #FF6B6B);
+      border-radius: 3px;
+    }
+
+    /* ─── Gradient text ─── */
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ════════════════════════════════════════════
+       BACKGROUND BLOBS
+       ════════════════════════════════════════════ */
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      animation: blobFloat 8s ease-in-out infinite;
+    }
+
+    .bg-blob-1 {
+      width: 500px; height: 500px;
+      background: rgba(124,58,237,0.1);
+      top: -150px; left: -150px;
+    }
+
+    .bg-blob-2 {
+      width: 400px; height: 400px;
+      background: rgba(255,107,107,0.08);
+      bottom: -100px; right: -100px;
+      animation-delay: -3s;
+    }
+
+    .bg-blob-3 {
+      width: 300px; height: 300px;
+      background: rgba(16,185,129,0.06);
+      top: 40%; left: 50%;
+      animation-delay: -5s;
+    }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33%       { transform: translate(20px,-20px) scale(1.04); }
+      66%       { transform: translate(-15px,15px) scale(0.97); }
+    }
+
+    /* ════════════════════════════════════════════
+       LAYOUT
+       ════════════════════════════════════════════ */
+    .admin-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    @media (max-width: 768px) {
+      .admin-wrap { padding: 20px 16px 48px; }
+    }
+
+    /* ════════════════════════════════════════════
+       HEADER
+       ════════════════════════════════════════════ */
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .admin-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .admin-logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--gradient);
+      box-shadow: 0 6px 20px rgba(124,58,237,0.38);
+      flex-shrink: 0;
+    }
+
+    .admin-title-block {}
+
+    .admin-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .admin-subtitle {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .dark-applied .admin-subtitle { color: rgba(255,255,255,0.45); }
+
+    /* ─── Header Actions ─── */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn-ghost {
+      background: rgba(124,58,237,0.06);
+      color: var(--violet);
+      border: 1.5px solid rgba(124,58,237,0.18);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(124,58,237,0.12);
+      border-color: var(--violet);
+      transform: translateY(-1px);
+    }
+
+    .btn-danger {
+      background: rgba(239,68,68,0.07);
+      color: var(--red);
+      border: 1.5px solid rgba(239,68,68,0.18);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239,68,68,0.14);
+      border-color: var(--red);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.36);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(124,58,237,0.48);
+    }
+
+    /* Theme toggle */
+    .theme-toggle-btn {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border-radius: 10px;
+      border: 1.5px solid rgba(124,58,237,0.18);
+      background: rgba(124,58,237,0.06);
+      color: var(--violet);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all var(--transition);
+    }
+
+    .theme-toggle-btn:hover {
+      background: rgba(124,58,237,0.12);
+      transform: rotate(20deg);
+    }
+
+    /* ════════════════════════════════════════════
+       STATS STRIP
+       ════════════════════════════════════════════ */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 900px) { .stats-strip { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px) { .stats-strip { grid-template-columns: 1fr 1fr; gap: 10px; } }
+
+    .stat-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(124,58,237,0.12);
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .stat-icon-violet { background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(168,85,247,0.1)); }
+    .stat-icon-coral  { background: linear-gradient(135deg, rgba(255,107,107,0.15), rgba(255,142,142,0.1)); }
+    .stat-icon-green  { background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(5,150,105,0.1)); }
+    .stat-icon-amber  { background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(217,119,6,0.1)); }
+
+    .stat-body {}
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .dark-applied .stat-label { color: rgba(255,255,255,0.45); }
+
+    /* ════════════════════════════════════════════
+       CONTROLS BAR
+       ════════════════════════════════════════════ */
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 42px;
+      padding: 0 14px 0 42px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(124,58,237,0.14);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--navy);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .dark-applied .search-input {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.88);
+    }
+
+    .search-input::placeholder { color: #94a3b8; }
+
+    .search-input:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.1);
+    }
+
+    .filter-select {
+      height: 42px;
+      padding: 0 36px 0 14px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(124,58,237,0.14);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%237C3AED' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .dark-applied .filter-select {
+      background-color: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.88);
+      color-scheme: dark;
+    }
+
+    .filter-select:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.1);
+    }
+
+    /* ════════════════════════════════════════════
+       TABLE CONTAINER
+       ════════════════════════════════════════════ */
+    .table-glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: var(--glass-shadow), 0 0 0 1px rgba(255,255,255,0.4) inset;
+      overflow: hidden;
+    }
+
+    .dark-applied .table-glass {
+      box-shadow: var(--glass-shadow);
+    }
+
+    .table-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(124,58,237,0.08);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .dark-applied .table-header { border-color: rgba(255,255,255,0.06); }
+
+    .table-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .table-count {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      background: rgba(124,58,237,0.08);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--violet);
+      margin-left: 10px;
+    }
+
+    .dark-applied .table-count {
+      background: rgba(124,58,237,0.18);
+      border-color: rgba(168,85,247,0.3);
+      color: #C084FC;
+    }
+
+    /* ─── Table ─── */
+    .table-scroll { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead {
+      background: rgba(124,58,237,0.04);
+      border-bottom: 1px solid rgba(124,58,237,0.08);
+    }
+
+    .dark-applied thead {
+      background: rgba(124,58,237,0.08);
+      border-color: rgba(255,255,255,0.06);
+    }
+
+    th {
+      padding: 13px 18px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #64748b;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      transition: color var(--transition);
+    }
+
+    .dark-applied th { color: rgba(255,255,255,0.4); }
+
+    th:hover { color: var(--violet); }
+    .dark-applied th:hover { color: #A855F7; }
+
+    th .sort-icon {
+      display: inline-block;
+      margin-left: 4px;
+      opacity: 0.4;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    th.sort-asc  .sort-icon,
+    th.sort-desc .sort-icon { opacity: 1; color: var(--violet); }
+    th.sort-desc .sort-icon { transform: rotate(180deg); }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(124,58,237,0.05);
+      transition: background var(--transition);
+      animation: rowFadeIn 0.3s ease forwards;
+    }
+
+    @keyframes rowFadeIn {
+      from { opacity: 0; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .dark-applied tbody tr { border-color: rgba(255,255,255,0.04); }
+
+    tbody tr:last-child { border-bottom: none; }
+
+    tbody tr:hover {
+      background: rgba(124,58,237,0.04);
+    }
+
+    .dark-applied tbody tr:hover { background: rgba(124,58,237,0.08); }
+
+    td {
+      padding: 16px 18px;
+      vertical-align: top;
+    }
+
+    /* ─── Student Cell ─── */
+    .student-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 160px;
+    }
+
+    .student-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(124,58,237,0.3);
+    }
+
+    .student-name {
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .dark-applied .student-name { color: rgba(255,255,255,0.9); }
+
+    .student-email {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* ─── Level Badge ─── */
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .level-o {
+      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(168,85,247,0.08));
+      color: var(--violet);
+      border: 1px solid rgba(124,58,237,0.2);
+    }
+
+    .level-a {
+      background: linear-gradient(135deg, rgba(255,107,107,0.12), rgba(255,142,142,0.08));
+      color: #e55;
+      border: 1px solid rgba(255,107,107,0.2);
+    }
+
+    .dark-applied .level-o { background: rgba(124,58,237,0.2); border-color: rgba(168,85,247,0.3); color: #C084FC; }
+    .dark-applied .level-a { background: rgba(255,107,107,0.15); border-color: rgba(255,107,107,0.25); color: #FCA5A5; }
+
+    /* ─── Subject Tags ─── */
+    .subject-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      min-width: 220px;
+      max-width: 340px;
+    }
+
+    .subject-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      background: rgba(124,58,237,0.07);
+      border: 1px solid rgba(124,58,237,0.14);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #475569;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+
+    .subject-tag:hover {
+      background: rgba(124,58,237,0.14);
+      color: var(--violet);
+    }
+
+    .dark-applied .subject-tag {
+      background: rgba(124,58,237,0.12);
+      border-color: rgba(168,85,247,0.2);
+      color: rgba(255,255,255,0.65);
+    }
+
+    .dark-applied .subject-tag:hover {
+      background: rgba(124,58,237,0.22);
+      color: #C084FC;
+    }
+
+    /* ─── Date Cell ─── */
+    .date-cell {
+      white-space: nowrap;
+      min-width: 110px;
+    }
+
+    .date-primary { font-size: 13px; font-weight: 500; color: var(--navy); }
+    .dark-applied .date-primary { color: rgba(255,255,255,0.8); }
+    .date-secondary { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+    /* ─── Actions Cell ─── */
+    .actions-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 140px;
+    }
+
+    /* WhatsApp Button */
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 14px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 3px 12px rgba(37,211,102,0.35);
+      white-space: nowrap;
+    }
+
+    .wa-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(37,211,102,0.5);
+    }
+
+    .wa-btn:active { transform: scale(0.97); }
+
+    /* Delete Button */
+    .del-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      background: rgba(239,68,68,0.07);
+      border: 1.5px solid rgba(239,68,68,0.15);
+      border-radius: 9px;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .del-btn:hover {
+      background: rgba(239,68,68,0.14);
+      border-color: var(--red);
+      color: var(--red);
+      transform: scale(1.08);
+    }
+
+    /* ════════════════════════════════════════════
+       EMPTY STATE
+       ════════════════════════════════════════════ */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 72px 32px;
+      gap: 16px;
+    }
+
+    .empty-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(255,107,107,0.08));
+      border: 1px solid rgba(124,58,237,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .empty-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .dark-applied .empty-title { color: rgba(255,255,255,0.88); }
+
+    .empty-sub {
+      font-size: 14px;
+      color: #64748b;
+      max-width: 380px;
+      line-height: 1.6;
+    }
+
+    .dark-applied .empty-sub { color: rgba(255,255,255,0.4); }
+
+    .empty-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 22px;
+      background: var(--gradient);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 11px;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(124,58,237,0.38);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .empty-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(124,58,237,0.5);
+    }
+
+    /* ════════════════════════════════════════════
+       DELETE CONFIRM TOAST
+       ════════════════════════════════════════════ */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--navy);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      z-index: 9999;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease;
+      opacity: 0;
+      min-width: 260px;
+      justify-content: center;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ════════════════════════════════════════════
+       CONFIRM DIALOG
+       ════════════════════════════════════════════ */
+    .confirm-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 8000;
+      background: rgba(10,15,35,0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .confirm-overlay.show { opacity: 1; }
+    .confirm-overlay[hidden] { display: none; }
+
+    .confirm-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 32px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 30px 80px rgba(124,58,237,0.18);
+      transform: scale(0.94);
+      transition: transform 0.28s cubic-bezier(0.16,1,0.3,1);
+      text-align: center;
+    }
+
+    .confirm-overlay.show .confirm-card { transform: scale(1); }
+
+    .confirm-icon {
+      font-size: 44px;
+      margin-bottom: 16px;
+    }
+
+    .confirm-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+
+    .dark-applied .confirm-title { color: rgba(255,255,255,0.9); }
+
+    .confirm-msg {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .dark-applied .confirm-msg { color: rgba(255,255,255,0.5); }
+
+    .confirm-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    /* ════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════ */
+    .admin-footer {
+      margin-top: 36px;
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .dark-applied .admin-footer { color: rgba(255,255,255,0.25); }
+
+    .admin-footer a {
+      color: var(--violet);
+      text-decoration: none;
+    }
+
+    .admin-footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .admin-header { gap: 12px; }
+      .header-actions { width: 100%; justify-content: flex-end; }
+      .controls-bar { flex-direction: column; align-items: stretch; }
+      .search-wrap { min-width: unset; }
+      .filter-select { width: 100%; }
+    }
+    /* ════════════════════════════════════════════
+       LOGIN WALL
+       ════════════════════════════════════════════ */
+
+    /* Dashboard hidden until authenticated */
+    #admin-dashboard { display: none; }
+    #admin-dashboard.auth-granted { display: block; }
+
+    /* Full-screen login overlay */
+    #login-wall {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(
+        ellipse at 30% 40%,
+        rgba(124,58,237,0.18) 0%, transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 70% 65%,
+        rgba(255,107,107,0.12) 0%, transparent 55%
+      ),
+      #060b1a;
+      transition: opacity 480ms cubic-bezier(0.16,1,0.3,1);
+    }
+
+    #login-wall.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Animated background particles on login */
+    .login-bg-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(124,58,237,0.15);
+      animation: ringExpand 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .login-bg-ring:nth-child(1) { width:320px; height:320px; animation-delay:0s; }
+    .login-bg-ring:nth-child(2) { width:520px; height:520px; animation-delay:-2s; opacity:.6; }
+    .login-bg-ring:nth-child(3) { width:720px; height:720px; animation-delay:-4s; opacity:.3; }
+    @keyframes ringExpand {
+      0%, 100% { transform: scale(1); opacity: .15; }
+      50%       { transform: scale(1.06); opacity: .08; }
+    }
+
+    /* Login card */
+    .login-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      background: rgba(15, 20, 50, 0.85);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      border: 1px solid rgba(124,58,237,0.28);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.05) inset;
+    }
+
+    /* Gradient top bar */
+    .login-card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, #7C3AED, #A855F7 40%, #FF6B6B);
+    }
+
+    .login-inner {
+      padding: 36px 36px 40px;
+    }
+
+    /* Logo */
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .login-logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #7C3AED, #FF6B6B);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(124,58,237,0.5);
+      flex-shrink: 0;
+    }
+
+    .login-logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #7C3AED, #FF6B6B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-logo-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 1px;
+    }
+
+    /* Heading */
+    .login-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .login-subheading {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.42);
+      margin-bottom: 28px;
+      line-height: 1.55;
+    }
+
+    /* Fields */
+    .login-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .login-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .login-input-wrap {
+      position: relative;
+    }
+
+    .login-input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.25);
+      pointer-events: none;
+      transition: color 0.25s ease;
+    }
+
+    .login-input {
+      width: 100%;
+      height: 50px;
+      padding: 0 16px 0 44px;
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 13px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: white;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      -webkit-appearance: none;
+    }
+
+    .login-input::placeholder { color: rgba(255,255,255,0.25); }
+
+    .login-input:focus {
+      border-color: #A855F7;
+      box-shadow: 0 0 0 4px rgba(168,85,247,0.18);
+      background: rgba(255,255,255,0.09);
+    }
+
+    .login-input:focus + .login-input-icon,
+    .login-input-wrap:focus-within .login-input-icon {
+      color: #A855F7;
+    }
+
+    .login-input.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 4px rgba(239,68,68,0.15);
+    }
+
+    /* Error message */
+    .login-error {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 14px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.25);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #f87171;
+      margin-bottom: 16px;
+      animation: loginShake 0.38s ease-out;
+    }
+
+    .login-error[hidden] { display: none; }
+
+    @keyframes loginShake {
+      0%  { transform: translateX(0); }
+      15% { transform: translateX(-8px); }
+      30% { transform: translateX(8px); }
+      45% { transform: translateX(-5px); }
+      60% { transform: translateX(5px); }
+      75% { transform: translateX(-2px); }
+      100%{ transform: translateX(0); }
+    }
+
+    /* Submit */
+    .login-btn {
+      width: 100%;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #7C3AED, #FF6B6B);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 13px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 6px 28px rgba(124,58,237,0.45);
+      margin-top: 4px;
+      letter-spacing: 0.01em;
+    }
+
+    .login-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(124,58,237,0.6); }
+    .login-btn:hover::before { opacity: 1; }
+    .login-btn:active { transform: scale(0.98); }
+
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Login spinner */
+    .login-spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .login-btn.loading .login-btn-text { display: none; }
+    .login-btn.loading .login-spinner   { display: block; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Footer note */
+    .login-footer-note {
+      text-align: center;
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.2);
+      margin-top: 20px;
+    }
+
+    /* ── Logout button in admin header ── */
+    .btn-logout {
+      background: rgba(239,68,68,0.07);
+      color: #f87171;
+      border: 1.5px solid rgba(239,68,68,0.2);
+    }
+    .btn-logout:hover {
+      background: rgba(239,68,68,0.15);
+      border-color: #ef4444;
+      transform: translateY(-1px);
+    }
+
+  </style>
+</head>
+
+<body id="admin-body">
+
+  <!-- ══ LOGIN WALL ══ -->
+  <div id="login-wall" role="dialog" aria-modal="true" aria-label="Admin Login">
+    <!-- Decorative rings -->
+    <div class="login-bg-ring"></div>
+    <div class="login-bg-ring"></div>
+    <div class="login-bg-ring"></div>
+
+    <div class="login-card">
+      <div class="login-inner">
+
+        <!-- Logo -->
+        <div class="login-logo">
+          <div class="login-logo-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+              <path d="M16 6L6 11V21L16 26L26 21V11L16 6Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="login-logo-text">SmartTutors</div>
+            <div class="login-logo-badge">Admin Portal</div>
+          </div>
+        </div>
+
+        <h1 class="login-heading">Welcome back</h1>
+        <p class="login-subheading">Sign in to access the enrollment dashboard.</p>
+
+        <!-- Error message -->
+        <div id="login-error" class="login-error" role="alert" hidden>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Invalid credentials. Please try again.
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" novalidate autocomplete="off">
+
+          <div class="login-field">
+            <label class="login-label" for="login-username">Username</label>
+            <div class="login-input-wrap">
+              <input
+                type="text"
+                id="login-username"
+                class="login-input"
+                placeholder="Enter username"
+                autocomplete="username"
+                autocorrect="off"
+                autocapitalize="none"
+                spellcheck="false"
+                required
+              />
+              <svg class="login-input-icon" width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+
+          <div class="login-field">
+            <label class="login-label" for="login-password">Password</label>
+            <div class="login-input-wrap">
+              <input
+                type="password"
+                id="login-password"
+                class="login-input"
+                placeholder="Enter password"
+                autocomplete="current-password"
+                required
+              />
+              <svg class="login-input-icon" width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+
+          <button type="submit" id="login-btn" class="login-btn">
+            <div class="login-spinner"></div>
+            <span class="login-btn-text">
+              Sign In to Dashboard
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="display:inline;margin-left:4px;vertical-align:middle"><path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+
+        </form>
+
+        <p class="login-footer-note">This portal is restricted to authorised SmartTutors staff only.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DASHBOARD (hidden until authenticated) ══ -->
+  <div id="admin-dashboard">
+
+  <!-- Background blobs -->
+  <div class="page-bg" aria-hidden="true">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+
+  <div class="admin-wrap">
+
+    <!-- ══ HEADER ══ -->
+    <header class="admin-header">
+      <div class="admin-logo-row">
+        <div class="admin-logo-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+            <path d="M16 6L6 11V21L16 26L26 21V11L16 6Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M16 6V26M6 11L26 21M26 11L6 21" stroke="white" stroke-width="1" stroke-opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="admin-title-block">
+          <h1 class="admin-title"><span class="gradient-text">SmartTutors</span> Admin</h1>
+          <p class="admin-subtitle" id="admin-subtitle">Enrollment Applications Dashboard</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="export-btn" title="Export as JSON">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Export JSON
+        </button>
+        <button class="btn btn-danger" id="clear-btn" title="Clear all records">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Clear All
+        </button>
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">☀️</button>
+    <!-- Logout button injected dynamically by JS -->
+    <a href="index.html" class="btn btn-primary" id="back-to-site-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M10 19l-7-7 7-7M21 12H3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Site
+    </a>
+      </div>
+    </header>
+
+    <!-- ══ STATS ══ -->
+    <div class="stats-strip" id="stats-strip">
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-violet">📋</div>
+        <div class="stat-body">
+          <div class="stat-value gradient-text" id="stat-total">0</div>
+          <div class="stat-label">Total Applications</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-coral">🎓</div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-olevel" style="background: linear-gradient(135deg,#7C3AED,#A855F7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">0</div>
+          <div class="stat-label">O Level / IGCSE</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-green">🏆</div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-alevel" style="background: linear-gradient(135deg,#FF6B6B,#FF8E8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">0</div>
+          <div class="stat-label">AS &amp; A Level</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-amber">📚</div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-subjects" style="background: linear-gradient(135deg,#F59E0B,#D97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">0</div>
+          <div class="stat-label">Avg Subjects / Student</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CONTROLS BAR ══ -->
+    <div class="controls-bar">
+      <div class="search-wrap">
+        <span class="search-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search by name, email, subject…"
+          aria-label="Search applications"
+        />
+      </div>
+      <select id="level-filter" class="filter-select" aria-label="Filter by level">
+        <option value="">All Levels</option>
+        <option value="o-level">O Level / IGCSE</option>
+        <option value="a-level">AS &amp; A Level</option>
+      </select>
+    </div>
+
+    <!-- ══ TABLE ══ -->
+    <div class="table-glass">
+      <div class="table-header">
+        <div>
+          <span class="table-title">Enrollment Applications</span>
+          <span class="table-count" id="table-count">0</span>
+        </div>
+        <div style="font-size:12px;color:#94a3b8;" id="last-updated"></div>
+      </div>
+
+      <!-- Table or empty state injected here -->
+      <div id="table-body"></div>
+    </div>
+
+    <!-- ══ FOOTER ══ -->
+    <footer class="admin-footer">
+      <p>SmartTutors.online Admin Panel &nbsp;·&nbsp; Data stored in browser localStorage &nbsp;·&nbsp; <a href="index.html">Return to public site →</a></p>
+    </footer>
+
+  </div><!-- /admin-wrap -->
+
+
+  </div><!-- /admin-dashboard -->
+
+  <!-- ══ DELETE CONFIRM DIALOG ══ -->
+  <div class="confirm-overlay" id="confirm-overlay" hidden>
+    <div class="confirm-card">
+      <div class="confirm-icon">🗑️</div>
+      <h2 class="confirm-title">Delete Application?</h2>
+      <p class="confirm-msg" id="confirm-msg">This will permanently remove the enrollment record. This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="confirm-cancel">Cancel</button>
+        <button class="btn btn-danger" id="confirm-delete">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TOAST ══ -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+  <script>
+    'use strict';
+
+    /* ═══════════════════════════════════════════════
+       STORE — reads/writes st_enrollments in localStorage
+       ═══════════════════════════════════════════════ */
+    const STORAGE_KEY = 'st_enrollments';
+
+    const LEVEL_LABELS = {
+      'o-level': 'Cambridge O Level / IGCSE',
+      'a-level': 'Cambridge International AS & A Level',
+    };
+
+    const SUBJECT_LABELS = {
+      'english':             'English Language',
+      'mathematics':         'Mathematics',
+      'physics':             'Physics',
+      'chemistry':           'Chemistry',
+      'biology':             'Biology',
+      'cs':                  'Computer Science',
+      'it':                  'Information Technology',
+      'economics':           'Economics',
+      'business':            'Business Studies',
+      'accounting':          'Accounting',
+      'pakistan-studies':    'Pakistan Studies',
+      'islamiyat':           'Islamiyat',
+      'global-perspectives': 'Global Perspectives',
+    };
+
+    function getAll() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        return Array.isArray(raw) ? raw : [];
+      } catch { return []; }
+    }
+
+    function deleteById(id) {
+      const filtered = getAll().filter(r => r.id !== id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+    }
+
+    function clearAll() {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    /* ═══════════════════════════════════════════════
+       DARK MODE
+       ═══════════════════════════════════════════════ */
+    const body       = document.getElementById('admin-body');
+    const themeBtn   = document.getElementById('theme-toggle');
+    let   darkMode   = localStorage.getItem('st-theme') === 'dark' ||
+                       (!localStorage.getItem('st-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    function applyTheme() {
+      body.classList.toggle('dark-applied', darkMode);
+      themeBtn.textContent = darkMode ? '☀️' : '🌙';
+    }
+
+    themeBtn.addEventListener('click', () => {
+      darkMode = !darkMode;
+      localStorage.setItem('st-theme', darkMode ? 'dark' : 'light');
+      applyTheme();
+    });
+
+    applyTheme();
+
+    /* ═══════════════════════════════════════════════
+       TOAST
+       ═══════════════════════════════════════════════ */
+    const toastEl = document.getElementById('toast');
+    let   toastTimer;
+
+    function showToast(msg, emoji = '✅') {
+      clearTimeout(toastTimer);
+      toastEl.innerHTML = `<span>${emoji}</span> ${msg}`;
+      toastEl.classList.add('show');
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3200);
+    }
+
+    /* ═══════════════════════════════════════════════
+       CONFIRM DIALOG
+       ═══════════════════════════════════════════════ */
+    const overlay      = document.getElementById('confirm-overlay');
+    const confirmMsg   = document.getElementById('confirm-msg');
+    const cancelBtn    = document.getElementById('confirm-cancel');
+    const deleteBtn    = document.getElementById('confirm-delete');
+    let   pendingDelete = null;
+
+    function showConfirm(id, name) {
+      pendingDelete = id;
+      confirmMsg.textContent = `This will permanently remove ${name}'s enrollment record. This action cannot be undone.`;
+      overlay.hidden = false;
+      requestAnimationFrame(() => { requestAnimationFrame(() => { overlay.classList.add('show'); }); });
+      deleteBtn.focus();
+    }
+
+    function hideConfirm() {
+      overlay.classList.remove('show');
+      overlay.addEventListener('transitionend', () => { overlay.hidden = true; }, { once: true });
+      pendingDelete = null;
+    }
+
+    cancelBtn.addEventListener('click', hideConfirm);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) hideConfirm(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.hidden) hideConfirm(); });
+
+    deleteBtn.addEventListener('click', () => {
+      if (!pendingDelete) return;
+      deleteById(pendingDelete);
+      hideConfirm();
+      render();
+      showToast('Application deleted.', '🗑️');
+    });
+
+    /* ═══════════════════════════════════════════════
+       SORT STATE
+       ═══════════════════════════════════════════════ */
+    let sortCol = 'submittedAt';
+    let sortDir = 'desc'; // 'asc' | 'desc'
+
+    /* ═══════════════════════════════════════════════
+       FORMAT HELPERS
+       ═══════════════════════════════════════════════ */
+    function formatDate(iso) {
+      try {
+        const d = new Date(iso);
+        return {
+          date: d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
+          time: d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+        };
+      } catch { return { date: '—', time: '' }; }
+    }
+
+    function initials(name) {
+      if (!name) return '?';
+      return name.split(' ').slice(0,2).map(w => w[0] || '').join('').toUpperCase();
+    }
+
+    function buildWAUrl(phone, name) {
+      const clean = phone.replace(/\D/g, '');
+      const msg = encodeURIComponent(
+        `Hi ${name.split(' ')[0]}! 👋 This is SmartTutors — we received your enrollment application and would love to discuss your class schedule. When would be a good time to chat?`
+      );
+      return `https://wa.me/${clean}?text=${msg}`;
+    }
+
+    function getSubjectLabels(record) {
+      if (record.subjectLabels?.length) return record.subjectLabels;
+      return (record.subjects || []).map(s => SUBJECT_LABELS[s] || s);
+    }
+
+    function getLevelLabel(record) {
+      if (record.levelLabel) return record.levelLabel;
+      return LEVEL_LABELS[record.level] || record.level;
+    }
+
+    /* ═══════════════════════════════════════════════
+       STATS
+       ═══════════════════════════════════════════════ */
+    function updateStats(data) {
+      const total    = data.length;
+      const oLevel   = data.filter(r => r.level === 'o-level').length;
+      const aLevel   = data.filter(r => r.level === 'a-level').length;
+      const avgSubj  = total ? (data.reduce((a,r) => a + (r.subjects?.length || 0), 0) / total).toFixed(1) : '0';
+
+      document.getElementById('stat-total').textContent    = total;
+      document.getElementById('stat-olevel').textContent   = oLevel;
+      document.getElementById('stat-alevel').textContent   = aLevel;
+      document.getElementById('stat-subjects').textContent = avgSubj;
+      document.getElementById('table-count').textContent   = total;
+
+      const sub = document.getElementById('admin-subtitle');
+      sub.textContent = total > 0
+        ? `${total} application${total !== 1 ? 's' : ''} on record — last updated ${formatDate(new Date().toISOString()).date}`
+        : 'Enrollment Applications Dashboard';
+
+      document.getElementById('last-updated').textContent =
+        total > 0 ? `Updated ${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}` : '';
+    }
+
+    /* ═══════════════════════════════════════════════
+       RENDER TABLE
+       ═══════════════════════════════════════════════ */
+    function buildTable(data) {
+      if (!data.length) {
+        return `
+          <div class="empty-state">
+            <div class="empty-icon">📬</div>
+            <div class="empty-title">No Applications Yet</div>
+            <p class="empty-sub">When students fill in the enrollment form on the main site, their applications will appear here automatically.</p>
+            <a href="index.html" class="empty-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M10 19l-7-7 7-7M21 12H3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Go to SmartTutors →
+            </a>
+          </div>`;
+      }
+
+      const rows = data.map((r, idx) => {
+        const { date, time } = formatDate(r.submittedAt);
+        const init   = initials(r.name);
+        const waUrl  = buildWAUrl(r.phone || '', r.name || '');
+        const level  = r.level || 'o-level';
+        const lvlClass = level === 'a-level' ? 'level-a' : 'level-o';
+        const subjects = getSubjectLabels(r);
+        const lvlLabel = getLevelLabel(r);
+
+        const subjectTags = subjects.map(s =>
+          `<span class="subject-tag">${s}</span>`
+        ).join('');
+
+        return `
+          <tr style="animation-delay:${idx * 40}ms">
+            <td>
+              <div class="student-cell">
+                <div class="student-avatar">${init}</div>
+                <div>
+                  <div class="student-name">${escHtml(r.name || '—')}</div>
+                  <div class="student-email">${escHtml(r.email || '')}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div style="font-size:13px;font-weight:500;margin-bottom:2px;">${escHtml(r.phone || '—')}</div>
+            </td>
+            <td>
+              <span class="level-badge ${lvlClass}">${escHtml(lvlLabel)}</span>
+            </td>
+            <td>
+              <div class="subject-tags">${subjectTags}</div>
+            </td>
+            <td>
+              <div class="date-cell">
+                <div class="date-primary">${date}</div>
+                <div class="date-secondary">${time}</div>
+              </div>
+            </td>
+            <td>
+              <div class="actions-cell">
+                <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="wa-btn" aria-label="WhatsApp ${escHtml(r.name)}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M20.52 3.449C12.831-3.984.106 1.407.101 11.893c-.001 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.447h.006c9.893 0 15.355-8.067 11.88-15.999-.717-1.634-1.849-3.13-3.411-4.347z"/></svg>
+                  WhatsApp
+                </a>
+                <button class="del-btn" data-id="${escHtml(r.id)}" data-name="${escHtml(r.name)}" aria-label="Delete ${escHtml(r.name)}'s application" title="Delete">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+
+      return `
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th class="sortable ${sortCol==='name'?'sort-'+sortDir:''}" data-col="name">
+                  Student <span class="sort-icon">↑</span>
+                </th>
+                <th class="sortable ${sortCol==='phone'?'sort-'+sortDir:''}" data-col="phone">
+                  Phone <span class="sort-icon">↑</span>
+                </th>
+                <th class="sortable ${sortCol==='level'?'sort-'+sortDir:''}" data-col="level">
+                  Level <span class="sort-icon">↑</span>
+                </th>
+                <th>Subjects</th>
+                <th class="sortable ${sortCol==='submittedAt'?'sort-'+sortDir:''}" data-col="submittedAt">
+                  Applied On <span class="sort-icon">↑</span>
+                </th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+    }
+
+    function escHtml(str) {
+      return String(str ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[c]));
+    }
+
+    /* ═══════════════════════════════════════════════
+       MAIN RENDER
+       ═══════════════════════════════════════════════ */
+    let currentQuery  = '';
+    let currentLevel  = '';
+
+    function getFiltered() {
+      let data = getAll();
+
+      // Filter by level
+      if (currentLevel) data = data.filter(r => r.level === currentLevel);
+
+      // Filter by search query
+      if (currentQuery.trim()) {
+        const q = currentQuery.toLowerCase();
+        data = data.filter(r => {
+          const subjectStr = getSubjectLabels(r).join(' ').toLowerCase();
+          return (
+            r.name?.toLowerCase().includes(q) ||
+            r.email?.toLowerCase().includes(q) ||
+            r.phone?.includes(q) ||
+            getLevelLabel(r).toLowerCase().includes(q) ||
+            subjectStr.includes(q)
+          );
+        });
+      }
+
+      // Sort
+      data.sort((a, b) => {
+        let va = a[sortCol] ?? '';
+        let vb = b[sortCol] ?? '';
+        if (sortDir === 'asc') return va > vb ? 1 : -1;
+        return va < vb ? 1 : -1;
+      });
+
+      return data;
+    }
+
+    function render() {
+      const all      = getAll();
+      const filtered = getFiltered();
+
+      updateStats(all);
+      document.getElementById('table-count').textContent = filtered.length;
+      document.getElementById('table-body').innerHTML = buildTable(filtered);
+
+      // Wire sort headers
+      document.querySelectorAll('th[data-col]').forEach(th => {
+        th.addEventListener('click', () => {
+          const col = th.dataset.col;
+          if (sortCol === col) { sortDir = sortDir === 'asc' ? 'desc' : 'asc'; }
+          else { sortCol = col; sortDir = 'asc'; }
+          render();
+        });
+      });
+
+      // Wire delete buttons
+      document.querySelectorAll('.del-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          showConfirm(btn.dataset.id, btn.dataset.name);
+        });
+      });
+    }
+
+    /* ═══════════════════════════════════════════════
+       SEARCH & FILTER
+       ═══════════════════════════════════════════════ */
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      currentQuery = e.target.value;
+      render();
+    });
+
+    document.getElementById('level-filter').addEventListener('change', (e) => {
+      currentLevel = e.target.value;
+      render();
+    });
+
+    /* ═══════════════════════════════════════════════
+       EXPORT
+       ═══════════════════════════════════════════════ */
+    document.getElementById('export-btn').addEventListener('click', () => {
+      const data = getAll();
+      if (!data.length) { showToast('No data to export.', '⚠️'); return; }
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = `smarttutors-enrollments-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast(`Exported ${data.length} record${data.length !== 1 ? 's' : ''}.`, '📤');
+    });
+
+    /* ═══════════════════════════════════════════════
+       CLEAR ALL
+       ═══════════════════════════════════════════════ */
+    document.getElementById('clear-btn').addEventListener('click', () => {
+      if (!getAll().length) { showToast('No records to clear.', '⚠️'); return; }
+      pendingDelete = '__ALL__';
+      confirmMsg.textContent = 'This will permanently delete ALL enrollment applications. This cannot be undone.';
+      overlay.hidden = false;
+      requestAnimationFrame(() => { requestAnimationFrame(() => { overlay.classList.add('show'); }); });
+      deleteBtn.focus();
+    });
+
+    // Override the delete confirm to handle __ALL__ case
+    deleteBtn.addEventListener('click', () => {
+      // already wired above — but we need to intercept __ALL__
+    }, { capture: true });
+
+    // Use a separate click handler that fires before the one above
+    deleteBtn.removeEventListener('click', deleteBtn._handler);
+    deleteBtn._handler = () => {
+      if (pendingDelete === '__ALL__') {
+        clearAll();
+        hideConfirm();
+        render();
+        showToast('All applications cleared.', '🗑️');
+      } else if (pendingDelete) {
+        deleteById(pendingDelete);
+        hideConfirm();
+        render();
+        showToast('Application deleted.', '🗑️');
+      }
+    };
+    deleteBtn.addEventListener('click', deleteBtn._handler);
+
+    /* ═══════════════════════════════════════════════
+       LIVE SYNC (across tabs)
+       ═══════════════════════════════════════════════ */
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY) {
+        render();
+        showToast('New application received!', '🔔');
+      }
+    });
+
+    /* ═══════════════════════════════════════════════
+       AUTH — Login Wall
+       ═══════════════════════════════════════════════ */
+    const SESSION_KEY   = 'st_admin_logged_in';
+    const ADMIN_USER    = 'Smarttutors';
+    const ADMIN_PASS    = 'Sm@rttutors7586';
+
+    const loginWall     = document.getElementById('login-wall');
+    const loginForm     = document.getElementById('login-form');
+    const loginUsernameEl = document.getElementById('login-username');
+    const loginPasswordEl = document.getElementById('login-password');
+    const loginErrorEl  = document.getElementById('login-error');
+    const loginBtnEl    = document.getElementById('login-btn');
+    const dashboard     = document.getElementById('admin-dashboard');
+
+    function grantAccess() {
+      sessionStorage.setItem(SESSION_KEY, '1');
+
+      // Fade out the login wall, then hide it and show dashboard
+      loginWall.classList.add('fade-out');
+      loginWall.addEventListener('transitionend', () => {
+        loginWall.style.display = 'none';
+      }, { once: true });
+
+      // Reveal dashboard
+      dashboard.classList.add('auth-granted');
+
+      // Inject Logout button into the header actions (before the Back to Site btn)
+      const headerActions = document.querySelector('.header-actions');
+      if (headerActions && !document.getElementById('logout-btn')) {
+        const logoutBtn = document.createElement('button');
+        logoutBtn.id        = 'logout-btn';
+        logoutBtn.className = 'btn btn-logout';
+        logoutBtn.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Logout`;
+        logoutBtn.addEventListener('click', logout);
+        const backBtn = document.getElementById('back-to-site-btn');
+        headerActions.insertBefore(logoutBtn, backBtn);
+      }
+
+      // Run dashboard data
+      render();
+      applyTheme();
+    }
+
+    function logout() {
+      sessionStorage.removeItem(SESSION_KEY);
+      // Reload so the login wall reappears cleanly
+      window.location.reload();
+    }
+
+    function shakeLoginCard() {
+      const card = document.querySelector('.login-card');
+      if (!card) return;
+      card.animate([
+        { transform: 'translateX(0)' },
+        { transform: 'translateX(-10px)' },
+        { transform: 'translateX(10px)' },
+        { transform: 'translateX(-6px)' },
+        { transform: 'translateX(6px)' },
+        { transform: 'translateX(0)' },
+      ], { duration: 420, easing: 'ease-out' });
+    }
+
+    function showLoginError() {
+      // Remove and re-add to re-trigger shake animation CSS
+      loginErrorEl.hidden = false;
+      loginErrorEl.style.animation = 'none';
+      loginErrorEl.offsetHeight; // reflow
+      loginErrorEl.style.animation = '';
+
+      loginUsernameEl.classList.add('error');
+      loginPasswordEl.classList.add('error');
+      shakeLoginCard();
+
+      // Clear error styling on next input
+      const clearError = () => {
+        loginUsernameEl.classList.remove('error');
+        loginPasswordEl.classList.remove('error');
+        loginErrorEl.hidden = true;
+        loginUsernameEl.removeEventListener('input', clearError);
+        loginPasswordEl.removeEventListener('input', clearError);
+      };
+      loginUsernameEl.addEventListener('input', clearError);
+      loginPasswordEl.addEventListener('input', clearError);
+    }
+
+    loginForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const user = (loginUsernameEl?.value || '').trim();
+      const pass = (loginPasswordEl?.value || '');
+
+      // Brief loading state for perceived security
+      loginBtnEl.disabled = true;
+      loginBtnEl.classList.add('loading');
+
+      await new Promise(r => setTimeout(r, 600));
+
+      loginBtnEl.disabled = false;
+      loginBtnEl.classList.remove('loading');
+
+      if (user === ADMIN_USER && pass === ADMIN_PASS) {
+        grantAccess();
+      } else {
+        showLoginError();
+        loginPasswordEl.value = '';
+        loginPasswordEl.focus();
+      }
+    });
+
+    // Allow Enter key on username to move to password
+    loginUsernameEl?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); loginPasswordEl?.focus(); }
+    });
+
+    /* ═══════════════════════════════════════════════
+       INIT — Check session on page load
+       ═══════════════════════════════════════════════ */
+    if (sessionStorage.getItem(SESSION_KEY) === '1') {
+      // Already authenticated in this tab — skip login wall
+      grantAccess();
+      loginWall.style.display = 'none';
+    } else {
+      // Show login wall, focus username
+      loginUsernameEl?.focus();
+    }
+  </script>
+
+</body>
+</html>

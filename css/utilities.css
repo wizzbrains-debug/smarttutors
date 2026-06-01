@@ -1,0 +1,48 @@
+/* ════════════════════════════════════════════
+   SMARTTUTORS — Additional Tailwind Utility Overrides
+   ════════════════════════════════════════════ */
+
+/* Ensure body has padding for fixed navbar */
+body {
+  padding-top: var(--nav-height);
+}
+
+/* Prose styles for content */
+.prose-dark {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #7C3AED, #FF6B6B);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #6D28D9, #ef4444);
+}
+
+/* ── Hero Ticker Utility Overrides ──
+   Ensures the ticker sits flush within the hero-content
+   centred column without inheriting unwanted stacking context
+   ─────────────────────────────────────────────────────── */
+
+/* The ticker should stretch to fill its parent column */
+.hero-content .hero-ticker {
+  display: block;
+  /* Prevent text-align: center from misaligning the inner inline-flex */
+  text-align: initial;
+}
+
+/* Keep ticker text crisp — disable sub-pixel blurring during GPU compositing */
+.hero-ticker,
+.ticker-track {
+  -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
