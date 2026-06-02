@@ -1,3 +1,4 @@
+cat << 'EOF' > js/ai-widget.js
 /* ================================================================
    SmartTutors DeepTutor AI Chat Widget
    Socratic O/A Level & IGCSE Multi-Subject Specialist
@@ -19,8 +20,8 @@
   let isOpen = false;
   let isTyping = false;
 
-  /* ── DeepTutor API endpoint (ngrok tunnel -> local Docker) ── */
-  const DEEPTUTOR_API_URL = 'https://lake-reliable-frugally.ngrok-free.dev/api/v1/run/chat';
+  /* ── DeepTutor Plugins API execution route ── */
+  const DEEPTUTOR_API_URL = 'https://lake-reliable-frugally.ngrok-free.dev/api/v1/plugins/capabilities/chat/execute-stream';
 
   /* ── Subject-specific Socratic system prompts ── */
   const SUBJECT_PROMPTS = {
@@ -211,13 +212,10 @@
           'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify({
-          message: studentText,
-          stream: false,
-          capability: "chat",
-          context: {
-            subject: activeSubject,
+          input: studentText,
+          parameters: {
             system_prompt: subj.prompt,
-            model_tier: subj.model
+            model: subj.model
           }
         })
       });
@@ -228,8 +226,8 @@
         throw new Error('API responded with status ' + response.status);
       }
 
-      var data = await response.json();
-      var reply = data.response || data.text || data.message;
+      // Read plaintext response text envelope
+      var reply = await response.text();
 
       renderBubble(reply || 'I could not generate a response. Please try again.', 'ai');
 
@@ -275,3 +273,4 @@
   });
 
 })();
+EOF
