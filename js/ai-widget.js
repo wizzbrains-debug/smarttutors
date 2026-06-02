@@ -25,7 +25,8 @@ Here's the full `js/ai-widget.js` — copy and paste directly:
   let isTyping = false;
 
   /* ── DeepTutor API endpoint (ngrok tunnel -> local Docker) ── */
-  const DEEPTUTOR_API_URL = 'https://lake-reliable-frugally.ngrok-free.dev/v1/chat/completions';
+  /* ── DeepTutor API endpoint (ngrok tunnel -> local Docker) ── */
+  const DEEPTUTOR_API_URL = 'https://lake-reliable-frugally.ngrok-free.dev/api/v1/run/chat';
 
   /* ── Subject-specific Socratic system prompts ── */
   const SUBJECT_PROMPTS = {
@@ -216,25 +217,21 @@ Here's the full `js/ai-widget.js` — copy and paste directly:
 
     /* ── Live DeepTutor endpoint (ngrok tunnel -> local Docker) ── */
     try {
-      var response = await fetch(DEEPTUTOR_API_URL, {
+   var response = await fetch(DEEPTUTOR_API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify({
-          model: subj.model,
-          messages: [
-            {
-              role: 'system',
-              content: subj.prompt
-            },
-            {
-              role: 'user',
-              content: studentText
-            }
-          ],
-          stream: false
+          message: studentText,
+          stream: false,
+          capability: "chat",
+          context: {
+            subject: activeSubject,
+            system_prompt: subj.prompt,
+            model_tier: subj.model
+          }
         })
       });
 
@@ -245,10 +242,8 @@ Here's the full `js/ai-widget.js` — copy and paste directly:
       }
 
       var data = await response.json();
-      var reply = data.choices
-        && data.choices[0]
-        && data.choices[0].message
-        && data.choices[0].message.content;
+      // Parse DeepTutor's native text envelope signature
+      var reply = data.response || data.text || data.message;
 
       renderBubble(reply || 'I could not generate a response. Please try again.', 'ai');
 
