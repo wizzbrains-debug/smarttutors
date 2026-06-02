@@ -1,5 +1,41 @@
+/* ================================================================
+   SmartTutors DeepTutor AI Chat Widget
+   Socratic O/A Level & IGCSE Multi-Subject Specialist
+   ================================================================ */
+(function () {
+  'use strict';
 
- label: 'Mathematics',
+  /* ── DOM refs ── */
+  const fab     = document.getElementById('ai-fab');
+  const drawer  = document.getElementById('ai-chat-drawer');
+  const closeBtn= document.getElementById('ai-chat-close');
+  const msgArea = document.getElementById('ai-chat-messages');
+  const input   = document.getElementById('ai-chat-input');
+  const sendBtn = document.getElementById('ai-chat-send');
+
+  if (!fab || !drawer) return; // guard
+
+  /* ── State ── */
+  let isOpen = false;
+  let isTyping = false;
+
+  /* ── DeepTutor API endpoint (ngrok tunnel -> local Docker) ── */
+  const DEEPTUTOR_API_URL = 'https://lake-reliable-frugally.ngrok-free.dev/api/v1/run/chat';
+
+  /* ── Subject-specific Socratic system prompts ── */
+  const SUBJECT_PROMPTS = {
+    chemistry: {
+      label: 'Chemistry',
+      model: 'o-level-chemistry-mentor',
+      prompt: 'You are an elite, specialized Cambridge O-Level Chemistry instructor (Syllabus 5070). You must strictly use the Socratic Method: NEVER give raw solutions, chemical formulas, or balanced equations directly. Instead, analyze the student\'s conceptual gap, reference the Chemistry 5070 syllabus topics (Atomic Structure, Bonding, Stoichiometry, Acids & Bases, Redox, Organic Chemistry, Energetics, Rates, Equilibria), and respond with a single, targeted question or helpful hint about the chemical components to guide them to find the answer themselves. Keep responses concise and encouraging.'
+    },
+    physics: {
+      label: 'Physics',
+      model: 'o-level-physics-mentor',
+      prompt: 'You are an elite, specialized Cambridge O-Level Physics instructor (Syllabus 5054). You must strictly use the Socratic Method: NEVER give raw solutions, final numerical answers, or fully derived equations directly. Instead, analyze the student\'s conceptual gap, reference the Physics 5054 syllabus topics (Measurements, Mechanics, Thermal Physics, Waves, Electricity & Magnetism, Nuclear Physics), and respond with a single, targeted question or helpful hint about the physical principles involved to guide them to find the answer themselves. Keep responses concise and encouraging.'
+    },
+    math: {
+      label: 'Mathematics',
       model: 'o-level-math-mentor',
       prompt: 'You are an elite, specialized Cambridge O-Level Mathematics instructor (Syllabus 4024). You must strictly use the Socratic Method: NEVER give raw solutions, final answers, or fully worked calculations directly. Instead, analyze the student\'s conceptual gap, reference the Mathematics 4024 syllabus topics (Number, Algebra, Geometry, Mensuration, Coordinate Geometry, Trigonometry, Vectors, Statistics, Probability, Matrices), and respond with a single, targeted question or helpful hint about the mathematical reasoning to guide them to find the answer themselves. Keep responses concise and encouraging.'
     },
@@ -15,7 +51,19 @@
     }
   };
 
-    "Good effort! Cambridge often asks you to 'describe' or 'explain'. These are different command words - which one fits here?",
+  /* ── Active subject (default: Chemistry) ── */
+  let activeSubject = 'chemistry';
+
+  /* ── Subject-keyed local fallback hint banks ── */
+  var LOCAL_FALLBACKS = {
+    chemistry: [
+      "Great question! Before I guide you, which reactants and products can you identify in this scenario?",
+      "Think about the type of reaction here. Is it neutralisation, decomposition, displacement, or redox? What clues tell you?",
+      "Let us check the syllabus. Which topic in Paper 5070 does this fall under - Acids & Bases, Stoichiometry, or Organic Chemistry?",
+      "Can you write out what you know about the valencies of the elements involved? That will help you build the formula.",
+      "Almost there! What state symbols would the examiner expect you to include? Why do they matter for full marks?",
+      "Now think about the mole concept. If I give you the mass, what is the very first calculation you would perform?",
+      "Good effort! Cambridge often asks you to 'describe' or 'explain'. These are different command words - which one fits here?",
       "Excellent thinking! Can you link this reaction to an industrial application? Paper 2 often rewards real-world context."
     ],
     math: [
@@ -78,10 +126,8 @@
         '<option value="english">English</option>' +
       '</select>';
 
-    // Insert after header, before messages
     header.insertAdjacentElement('afterend', selector);
 
-    // Bind change listener
     var select = document.getElementById('ai-subject-select');
     select.addEventListener('change', function () {
       activeSubject = this.value;
@@ -103,7 +149,6 @@
   fab.addEventListener('click', toggleDrawer);
   closeBtn.addEventListener('click', toggleDrawer);
 
-  /* ── Close on Escape ── */
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && isOpen) toggleDrawer();
   });
@@ -149,19 +194,15 @@
     if (!studentText.trim() || isTyping) return;
     isTyping = true;
 
-    // Render user bubble
     renderBubble(studentText, 'user');
     input.value = '';
     input.disabled = true;
     sendBtn.disabled = true;
 
-    // Show typing indicator
     showTyping();
 
-    /* ── Resolve active subject config ── */
     var subj = SUBJECT_PROMPTS[activeSubject];
 
-    /* ── Live DeepTutor endpoint (ngrok tunnel -> local Docker) ── */
     try {
       var response = await fetch(DEEPTUTOR_API_URL, {
         method: 'POST',
@@ -170,18 +211,14 @@
           'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify({
-          model: subj.model,
-          messages: [
-            {
-              role: 'system',
-              content: subj.prompt
-            },
-            {
-              role: 'user',
-              content: studentText
-            }
-          ],
-          stream: false
+          message: studentText,
+          stream: false,
+          capability: "chat",
+          context: {
+            subject: activeSubject,
+            system_prompt: subj.prompt,
+            model_tier: subj.model
+          }
         })
       });
 
@@ -192,15 +229,11 @@
       }
 
       var data = await response.json();
-      var reply = data.choices
-        && data.choices[0]
-        && data.choices[0].message
-        && data.choices[0].message.content;
+      var reply = data.response || data.text || data.message;
 
       renderBubble(reply || 'I could not generate a response. Please try again.', 'ai');
 
     } catch (err) {
-      // Fallback to subject-specific local hint bank if API is unreachable
       hideTyping();
       console.warn('[DeepTutor] API error, falling back to local hints:', err.message);
       var pool = LOCAL_FALLBACKS[activeSubject] || LOCAL_FALLBACKS.chemistry;
