@@ -1546,3 +1546,46 @@
     height: 54px;
   }
 }
+
+/* ── Subject Selector Dropdown ── */
+.ai-subject-selector {
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(124, 58, 237, 0.06);
+  flex-shrink: 0;
+}
+.ai-subject-dropdown {
+  width: 100%;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+  font-size: 12.5px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a78bfa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.ai-subject-dropdown:hover {
+  border-color: rgba(124, 58, 237, 0.4);
+  background: rgba(124, 58, 237, 0.1);
+}
+.ai-subject-dropdown:focus {
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+.ai-subject-dropdown option {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 8px;
+}
+
