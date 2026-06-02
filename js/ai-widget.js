@@ -1,4 +1,8 @@
-cat << 'EOF' > js/ai-widget.js
+# 1. Force write a fresh micro-stamp comment into the file layout
+echo "// Build Signature: $(date +%s)" > js/ai-widget.js
+
+# 2. Append the verified functional script block directly
+cat << 'EOF' >> js/ai-widget.js
 /* ================================================================
    SmartTutors DeepTutor AI Chat Widget
    Socratic O/A Level & IGCSE Multi-Subject Specialist
