@@ -226,9 +226,7 @@ cat << 'EOF' > js/ai-widget.js
         throw new Error('API responded with status ' + response.status);
       }
 
-      // Read plaintext response text envelope
       var reply = await response.text();
-
       renderBubble(reply || 'I could not generate a response. Please try again.', 'ai');
 
     } catch (err) {
