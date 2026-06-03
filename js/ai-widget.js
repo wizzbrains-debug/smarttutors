@@ -1,8 +1,3 @@
-# 1. Clear out the broken double-stacked code layout completely
-true > js/ai-widget.js
-
-# 2. Re-populate it cleanly with the aligned DeepTutor stream execution parameters
-cat << 'EOF' > js/ai-widget.js
 /* ================================================================
    SmartTutors DeepTutor AI Chat Widget
    Socratic O/A Level & IGCSE Multi-Subject Specialist
@@ -275,4 +270,3 @@ cat << 'EOF' > js/ai-widget.js
   });
 
 })();
-EOF
