@@ -244,29 +244,31 @@
         // Save the last (possibly incomplete) line for the next iteration
         partialLine = lines.pop();
 
-        for (const line of lines) {
+for (const line of lines) {
           const trimmed = line.trim();
           if (!trimmed) continue;
 
-          // Only process SSE data lines
-          if (trimmed.startsWith('data:')) {
+          // FIX: Look for 'data:' anywhere in the chunk line
+          if (trimmed.includes('data:')) {
             try {
-              const rawJson = trimmed.substring(5).trim();
-              const parsed  = JSON.parse(rawJson);
+              // Extract everything after 'data:' dynamically
+              const dataIndex = trimmed.indexOf('data:');
+              const rawJson = trimmed.substring(dataIndex + 5).trim();
+              const parsed = JSON.parse(rawJson);
 
-              // Capture only actual content delta events
+              // Capture only pure text content updates
               if (parsed.type === 'content' && parsed.content) {
-                fullReplyText += parsed.content;
-                activeBody.textContent = fullReplyText;
-                msgArea.scrollTop = msgArea.scrollHeight;
+                if (!parsed.content.includes('TOOL') && !parsed.content.includes('native_tool_call')) {
+                  fullReplyText += parsed.content;
+                  activeBody.textContent = fullReplyText;
+                  msgArea.scrollTop = msgArea.scrollHeight;
+                }
               }
             } catch (e) {
-              // Silently ignore partial / metadata lines
+              // Ignore partial JSON chunks silently
             }
           }
         }
-      }
-
       // If the stream ended with no content at all, show a fallback message
       if (!fullReplyText.trim()) {
         activeBody.textContent = 'I could not generate a response. Please try again.';
