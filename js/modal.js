@@ -11,7 +11,7 @@
    deployed Google Apps Script Web App URL.
    Instructions: Extensions → Apps Script → Deploy → Web App
    ════════════════════════════════════════════ */
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxIJrBOOCUNzRiKnHq5L_qnAX55RdzSf0Px7yxA9jrm0Jwcydhh2kia-PehvsZ3Q0gz/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzF7-qFsWobu-cAOur9Lz2QuI4zMYgK5rGvLQ4s7FqtIG2SZxLse7APDhqvmRIz-QUo/exec';
 
 /* ════════════════════════════════════════════
    ENROLL STORE — shared localStorage module
@@ -521,23 +521,24 @@ const EnrollModal = (() => {
         const controller = new AbortController();
         const networkTimeout = setTimeout(() => controller.abort(), 8000);
 
-        fetch(GOOGLE_SCRIPT_URL, {
-          method:  'POST',
-          // no-cors mode required for Apps Script to avoid preflight CORS errors
-          mode:    'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(payload),
-          signal:  controller.signal,
-        })
-          .then(() => {
-            clearTimeout(networkTimeout);
-            console.debug('[SmartTutors] ✅ Google Sheets POST succeeded.');
-          })
-          .catch(err => {
-            clearTimeout(networkTimeout);
-            // Network failure is silent — localStorage already has the record
-            console.warn('[SmartTutors] ⚠️ Google Sheets POST failed (localStorage backup retained):', err.message);
-          });
+       fetch(GOOGLE_SCRIPT_URL, {
+        method:  'POST',
+        mode:    'no-cors', // Keeps preflight CORS errors quiet
+        headers: { 
+          // Use text/plain because no-cors allows it without being stripped
+          'Content-Type': 'text/plain;charset=utf-8' 
+        },
+        body:    JSON.stringify(payload), // Send the raw stringified text object
+        signal:  controller.signal,
+      })
+      .then(() => {
+        clearTimeout(networkTimeout);
+        console.debug('[SmartTutors] ✅ Google Sheets POST succeeded.');
+      })
+      .catch(err => {
+        clearTimeout(networkTimeout);
+        console.warn('[SmartTutors] ⚠️ Google Sheets POST failed (localStorage backup retained):', err.message);
+      });
       } else {
         console.debug('[SmartTutors] Google Sheets URL not configured — localStorage only.');
       }
