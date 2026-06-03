@@ -16,7 +16,7 @@
   if (!fab || !drawer) return; // guard
 
   /* ── State ── */
-  let isOpen = false;
+  let isOpen   = false;
   let isTyping = false;
 
   /* ── DeepTutor Plugins API execution route ── */
@@ -178,7 +178,8 @@
     var el = document.createElement('div');
     el.className = 'ai-msg ai-msg-ai ai-typing-indicator';
     el.id = 'ai-typing';
-    el.innerHTML = '<div class="ai-msg-avatar ai-msg-avatar-ai">AI</div>' +
+    el.innerHTML =
+      '<div class="ai-msg-avatar ai-msg-avatar-ai">AI</div>' +
       '<div class="ai-msg-body"><span class="ai-dot"></span><span class="ai-dot"></span><span class="ai-dot"></span></div>';
     msgArea.appendChild(el);
     msgArea.scrollTop = msgArea.scrollHeight;
@@ -210,28 +211,72 @@
           'Content-Type': 'application/json',
           'ngrok-skip-browser-warning': 'true'
         },
-     body: JSON.stringify({
-          content: studentText,         // 🧠 Changed 'input' to 'content' to satisfy FastAPI
+        body: JSON.stringify({
+          content: studentText,
           system_prompt: subj.prompt,
           model: subj.model,
           subject: activeSubject
         })
       });
 
-      hideTyping();
-
       if (!response.ok) {
         throw new Error('API responded with status ' + response.status);
       }
 
-      var reply = await response.text();
-      renderBubble(reply || 'I could not generate a response. Please try again.', 'ai');
+      /* ── SSE Stream Reader Pipeline ── */
+      const reader  = response.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let partialLine   = '';
+      let fullReplyText = '';
+
+      // Render an empty bubble that we populate live as chunks arrive
+      let activeBubble = renderBubble('', 'ai');
+      let activeBody   = activeBubble.querySelector('.ai-msg-body');
+      hideTyping();
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = (partialLine + chunk).split('\n');
+
+        // Save the last (possibly incomplete) line for the next iteration
+        partialLine = lines.pop();
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed) continue;
+
+          // Only process SSE data lines
+          if (trimmed.startsWith('data:')) {
+            try {
+              const rawJson = trimmed.substring(5).trim();
+              const parsed  = JSON.parse(rawJson);
+
+              // Capture only actual content delta events
+              if (parsed.type === 'content' && parsed.content) {
+                fullReplyText += parsed.content;
+                activeBody.textContent = fullReplyText;
+                msgArea.scrollTop = msgArea.scrollHeight;
+              }
+            } catch (e) {
+              // Silently ignore partial / metadata lines
+            }
+          }
+        }
+      }
+
+      // If the stream ended with no content at all, show a fallback message
+      if (!fullReplyText.trim()) {
+        activeBody.textContent = 'I could not generate a response. Please try again.';
+      }
 
     } catch (err) {
       hideTyping();
       console.warn('[DeepTutor] API error, falling back to local hints:', err.message);
       var pool = LOCAL_FALLBACKS[activeSubject] || LOCAL_FALLBACKS.chemistry;
-      var idx = fallbackIndexes[activeSubject] || 0;
+      var idx  = fallbackIndexes[activeSubject] || 0;
       var hint = pool[idx % pool.length];
       fallbackIndexes[activeSubject] = idx + 1;
       renderBubble(hint, 'ai');
