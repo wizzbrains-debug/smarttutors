@@ -210,8 +210,8 @@
           'Content-Type': 'application/json',
           'ngrok-skip-browser-warning': 'true'
         },
-       body: JSON.stringify({
-          input: studentText,
+     body: JSON.stringify({
+          content: studentText,         // 🧠 Changed 'input' to 'content' to satisfy FastAPI
           system_prompt: subj.prompt,
           model: subj.model,
           subject: activeSubject
