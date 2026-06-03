@@ -210,12 +210,11 @@
           'Content-Type': 'application/json',
           'ngrok-skip-browser-warning': 'true'
         },
-        body: JSON.stringify({
+       body: JSON.stringify({
           input: studentText,
-          parameters: {
-            system_prompt: subj.prompt,
-            model: subj.model
-          }
+          system_prompt: subj.prompt,
+          model: subj.model,
+          subject: activeSubject
         })
       });
 
