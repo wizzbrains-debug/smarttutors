@@ -19,8 +19,9 @@
   let isOpen   = false;
   let isTyping = false;
 
-  /* ── DeepTutor Plugins API execution route ── */
-  const DEEPTUTOR_API_URL = 'https://lake-reliable-frugally.ngrok-free.dev/api/v1/plugins/capabilities/chat/execute-stream';
+  /* ── AI Backend endpoint (/api/chat serverless Gemini route; legacy DeepTutor route retained for reference) ── */
+  const LEGACY_DEEPTUTOR_API_URL = 'https://lake-reliable-frugally.ngrok-free.dev/api/v1/plugins/capabilities/chat/execute-stream';
+  const DEEPTUTOR_API_URL = '/api/chat';
 
   /* ── Subject-specific Socratic system prompts ── */
   const SUBJECT_PROMPTS = {
@@ -51,8 +52,10 @@
     }
   };
 
-  /* ── Active subject (default: Chemistry) ── */
+  /* ── Active subject (default: Chemistry) & bounded conversation history ── */
   let activeSubject = 'chemistry';
+  var MAX_HISTORY_MESSAGES = 8;
+  var conversationHistory = [];
 
   /* ── Subject-keyed local fallback hint banks ── */
   var LOCAL_FALLBACKS = {
@@ -131,6 +134,7 @@
     var select = document.getElementById('ai-subject-select');
     select.addEventListener('change', function () {
       activeSubject = this.value;
+      conversationHistory = [];
       var subj = SUBJECT_PROMPTS[activeSubject];
       renderBubble('Switched to ' + subj.label + ' mode. Ask me anything from the ' + subj.label + ' syllabus!', 'ai');
     });
@@ -190,107 +194,163 @@
     if (el) el.remove();
   }
 
+  function recordConversationTurn(userText, modelReply) {
+    conversationHistory.push({ role: 'user', text: userText });
+    conversationHistory.push({ role: 'model', text: modelReply });
+    if (conversationHistory.length > MAX_HISTORY_MESSAGES) {
+      conversationHistory = conversationHistory.slice(-MAX_HISTORY_MESSAGES);
+    }
+  }
+
   /* ── Core send handler ── */
   async function sendMessageToDeepTutor(studentText) {
-    if (!studentText.trim() || isTyping) return;
+    var trimmedInput = studentText ? studentText.trim() : '';
+    if (!trimmedInput || isTyping) return;
+
+    if (trimmedInput.length > 1500) {
+      renderBubble('Your question is a bit too long (max 1500 characters). Please shorten it and try again.', 'ai');
+      return;
+    }
+
     isTyping = true;
 
-    renderBubble(studentText, 'user');
+    renderBubble(trimmedInput, 'user');
     input.value = '';
     input.disabled = true;
     sendBtn.disabled = true;
 
     showTyping();
 
-    var subj = SUBJECT_PROMPTS[activeSubject];
+    var activeBubble = null;
+    var historySnapshot = conversationHistory.slice(-MAX_HISTORY_MESSAGES);
 
     try {
       var response = await fetch(DEEPTUTOR_API_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          content: studentText,
-          system_prompt: subj.prompt,
-          model: subj.model,
-          subject: activeSubject
+          message: trimmedInput,
+          subject: activeSubject,
+          history: historySnapshot
         })
       });
 
       if (!response.ok) {
-        throw new Error('API responded with status ' + response.status);
+        var errMsg = '';
+        try {
+          var errData = await response.json();
+          if (errData && typeof errData.error === 'string') {
+            errMsg = errData.error;
+          }
+        } catch (_parseErr) {
+          // Ignore non-JSON error body
+        }
+
+        if (response.status === 400) {
+          hideTyping();
+          renderBubble(errMsg || 'Please check your question and try again.', 'ai');
+          isTyping = false;
+          input.disabled = false;
+          sendBtn.disabled = false;
+          input.focus();
+          return;
+        }
+
+        if (response.status === 429) {
+          hideTyping();
+          renderBubble(
+            errMsg || 'Request limit reached. Please wait a few seconds before sending another question.',
+            'ai'
+          );
+          isTyping = false;
+          input.disabled = false;
+          sendBtn.disabled = false;
+          input.focus();
+          return;
+        }
+
+        throw new Error(errMsg || 'API responded with status ' + response.status);
       }
 
-      /* ── SSE Stream Reader Pipeline ── */
-      const reader  = response.body.getReader();
-      const decoder = new TextDecoder('utf-8');
-      let partialLine   = '';
-      let fullReplyText = '';
+      var contentType = (response.headers.get('content-type') || '').toLowerCase();
 
-      // Render an empty bubble that we populate live as chunks arrive
-      let activeBubble = renderBubble('', 'ai');
-      let activeBody   = activeBubble.querySelector('.ai-msg-body');
-      hideTyping();
+      if (contentType.includes('application/json')) {
+        /* ── Standard JSON response from /api/chat ── */
+        var data = await response.json();
+        hideTyping();
+        var replyText = data && typeof data.reply === 'string' ? data.reply.trim() : '';
+        if (!replyText) {
+          throw new Error('Empty reply from AI service.');
+        }
+        activeBubble = renderBubble(replyText, 'ai');
+        recordConversationTurn(trimmedInput, replyText);
+      } else if (contentType.includes('text/event-stream') && response.body) {
+        /* ── SSE Stream Reader Pipeline (preserved for streaming compatibility) ── */
+        const reader  = response.body.getReader();
+        const decoder = new TextDecoder('utf-8');
+        let partialLine   = '';
+        let fullReplyText = '';
 
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
+        activeBubble = renderBubble('', 'ai');
+        let activeBody = activeBubble.querySelector('.ai-msg-body');
+        hideTyping();
 
-        const chunk = decoder.decode(value, { stream: true });
-        const lines = (partialLine + chunk).split('\n');
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
 
-        // Save the last (possibly incomplete) line for the next iteration
-        partialLine = lines.pop();
+          const chunk = decoder.decode(value, { stream: true });
+          const lines = (partialLine + chunk).split('\n');
+          partialLine = lines.pop();
 
-        for (const line of lines) {
-          const trimmed = line.trim();
-          if (!trimmed) continue;
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed) continue;
 
-          // Look for 'data:' anywhere in the chunk line
-          if (trimmed.includes('data:')) {
-            try {
-              // Extract everything after 'data:' dynamically
-              const dataIndex = trimmed.indexOf('data:');
-              const rawJson = trimmed.substring(dataIndex + 5).trim();
-              const parsed = JSON.parse(rawJson);
+            if (trimmed.includes('data:')) {
+              try {
+                const dataIndex = trimmed.indexOf('data:');
+                const rawJson = trimmed.substring(dataIndex + 5).trim();
+                const parsed = JSON.parse(rawJson);
 
-              // Capture only pure text content updates
-              if (parsed.type === 'content' && parsed.content) {
-                if (!parsed.content.includes('TOOL') && !parsed.content.includes('native_tool_call')) {
-                  fullReplyText += parsed.content;
-                  activeBody.textContent = fullReplyText;
-                  msgArea.scrollTop = msgArea.scrollHeight;
+                if (parsed.type === 'content' && parsed.content) {
+                  if (!parsed.content.includes('TOOL') && !parsed.content.includes('native_tool_call')) {
+                    fullReplyText += parsed.content;
+                    activeBody.textContent = fullReplyText;
+                    msgArea.scrollTop = msgArea.scrollHeight;
+                  }
                 }
+              } catch (e) {
+                // Ignore partial JSON chunks silently
               }
-            } catch (e) {
-              // Ignore partial JSON chunks silently
             }
           }
         }
-      } // ── End of while loop ──
 
-      // If the stream ended with no content at all, show a fallback message
-      if (!fullReplyText.trim()) {
-        activeBody.textContent = 'I could not generate a response. Please try again.';
+        if (!fullReplyText.trim()) {
+          throw new Error('Empty stream response from AI service.');
+        }
+        recordConversationTurn(trimmedInput, fullReplyText.trim());
+      } else {
+        throw new Error('Unexpected response format from AI service.');
       }
 
     } catch (err) {
       hideTyping();
-      console.warn('[DeepTutor] API error, falling back to local hints:', err.message);
+      console.warn('[SmartTutors AI] Backend unavailable, using labeled offline fallback hint:', err.message);
       var pool = LOCAL_FALLBACKS[activeSubject] || LOCAL_FALLBACKS.chemistry;
       var idx  = fallbackIndexes[activeSubject] || 0;
       var hint = pool[idx % pool.length];
       fallbackIndexes[activeSubject] = idx + 1;
-      
-      // Update the active body to render our fallback local bank array
-      var bubbles = msgArea.querySelectorAll('.ai-msg-ai');
-      if (bubbles.length > 0) {
-        var lastBody = bubbles[bubbles.length - 1].querySelector('.ai-msg-body');
-        if (lastBody) lastBody.textContent = hint;
+      var fallbackMessage = '[Offline study hint - live AI tutor unavailable] ' + hint;
+
+      if (activeBubble) {
+        var activeBodyEl = activeBubble.querySelector('.ai-msg-body');
+        if (activeBodyEl) activeBodyEl.textContent = fallbackMessage;
       } else {
-        renderBubble(hint, 'ai');
+        renderBubble(fallbackMessage, 'ai');
       }
     }
 
