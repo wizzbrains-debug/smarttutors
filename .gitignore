@@ -1,4 +1,5 @@
 .vercel
-data/
+data/*
+!data/syllabus/
 .env*
 !.env.example

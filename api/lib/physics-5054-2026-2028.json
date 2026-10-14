@@ -1,0 +1,1662 @@
+{
+  "meta": {
+    "exam_board": "Cambridge Assessment International Education",
+    "qualification": "Cambridge O Level",
+    "subject": "Physics",
+    "syllabus_code": "5054",
+    "examination_years": "2026-2028",
+    "syllabus_version": "Version 2.0",
+    "publication_date": "December 2025",
+    "source_urls": {
+      "syllabus_pdf": "https://www.cambridgeinternational.org/Images/697324-2026-2028-syllabus.pdf",
+      "syllabus_update_pdf": "https://www.cambridgeinternational.org/Images/748934-2026-2028-syllabus-update.pdf",
+      "official_page": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-o-level-physics-5054/"
+    },
+    "future_support_notes": "2029 syllabus (Version 1) cataloged at https://www.cambridgeinternational.org/Images/764158-2029-syllabus.pdf for future upgrade.",
+    "verification_status": "verified_against_official_pdf",
+    "ingestion_date": "2026-10-14",
+    "copyright_notice": "Cambridge International Education bears no responsibility for third-party adaptations or applications. Learning objectives reproduced for structured educational alignment.",
+    "assessment_structure": {
+      "components": [
+        {
+          "paper": "Paper 1",
+          "title": "Multiple Choice",
+          "duration": "1 hour",
+          "marks": 40,
+          "weighting_percent": 30,
+          "format": "40 four-option multiple-choice questions",
+          "assessment_objectives_tested": [
+            "AO1",
+            "AO2"
+          ]
+        },
+        {
+          "paper": "Paper 2",
+          "title": "Theory",
+          "duration": "1 hour 45 minutes",
+          "marks": 80,
+          "weighting_percent": 50,
+          "format": "Short-answer and structured questions",
+          "assessment_objectives_tested": [
+            "AO1",
+            "AO2"
+          ]
+        },
+        {
+          "paper": "Paper 3 or Paper 4",
+          "title": "Practical Test or Alternative to Practical",
+          "duration": "1 hour 30 minutes (Paper 3) or 1 hour (Paper 4)",
+          "marks": 40,
+          "weighting_percent": 20,
+          "format": "Laboratory experiment skills or written alternative assessing practical and investigative skills",
+          "assessment_objectives_tested": [
+            "AO3"
+          ]
+        }
+      ],
+      "assessment_objectives": [
+        {
+          "code": "AO1",
+          "title": "Knowledge with understanding",
+          "weighting_percent": 50
+        },
+        {
+          "code": "AO2",
+          "title": "Handling information and problem-solving",
+          "weighting_percent": 30
+        },
+        {
+          "code": "AO3",
+          "title": "Experimental skills and investigations",
+          "weighting_percent": 20
+        }
+      ]
+    }
+  },
+  "topics": [
+    {
+      "topic_id": "1",
+      "title": "Motion, forces and energy",
+      "subtopics": [
+        {
+          "subtopic_id": "1.1",
+          "title": "Physical quantities and measurement techniques",
+          "page_reference": 12,
+          "objectives": [
+            {
+              "id": "5054-1.1.1",
+              "number": 1,
+              "wording": "Describe how to measure a variety of lengths with appropriate precision using tapes, rulers and micrometers (including reading the scale on an analogue micrometer)",
+              "classification": "practical",
+              "keywords": [
+                "length",
+                "micrometer",
+                "ruler",
+                "precision",
+                "analogue scale"
+              ],
+              "page": 12
+            },
+            {
+              "id": "5054-1.1.2",
+              "number": 2,
+              "wording": "Describe how to use a measuring cylinder to measure the volume of a liquid and to determine the volume of a solid by displacement",
+              "classification": "practical",
+              "keywords": [
+                "measuring cylinder",
+                "volume",
+                "liquid",
+                "displacement"
+              ],
+              "page": 12
+            },
+            {
+              "id": "5054-1.1.3",
+              "number": 3,
+              "wording": "Describe how to measure a variety of time intervals using clocks and digital timers",
+              "classification": "practical",
+              "keywords": [
+                "time",
+                "stopwatch",
+                "timer",
+                "clock"
+              ],
+              "page": 12
+            },
+            {
+              "id": "5054-1.1.4",
+              "number": 4,
+              "wording": "Determine an average value for a small distance and for a short interval of time by measuring multiples (including the period of oscillation of a pendulum)",
+              "classification": "practical",
+              "keywords": [
+                "average",
+                "pendulum",
+                "oscillation",
+                "period"
+              ],
+              "page": 12
+            },
+            {
+              "id": "5054-1.1.5",
+              "number": 5,
+              "wording": "Understand that a scalar quantity has magnitude (size) only and that a vector quantity has magnitude and direction",
+              "classification": "theoretical",
+              "keywords": [
+                "scalar",
+                "vector",
+                "magnitude",
+                "direction"
+              ],
+              "page": 12
+            },
+            {
+              "id": "5054-1.1.6",
+              "number": 6,
+              "wording": "Know that the following quantities are scalars: distance, speed, time, mass, energy and temperature",
+              "classification": "theoretical",
+              "keywords": [
+                "scalar examples",
+                "distance",
+                "speed",
+                "mass",
+                "temperature"
+              ],
+              "page": 12
+            },
+            {
+              "id": "5054-1.1.7",
+              "number": 7,
+              "wording": "Know that the following quantities are vectors: displacement, force, weight, velocity, acceleration, momentum, electric field strength and gravitational field strength",
+              "classification": "theoretical",
+              "keywords": [
+                "vector examples",
+                "displacement",
+                "velocity",
+                "acceleration",
+                "force",
+                "momentum"
+              ],
+              "page": 12
+            },
+            {
+              "id": "5054-1.1.8",
+              "number": 8,
+              "wording": "Determine, by calculation or graphically, the resultant of two vectors at right angles",
+              "classification": "mathematical",
+              "keywords": [
+                "vector addition",
+                "resultant",
+                "pythagoras",
+                "trigonometry"
+              ],
+              "page": 12
+            }
+          ],
+          "page_range": "12"
+        },
+        {
+          "subtopic_id": "1.2",
+          "title": "Motion",
+          "page_reference": 13,
+          "objectives": [
+            {
+              "id": "5054-1.2.1",
+              "number": 1,
+              "wording": "Define speed as distance travelled per unit time; recall and use the equation v = s / t",
+              "classification": "mathematical",
+              "formula": "v = s / t",
+              "keywords": [
+                "speed",
+                "distance",
+                "time"
+              ],
+              "page": 13
+            },
+            {
+              "id": "5054-1.2.2",
+              "number": 2,
+              "wording": "Define velocity as speed in a given direction",
+              "classification": "theoretical",
+              "keywords": [
+                "velocity",
+                "speed",
+                "direction"
+              ],
+              "page": 13
+            },
+            {
+              "id": "5054-1.2.3",
+              "number": 3,
+              "wording": "Define acceleration as change in velocity per unit time; recall and use the equation a = Δv / Δt = (v - u) / t",
+              "classification": "mathematical",
+              "formula": "a = (v - u) / t",
+              "keywords": [
+                "acceleration",
+                "change in velocity",
+                "time"
+              ],
+              "page": 13
+            },
+            {
+              "id": "5054-1.2.4",
+              "number": 4,
+              "wording": "Sketch, plot and interpret distance–time and speed–time graphs",
+              "classification": "graphical",
+              "keywords": [
+                "distance-time graph",
+                "speed-time graph",
+                "gradient",
+                "area under graph"
+              ],
+              "page": 13
+            },
+            {
+              "id": "5054-1.2.5",
+              "number": 5,
+              "wording": "Determine from the shape of a speed–time graph when an object is: (a) at rest, (b) moving with constant speed, (c) moving with constant acceleration, (d) moving with changing acceleration",
+              "classification": "graphical",
+              "keywords": [
+                "speed-time graph interpretation",
+                "rest",
+                "constant speed",
+                "constant acceleration"
+              ],
+              "page": 13
+            },
+            {
+              "id": "5054-1.2.6",
+              "number": 6,
+              "wording": "State that acceleration of free fall g for an object close to the surface of the Earth is approximately constant and is approximately 9.8 m/s²",
+              "classification": "theoretical",
+              "formula": "g = 9.8 m/s²",
+              "keywords": [
+                "free fall",
+                "acceleration of free fall",
+                "gravity",
+                "9.8 m/s2"
+              ],
+              "page": 13
+            }
+          ],
+          "page_range": "13"
+        },
+        {
+          "subtopic_id": "1.3",
+          "title": "Mass and weight",
+          "page_reference": 14,
+          "objectives": [
+            {
+              "id": "5054-1.3.1",
+              "number": 1,
+              "wording": "State that mass is a measure of the quantity of matter in an object at rest relative to the observer",
+              "classification": "theoretical",
+              "keywords": [
+                "mass",
+                "matter",
+                "inertia"
+              ],
+              "page": 14
+            },
+            {
+              "id": "5054-1.3.2",
+              "number": 2,
+              "wording": "State that weight is a gravitational force on an object that has mass; recall and use W = mg",
+              "classification": "mathematical",
+              "formula": "W = mg",
+              "keywords": [
+                "weight",
+                "gravitational force",
+                "mass",
+                "W = mg"
+              ],
+              "page": 14
+            },
+            {
+              "id": "5054-1.3.3",
+              "number": 3,
+              "wording": "Describe and use the concept of gravitational field strength g as force per unit mass; g = W / m",
+              "classification": "mathematical",
+              "formula": "g = W / m",
+              "keywords": [
+                "gravitational field strength",
+                "N/kg"
+              ],
+              "page": 14
+            }
+          ],
+          "page_range": "14"
+        },
+        {
+          "subtopic_id": "1.4",
+          "title": "Density",
+          "page_reference": 14,
+          "objectives": [
+            {
+              "id": "5054-1.4.1",
+              "number": 1,
+              "wording": "Define density as mass per unit volume; recall and use the equation ρ = m / V",
+              "classification": "mathematical",
+              "formula": "ρ = m / V",
+              "keywords": [
+                "density",
+                "mass",
+                "volume",
+                "rho = m/V"
+              ],
+              "page": 14
+            },
+            {
+              "id": "5054-1.4.2",
+              "number": 2,
+              "wording": "Describe experiments to determine the density of a liquid, of a regularly shaped solid and of an irregularly shaped solid which sinks in a liquid",
+              "classification": "practical",
+              "keywords": [
+                "density experiment",
+                "regular solid",
+                "irregular solid",
+                "displacement"
+              ],
+              "page": 14
+            }
+          ],
+          "page_range": "14"
+        },
+        {
+          "subtopic_id": "1.5",
+          "title": "Forces",
+          "page_reference": 14,
+          "objectives": [
+            {
+              "id": "5054-1.5.1",
+              "number": 1,
+              "wording": "Identify forces acting on an object and determine the resultant force",
+              "classification": "theoretical",
+              "keywords": [
+                "resultant force",
+                "balanced forces",
+                "unbalanced forces"
+              ],
+              "page": 14
+            },
+            {
+              "id": "5054-1.5.2",
+              "number": 2,
+              "wording": "Recall and use the equation F = ma and know that the force and acceleration are in the same direction",
+              "classification": "mathematical",
+              "formula": "F = ma",
+              "keywords": [
+                "Newton second law",
+                "F = ma",
+                "force",
+                "mass",
+                "acceleration"
+              ],
+              "page": 15
+            },
+            {
+              "id": "5054-1.5.3",
+              "number": 3,
+              "wording": "Describe Hooke’s law and recall and use the equation F = kΔx",
+              "classification": "mathematical",
+              "formula": "F = kΔx",
+              "keywords": [
+                "Hooke's law",
+                "spring constant",
+                "extension",
+                "limit of proportionality"
+              ],
+              "page": 15
+            },
+            {
+              "id": "5054-1.5.4",
+              "number": 4,
+              "wording": "Define the moment of a force as moment = force × perpendicular distance from the pivot",
+              "classification": "mathematical",
+              "formula": "moment = F × d",
+              "keywords": [
+                "moment of force",
+                "torque",
+                "pivot",
+                "perpendicular distance"
+              ],
+              "page": 15
+            },
+            {
+              "id": "5054-1.5.5",
+              "number": 5,
+              "wording": "Apply the principle of moments to balance problems involving clockwise and anticlockwise moments",
+              "classification": "mathematical",
+              "keywords": [
+                "principle of moments",
+                "equilibrium",
+                "clockwise",
+                "anticlockwise"
+              ],
+              "page": 15
+            }
+          ],
+          "page_range": "14–15"
+        },
+        {
+          "subtopic_id": "1.6",
+          "title": "Momentum",
+          "page_reference": 16,
+          "objectives": [
+            {
+              "id": "5054-1.6.1",
+              "number": 1,
+              "wording": "Define momentum as mass × velocity; recall and use p = mv",
+              "classification": "mathematical",
+              "formula": "p = mv",
+              "keywords": [
+                "momentum",
+                "p = mv",
+                "kg m/s"
+              ],
+              "page": 16
+            },
+            {
+              "id": "5054-1.6.2",
+              "number": 2,
+              "wording": "Apply the principle of conservation of momentum to solve simple problems in one dimension",
+              "classification": "mathematical",
+              "keywords": [
+                "conservation of momentum",
+                "collision",
+                "explosion"
+              ],
+              "page": 16
+            },
+            {
+              "id": "5054-1.6.3",
+              "number": 3,
+              "wording": "Define impulse as force × time; recall and use impulse = FΔt = Δ(mv)",
+              "classification": "mathematical",
+              "formula": "impulse = FΔt = Δp",
+              "keywords": [
+                "impulse",
+                "change in momentum",
+                "force",
+                "contact time"
+              ],
+              "page": 16
+            }
+          ],
+          "page_range": "16"
+        },
+        {
+          "subtopic_id": "1.7",
+          "title": "Energy, work and power",
+          "page_reference": 16,
+          "objectives": [
+            {
+              "id": "5054-1.7.1",
+              "number": 1,
+              "wording": "Recall and use the equation for kinetic energy Ek = 1/2 m v²",
+              "classification": "mathematical",
+              "formula": "Ek = 1/2 m v²",
+              "keywords": [
+                "kinetic energy",
+                "Ek",
+                "speed",
+                "velocity"
+              ],
+              "page": 16
+            },
+            {
+              "id": "5054-1.7.2",
+              "number": 2,
+              "wording": "Recall and use the equation for gravitational potential energy ΔEp = mgΔh",
+              "classification": "mathematical",
+              "formula": "ΔEp = mgΔh",
+              "keywords": [
+                "gravitational potential energy",
+                "Ep",
+                "height",
+                "gpe"
+              ],
+              "page": 16
+            },
+            {
+              "id": "5054-1.7.3",
+              "number": 3,
+              "wording": "State and apply the principle of the conservation of energy to energy transformations",
+              "classification": "theoretical",
+              "keywords": [
+                "conservation of energy",
+                "energy transfer",
+                "efficiency"
+              ],
+              "page": 17
+            },
+            {
+              "id": "5054-1.7.4",
+              "number": 4,
+              "wording": "Recall and use the equation for work done W = Fd = ΔE",
+              "classification": "mathematical",
+              "formula": "W = Fd",
+              "keywords": [
+                "work done",
+                "force × distance",
+                "joules"
+              ],
+              "page": 17
+            },
+            {
+              "id": "5054-1.7.5",
+              "number": 5,
+              "wording": "Define power as work done per unit time or energy transferred per unit time; recall and use P = W / t = ΔE / t",
+              "classification": "mathematical",
+              "formula": "P = W / t",
+              "keywords": [
+                "power",
+                "work/time",
+                "energy/time",
+                "watts"
+              ],
+              "page": 17
+            },
+            {
+              "id": "5054-1.7.6",
+              "number": 6,
+              "wording": "Recall and use efficiency = (useful energy output / total energy input) × 100%",
+              "classification": "mathematical",
+              "formula": "efficiency = (useful output / total input) × 100%",
+              "keywords": [
+                "efficiency",
+                "energy loss",
+                "percentage efficiency"
+              ],
+              "page": 17
+            }
+          ],
+          "page_range": "16–17"
+        },
+        {
+          "subtopic_id": "1.8",
+          "title": "Pressure",
+          "page_reference": 18,
+          "objectives": [
+            {
+              "id": "5054-1.8.1",
+              "number": 1,
+              "wording": "Define pressure as force per unit area; recall and use p = F / A",
+              "classification": "mathematical",
+              "formula": "p = F / A",
+              "keywords": [
+                "pressure",
+                "force/area",
+                "pascal",
+                "N/m2"
+              ],
+              "page": 18
+            },
+            {
+              "id": "5054-1.8.2",
+              "number": 2,
+              "wording": "Recall and use the equation for hydrostatic pressure in a liquid Δp = ρgΔh",
+              "classification": "mathematical",
+              "formula": "Δp = ρgΔh",
+              "keywords": [
+                "hydrostatic pressure",
+                "liquid depth",
+                "density"
+              ],
+              "page": 18
+            }
+          ],
+          "page_range": "18"
+        }
+      ]
+    },
+    {
+      "topic_id": "2",
+      "title": "Thermal physics",
+      "subtopics": [
+        {
+          "subtopic_id": "2.1",
+          "title": "Kinetic particle model of matter",
+          "page_reference": 18,
+          "objectives": [
+            {
+              "id": "5054-2.1.1",
+              "number": 1,
+              "wording": "Describe the states of matter and their interconversion in terms of the kinetic particle model",
+              "classification": "theoretical",
+              "keywords": [
+                "states of matter",
+                "solid",
+                "liquid",
+                "gas",
+                "particle arrangement"
+              ],
+              "page": 18
+            },
+            {
+              "id": "5054-2.1.2",
+              "number": 2,
+              "wording": "Explain the relationship between temperature and the kinetic energy of particles, including the Kelvin scale where T(K) = θ(°C) + 273",
+              "classification": "mathematical",
+              "formula": "T(K) = θ(°C) + 273",
+              "keywords": [
+                "kelvin",
+                "absolute temperature",
+                "celsius",
+                "kinetic energy of particles"
+              ],
+              "page": 18
+            },
+            {
+              "id": "5054-2.1.3",
+              "number": 3,
+              "wording": "Explain the pressure of a gas in terms of particle collisions with container walls; recall and use p1V1 = p2V2 for constant temperature",
+              "classification": "mathematical",
+              "formula": "p1V1 = p2V2",
+              "keywords": [
+                "Boyle's law",
+                "gas pressure",
+                "particle collisions",
+                "volume"
+              ],
+              "page": 18
+            }
+          ],
+          "page_range": "18"
+        },
+        {
+          "subtopic_id": "2.2",
+          "title": "Thermal properties and temperature",
+          "page_reference": 19,
+          "objectives": [
+            {
+              "id": "5054-2.2.1",
+              "number": 1,
+              "wording": "Describe thermal expansion of solids, liquids and gases and explain its consequences and applications",
+              "classification": "theoretical",
+              "keywords": [
+                "thermal expansion",
+                "bimetallic strip",
+                "thermometer"
+              ],
+              "page": 19
+            },
+            {
+              "id": "5054-2.2.2",
+              "number": 2,
+              "wording": "Define specific heat capacity c as thermal energy required to raise the temperature of 1 kg by 1 °C; recall and use c = ΔE / (mΔθ)",
+              "classification": "mathematical",
+              "formula": "c = ΔE / (mΔθ)",
+              "keywords": [
+                "specific heat capacity",
+                "thermal capacity",
+                "c = E/(m delta theta)"
+              ],
+              "page": 19
+            },
+            {
+              "id": "5054-2.2.3",
+              "number": 3,
+              "wording": "Describe melting, boiling, solidification and condensation in terms of latent heat and particle behavior without change in temperature",
+              "classification": "theoretical",
+              "keywords": [
+                "latent heat",
+                "melting",
+                "boiling",
+                "evaporation",
+                "cooling effect"
+              ],
+              "page": 19
+            }
+          ],
+          "page_range": "19"
+        },
+        {
+          "subtopic_id": "2.3",
+          "title": "Transfer of thermal energy",
+          "page_reference": 20,
+          "objectives": [
+            {
+              "id": "5054-2.3.1",
+              "number": 1,
+              "wording": "Describe thermal conduction in terms of atomic vibrations and free/delocalised electrons in metals",
+              "classification": "theoretical",
+              "keywords": [
+                "conduction",
+                "thermal conductors",
+                "delocalised electrons"
+              ],
+              "page": 20
+            },
+            {
+              "id": "5054-2.3.2",
+              "number": 2,
+              "wording": "Describe convection in fluids in terms of density changes and convection currents",
+              "classification": "theoretical",
+              "keywords": [
+                "convection",
+                "convection current",
+                "density decrease",
+                "fluid"
+              ],
+              "page": 20
+            },
+            {
+              "id": "5054-2.3.3",
+              "number": 3,
+              "wording": "Describe thermal radiation as electromagnetic waves (infrared) and the factors affecting emission and absorption",
+              "classification": "theoretical",
+              "keywords": [
+                "radiation",
+                "infrared",
+                "black surfaces",
+                "shiny surfaces"
+              ],
+              "page": 20
+            }
+          ],
+          "page_range": "20"
+        }
+      ]
+    },
+    {
+      "topic_id": "3",
+      "title": "Waves",
+      "subtopics": [
+        {
+          "subtopic_id": "3.1",
+          "title": "General properties of waves",
+          "page_reference": 21,
+          "objectives": [
+            {
+              "id": "5054-3.1.1",
+              "number": 1,
+              "wording": "Know that waves transfer energy without transferring matter",
+              "classification": "theoretical",
+              "keywords": [
+                "wave energy transfer",
+                "wave motion"
+              ],
+              "page": 21
+            },
+            {
+              "id": "5054-3.1.2",
+              "number": 2,
+              "wording": "Describe transverse and longitudinal waves and give examples of each",
+              "classification": "theoretical",
+              "keywords": [
+                "transverse wave",
+                "longitudinal wave",
+                "light",
+                "sound"
+              ],
+              "page": 21
+            },
+            {
+              "id": "5054-3.1.3",
+              "number": 3,
+              "wording": "Define speed, frequency, wavelength and amplitude; recall and use the wave equation v = f λ",
+              "classification": "mathematical",
+              "formula": "v = f λ",
+              "keywords": [
+                "wave equation",
+                "v = f lambda",
+                "frequency",
+                "wavelength",
+                "amplitude"
+              ],
+              "page": 21
+            }
+          ],
+          "page_range": "21"
+        },
+        {
+          "subtopic_id": "3.2",
+          "title": "Light",
+          "page_reference": 21,
+          "objectives": [
+            {
+              "id": "5054-3.2.1",
+              "number": 1,
+              "wording": "Describe the reflection of light at a plane surface; law of reflection: angle of incidence = angle of reflection",
+              "classification": "theoretical",
+              "keywords": [
+                "reflection",
+                "plane mirror",
+                "angle of incidence",
+                "angle of reflection"
+              ],
+              "page": 21
+            },
+            {
+              "id": "5054-3.2.2",
+              "number": 2,
+              "wording": "Describe refraction of light and define refractive index n; recall and use n = sin(i) / sin(r) and n = c / v",
+              "classification": "mathematical",
+              "formula": "n = sin(i) / sin(r)",
+              "keywords": [
+                "refraction",
+                "refractive index",
+                "Snell's law",
+                "speed of light"
+              ],
+              "page": 22
+            },
+            {
+              "id": "5054-3.2.3",
+              "number": 3,
+              "wording": "Describe total internal reflection and critical angle c; recall and use n = 1 / sin(c)",
+              "classification": "mathematical",
+              "formula": "n = 1 / sin(c)",
+              "keywords": [
+                "total internal reflection",
+                "critical angle",
+                "optical fibres"
+              ],
+              "page": 22
+            },
+            {
+              "id": "5054-3.2.4",
+              "number": 4,
+              "wording": "Describe the action of a thin converging lens on a parallel beam of light; define focal length and principal focus",
+              "classification": "practical",
+              "keywords": [
+                "converging lens",
+                "focal length",
+                "principal focus",
+                "real image",
+                "virtual image"
+              ],
+              "page": 22
+            }
+          ],
+          "page_range": "21–22"
+        },
+        {
+          "subtopic_id": "3.3",
+          "title": "Electromagnetic spectrum",
+          "page_reference": 23,
+          "objectives": [
+            {
+              "id": "5054-3.3.1",
+              "number": 1,
+              "wording": "Know the main regions of the electromagnetic spectrum in order of frequency and wavelength: radio, microwave, infrared, visible, ultraviolet, X-ray, gamma",
+              "classification": "theoretical",
+              "keywords": [
+                "electromagnetic spectrum",
+                "radio waves",
+                "microwaves",
+                "infrared",
+                "x-rays",
+                "gamma rays"
+              ],
+              "page": 23
+            },
+            {
+              "id": "5054-3.3.2",
+              "number": 2,
+              "wording": "Know that all electromagnetic waves travel at the speed of light in vacuum (3.0 × 10⁸ m/s)",
+              "classification": "theoretical",
+              "formula": "c = 3.0 × 10⁸ m/s",
+              "keywords": [
+                "speed of light",
+                "vacuum speed",
+                "3x10^8 m/s"
+              ],
+              "page": 23
+            }
+          ],
+          "page_range": "23"
+        },
+        {
+          "subtopic_id": "3.4",
+          "title": "Sound",
+          "page_reference": 23,
+          "objectives": [
+            {
+              "id": "5054-3.4.1",
+              "number": 1,
+              "wording": "Describe the production of sound waves by vibrating sources and transmission as longitudinal waves",
+              "classification": "theoretical",
+              "keywords": [
+                "sound waves",
+                "vibrations",
+                "longitudinal waves",
+                "compressions",
+                "rarefactions"
+              ],
+              "page": 23
+            },
+            {
+              "id": "5054-3.4.2",
+              "number": 2,
+              "wording": "State that the approximate range of audible frequencies for a healthy human ear is 20 Hz to 20 000 Hz",
+              "classification": "theoretical",
+              "keywords": [
+                "audible range",
+                "20 Hz to 20 kHz",
+                "ultrasound"
+              ],
+              "page": 23
+            }
+          ],
+          "page_range": "23"
+        }
+      ]
+    },
+    {
+      "topic_id": "4",
+      "title": "Electricity and magnetism",
+      "subtopics": [
+        {
+          "subtopic_id": "4.1",
+          "title": "Simple magnetism and magnetic fields",
+          "page_reference": 24,
+          "objectives": [
+            {
+              "id": "5054-4.1.1",
+              "number": 1,
+              "wording": "Describe the forces between magnetic poles and between magnets and magnetic materials (attraction and repulsion)",
+              "classification": "theoretical",
+              "keywords": [
+                "magnetic poles",
+                "north pole",
+                "south pole",
+                "attraction",
+                "repulsion"
+              ],
+              "page": 24
+            },
+            {
+              "id": "5054-4.1.2",
+              "number": 2,
+              "wording": "Describe a magnetic field as a region in which a magnetic pole experiences a force; plot magnetic field lines with a compass",
+              "classification": "practical",
+              "keywords": [
+                "magnetic field lines",
+                "plotting compass",
+                "bar magnet"
+              ],
+              "page": 24
+            }
+          ],
+          "page_range": "24"
+        },
+        {
+          "subtopic_id": "4.2",
+          "title": "Electrical quantities",
+          "page_reference": 24,
+          "objectives": [
+            {
+              "id": "5054-4.2.1.1",
+              "number": 1,
+              "section": "4.2.1 Electrical charge",
+              "wording": "State that there are positive and negative charges measured in coulombs; unlike charges attract and like charges repel",
+              "classification": "theoretical",
+              "keywords": [
+                "electric charge",
+                "coulombs",
+                "positive charge",
+                "negative charge"
+              ],
+              "page": 24
+            },
+            {
+              "id": "5054-4.2.2.1",
+              "number": 1,
+              "section": "4.2.2 Electrical current",
+              "wording": "Define electric current as the charge passing a point per unit time; recall and use the equation I = Q / t",
+              "classification": "mathematical",
+              "formula": "I = Q / t",
+              "keywords": [
+                "electric current",
+                "charge/time",
+                "I = Q/t",
+                "amperes"
+              ],
+              "page": 25
+            },
+            {
+              "id": "5054-4.2.2.2",
+              "number": 2,
+              "section": "4.2.2 Electrical current",
+              "wording": "Describe electrical conduction in metals in terms of the movement of free electrons",
+              "classification": "theoretical",
+              "keywords": [
+                "free electrons",
+                "conduction in metals",
+                "electron drift"
+              ],
+              "page": 25
+            },
+            {
+              "id": "5054-4.2.2.5",
+              "number": 5,
+              "section": "4.2.2 Electrical current",
+              "wording": "State that conventional current is from positive to negative and that the flow of free electrons is from negative to positive",
+              "classification": "theoretical",
+              "keywords": [
+                "conventional current",
+                "electron flow",
+                "positive to negative"
+              ],
+              "page": 25
+            },
+            {
+              "id": "5054-4.2.2.6",
+              "number": 6,
+              "section": "4.2.2 Electrical current",
+              "wording": "Describe the use of ammeters (analogue and digital) with different ranges",
+              "classification": "practical",
+              "keywords": [
+                "ammeter",
+                "analogue ammeter",
+                "digital ammeter",
+                "current measurement"
+              ],
+              "page": 25
+            },
+            {
+              "id": "5054-4.2.3.1",
+              "number": 1,
+              "section": "4.2.3 Electromotive force and potential difference",
+              "wording": "Define e.m.f. (electromotive force) as electrical work done by a source in moving a unit charge around a complete circuit; recall and use E = W / Q",
+              "classification": "mathematical",
+              "formula": "E = W / Q",
+              "keywords": [
+                "electromotive force",
+                "emf",
+                "E = W/Q",
+                "battery voltage"
+              ],
+              "page": 25
+            },
+            {
+              "id": "5054-4.2.3.2",
+              "number": 2,
+              "section": "4.2.3 Electromotive force and potential difference",
+              "wording": "Define p.d. (potential difference) as work done by a unit charge passing through a component; recall and use V = W / Q",
+              "classification": "mathematical",
+              "formula": "V = W / Q",
+              "keywords": [
+                "potential difference",
+                "p.d.",
+                "voltage",
+                "V = W/Q",
+                "volts"
+              ],
+              "page": 25
+            },
+            {
+              "id": "5054-4.2.3.4",
+              "number": 4,
+              "section": "4.2.3 Electromotive force and potential difference",
+              "wording": "Describe the use of voltmeters (analogue and digital) with different ranges",
+              "classification": "practical",
+              "keywords": [
+                "voltmeter",
+                "analogue voltmeter",
+                "digital voltmeter",
+                "voltage measurement"
+              ],
+              "page": 25
+            },
+            {
+              "id": "5054-4.2.4.1",
+              "number": 1,
+              "section": "4.2.4 Resistance",
+              "wording": "Recall and use the equation resistance = p.d. / current, R = V / I",
+              "classification": "mathematical",
+              "formula": "R = V / I",
+              "keywords": [
+                "resistance",
+                "R = V/I",
+                "ohms",
+                "potential difference",
+                "current"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.2.4.2",
+              "number": 2,
+              "section": "4.2.4 Resistance",
+              "wording": "Describe an experiment to determine resistance using a voltmeter and an ammeter and do the appropriate calculations",
+              "classification": "practical",
+              "keywords": [
+                "resistance experiment",
+                "voltmeter ammeter method",
+                "resistance calculation"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.2.4.3",
+              "number": 3,
+              "section": "4.2.4 Resistance",
+              "wording": "Recall and use, for a wire, the direct proportionality between resistance and length, and inverse proportionality between resistance and cross-sectional area",
+              "classification": "mathematical",
+              "keywords": [
+                "wire resistance",
+                "length proportionality",
+                "cross-sectional area",
+                "resistivity"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.2.4.4",
+              "number": 4,
+              "section": "4.2.4 Resistance",
+              "wording": "State Ohm’s law, including reference to constant temperature",
+              "classification": "theoretical",
+              "keywords": [
+                "Ohm's law",
+                "constant temperature",
+                "ohmic conductor",
+                "proportionality"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.2.4.5",
+              "number": 5,
+              "section": "4.2.4 Resistance",
+              "wording": "Sketch and explain the current–voltage graphs for a resistor of constant resistance, a filament lamp and a diode",
+              "classification": "graphical",
+              "keywords": [
+                "I-V characteristic",
+                "current-voltage graph",
+                "filament lamp",
+                "diode",
+                "fixed resistor"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.2.4.6",
+              "number": 6,
+              "section": "4.2.4 Resistance",
+              "wording": "Describe the effect of temperature increase on the resistance of a resistor, such as the filament in a filament lamp",
+              "classification": "theoretical",
+              "keywords": [
+                "temperature effect on resistance",
+                "filament lamp resistance",
+                "heating effect"
+              ],
+              "page": 26
+            }
+          ],
+          "page_range": "24–26"
+        },
+        {
+          "subtopic_id": "4.3",
+          "title": "Electric circuits",
+          "page_reference": 26,
+          "objectives": [
+            {
+              "id": "5054-4.3.1.1",
+              "number": 1,
+              "section": "4.3.1 Circuit diagrams and circuit components",
+              "wording": "Draw and interpret circuit diagrams with cells, batteries, power supplies, generators, oscilloscopes, potential dividers, switches, resistors (fixed and variable), heaters, thermistors (NTC only), light-dependent resistors (LDRs), lamps, motors, ammeters, voltmeters, magnetising coils, transformers, fuses, relays, diodes and light-emitting diodes (LEDs), and know how these components behave in the circuit",
+              "classification": "practical",
+              "keywords": [
+                "circuit diagram",
+                "circuit symbols",
+                "battery",
+                "switch",
+                "ammeter",
+                "voltmeter",
+                "resistor",
+                "lamp"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.3.2.1",
+              "number": 1,
+              "section": "4.3.2 Series and parallel circuits",
+              "wording": "Recall and use in calculations, the fact that: (a) current at every point in a series circuit is the same, (b) sum of currents entering a junction equals sum leaving, (c) total p.d. across components in series equals sum of individual p.d.s, (d) p.d. across parallel branches is the same",
+              "classification": "mathematical",
+              "keywords": [
+                "series circuit",
+                "parallel circuit",
+                "current conservation",
+                "junction rule",
+                "voltage drop"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.3.2.2",
+              "number": 2,
+              "section": "4.3.2 Series and parallel circuits",
+              "wording": "Calculate the combined resistance of two or more resistors in series; R = R1 + R2 + ...",
+              "classification": "mathematical",
+              "formula": "R = R1 + R2 + ...",
+              "keywords": [
+                "resistors in series",
+                "total series resistance"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.3.2.3",
+              "number": 3,
+              "section": "4.3.2 Series and parallel circuits",
+              "wording": "Calculate the combined resistance of two resistors in parallel; 1/R = 1/R1 + 1/R2",
+              "classification": "mathematical",
+              "formula": "1/R = 1/R1 + 1/R2",
+              "keywords": [
+                "resistors in parallel",
+                "parallel resistance formula"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.3.2.4",
+              "number": 4,
+              "section": "4.3.2 Series and parallel circuits",
+              "wording": "Calculate current, voltage and resistance in parts of a circuit or in the whole circuit",
+              "classification": "mathematical",
+              "keywords": [
+                "circuit calculation",
+                "total current",
+                "branch voltage",
+                "total resistance"
+              ],
+              "page": 26
+            },
+            {
+              "id": "5054-4.3.3.2",
+              "number": 2,
+              "section": "4.3.3 Action and use of circuit components",
+              "wording": "Describe the action of a variable potential divider",
+              "classification": "practical",
+              "keywords": [
+                "potential divider",
+                "potentiometer",
+                "variable resistor"
+              ],
+              "page": 27
+            },
+            {
+              "id": "5054-4.3.3.3",
+              "number": 3,
+              "section": "4.3.3 Action and use of circuit components",
+              "wording": "Recall and use the equation for two resistors used as a potential divider: R1 / R2 = V1 / V2",
+              "classification": "mathematical",
+              "formula": "R1 / R2 = V1 / V2",
+              "keywords": [
+                "potential divider equation",
+                "voltage ratio"
+              ],
+              "page": 27
+            }
+          ],
+          "page_range": "26–27"
+        },
+        {
+          "subtopic_id": "4.4",
+          "title": "Practical electricity",
+          "page_reference": 27,
+          "objectives": [
+            {
+              "id": "5054-4.4.1.3",
+              "number": 3,
+              "section": "4.4.1 Uses of electricity",
+              "wording": "Recall and use the equation power = current × voltage, P = I V",
+              "classification": "mathematical",
+              "formula": "P = I V",
+              "keywords": [
+                "electrical power",
+                "P = IV",
+                "watts",
+                "power dissipation"
+              ],
+              "page": 27
+            },
+            {
+              "id": "5054-4.4.1.4",
+              "number": 4,
+              "section": "4.4.1 Uses of electricity",
+              "wording": "Recall and use the equation energy = current × voltage × time, E = I V t",
+              "classification": "mathematical",
+              "formula": "E = I V t",
+              "keywords": [
+                "electrical energy",
+                "E = IVt",
+                "joules"
+              ],
+              "page": 27
+            },
+            {
+              "id": "5054-4.4.2.1",
+              "number": 1,
+              "section": "4.4.2 Electrical safety",
+              "wording": "State the hazards of damaged insulation, overheating cables, damp conditions, and excess current from overloading",
+              "classification": "safety",
+              "keywords": [
+                "electrical hazard",
+                "overheating",
+                "overloading",
+                "damp conditions"
+              ],
+              "page": 27
+            },
+            {
+              "id": "5054-4.4.2.2",
+              "number": 2,
+              "section": "4.4.2 Electrical safety",
+              "wording": "Explain the use and operation of trip switches and fuses and choose appropriate fuse ratings and trip switch settings",
+              "classification": "practical",
+              "keywords": [
+                "fuse",
+                "circuit breaker",
+                "trip switch",
+                "fuse rating"
+              ],
+              "page": 27
+            }
+          ],
+          "page_range": "27"
+        },
+        {
+          "subtopic_id": "4.5",
+          "title": "Electromagnetic effects",
+          "page_reference": 28,
+          "objectives": [
+            {
+              "id": "5054-4.5.1.1",
+              "number": 1,
+              "section": "4.5.1 Electromagnetic induction",
+              "wording": "Describe an experiment to demonstrate electromagnetic induction",
+              "classification": "practical",
+              "keywords": [
+                "electromagnetic induction",
+                "induced emf",
+                "Faraday"
+              ],
+              "page": 28
+            },
+            {
+              "id": "5054-4.5.5.1",
+              "number": 1,
+              "section": "4.5.5 The d.c. motor",
+              "wording": "Know that a current-carrying coil in a magnetic field may experience a turning effect, increased by turns, current, and field strength",
+              "classification": "theoretical",
+              "keywords": [
+                "dc motor",
+                "turning effect",
+                "split-ring commutator",
+                "coil"
+              ],
+              "page": 28
+            },
+            {
+              "id": "5054-4.5.6.3",
+              "number": 3,
+              "section": "4.5.6 The transformer",
+              "wording": "Recall and use the equation Vp / Vs = Np / Ns where P and S refer to primary and secondary",
+              "classification": "mathematical",
+              "formula": "Vp / Vs = Np / Ns",
+              "keywords": [
+                "transformer",
+                "turns ratio",
+                "step-up",
+                "step-down",
+                "primary",
+                "secondary"
+              ],
+              "page": 29
+            }
+          ],
+          "page_range": "28–29"
+        }
+      ]
+    },
+    {
+      "topic_id": "5",
+      "title": "Nuclear physics",
+      "subtopics": [
+        {
+          "subtopic_id": "5.1",
+          "title": "The nuclear model of the atom",
+          "page_reference": 29,
+          "objectives": [
+            {
+              "id": "5054-5.1.1.1",
+              "number": 1,
+              "section": "5.1.1 The atom",
+              "wording": "Describe the structure of the atom in terms of a positively charged nucleus and negatively charged electrons in orbit around the nucleus",
+              "classification": "theoretical",
+              "keywords": [
+                "atom structure",
+                "nucleus",
+                "orbiting electrons"
+              ],
+              "page": 29
+            },
+            {
+              "id": "5054-5.1.2.1",
+              "number": 1,
+              "section": "5.1.2 The nucleus",
+              "wording": "Describe the composition of the nucleus in terms of protons and neutrons",
+              "classification": "theoretical",
+              "keywords": [
+                "protons",
+                "neutrons",
+                "nucleons"
+              ],
+              "page": 29
+            },
+            {
+              "id": "5054-5.1.2.3",
+              "number": 3,
+              "section": "5.1.2 The nucleus",
+              "wording": "Define proton number (atomic number) Z and nucleon number (mass number) A and calculate the number of neutrons",
+              "classification": "mathematical",
+              "keywords": [
+                "atomic number",
+                "mass number",
+                "proton number",
+                "neutron calculation"
+              ],
+              "page": 29
+            },
+            {
+              "id": "5054-5.1.2.5",
+              "number": 5,
+              "section": "5.1.2 The nucleus",
+              "wording": "Explain what is meant by an isotope and state that an element may have more than one isotope",
+              "classification": "theoretical",
+              "keywords": [
+                "isotopes",
+                "nuclide notation",
+                "same proton number"
+              ],
+              "page": 29
+            }
+          ],
+          "page_range": "29"
+        },
+        {
+          "subtopic_id": "5.2",
+          "title": "Radioactivity",
+          "page_reference": 30,
+          "objectives": [
+            {
+              "id": "5054-5.2.2.1",
+              "number": 1,
+              "section": "5.2.2 The three types of emission",
+              "wording": "Describe the characteristics of the three types of emission (alpha, beta, gamma) in terms of ionising power and penetrating power",
+              "classification": "theoretical",
+              "keywords": [
+                "alpha particles",
+                "beta particles",
+                "gamma rays",
+                "ionising power",
+                "penetrating power"
+              ],
+              "page": 30
+            },
+            {
+              "id": "5054-5.2.5.1",
+              "number": 1,
+              "section": "5.2.5 Half-life",
+              "wording": "Define half-life as the time taken for half the nuclei of that isotope in any sample to decay; calculate half-life from decay curves",
+              "classification": "mathematical",
+              "keywords": [
+                "half-life",
+                "radioactive decay",
+                "decay curve",
+                "count rate"
+              ],
+              "page": 31
+            }
+          ],
+          "page_range": "30–31"
+        }
+      ]
+    },
+    {
+      "topic_id": "6",
+      "title": "Space physics",
+      "subtopics": [
+        {
+          "subtopic_id": "6.1",
+          "title": "Earth and the Solar System",
+          "page_reference": 31,
+          "objectives": [
+            {
+              "id": "5054-6.1.1.1",
+              "number": 1,
+              "section": "6.1.1 The Earth",
+              "wording": "Know that the Earth is a planet that orbits the Sun once in approximately 365 days and that it rotates on its axis once in approximately 24 hours",
+              "classification": "theoretical",
+              "keywords": [
+                "Earth orbit",
+                "axial rotation",
+                "day and night",
+                "year"
+              ],
+              "page": 31
+            },
+            {
+              "id": "5054-6.1.2.1",
+              "number": 1,
+              "section": "6.1.2 The Solar System",
+              "wording": "Describe the Solar System as containing: the Sun, eight planets (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune), dwarf planets, moons, asteroids and comets",
+              "classification": "theoretical",
+              "keywords": [
+                "Solar System",
+                "planets order",
+                "Sun",
+                "moons",
+                "asteroids",
+                "comets"
+              ],
+              "page": 32
+            },
+            {
+              "id": "5054-6.1.2.2",
+              "number": 2,
+              "section": "6.1.2 The Solar System",
+              "wording": "Analyse and interpret planetary data about orbital distance, orbital duration, density, surface temperature and gravitational field strength",
+              "classification": "analytical",
+              "keywords": [
+                "planetary data",
+                "orbital distance",
+                "orbital period",
+                "gravitational field strength"
+              ],
+              "page": 32
+            },
+            {
+              "id": "5054-6.1.2.4",
+              "number": 4,
+              "section": "6.1.2 The Solar System",
+              "wording": "Recall and use the equation for orbital speed v = 2 π r / T",
+              "classification": "mathematical",
+              "formula": "v = 2 π r / T",
+              "keywords": [
+                "orbital speed",
+                "v = 2pi r / T",
+                "circular orbit"
+              ],
+              "page": 32
+            }
+          ],
+          "page_range": "31–32"
+        },
+        {
+          "subtopic_id": "6.2",
+          "title": "Stars and the Universe",
+          "page_reference": 32,
+          "objectives": [
+            {
+              "id": "5054-6.2.1.1",
+              "number": 1,
+              "section": "6.2.1 The Sun as a star",
+              "wording": "State that the Sun is a star of medium size consisting mostly of hydrogen and helium, radiating energy from nuclear fusion",
+              "classification": "theoretical",
+              "keywords": [
+                "Sun",
+                "star",
+                "hydrogen",
+                "helium",
+                "nuclear fusion"
+              ],
+              "page": 32
+            },
+            {
+              "id": "5054-6.2.2.1",
+              "number": 1,
+              "section": "6.2.2 Stars",
+              "wording": "Describe the life cycle of stars: interstellar clouds (nebulae), protostar, stable star (main sequence), red giant or red supergiant, planetary nebula or supernova, white dwarf, neutron star or black hole",
+              "classification": "theoretical",
+              "keywords": [
+                "stellar evolution",
+                "protostar",
+                "main sequence",
+                "red giant",
+                "supernova",
+                "white dwarf",
+                "black hole"
+              ],
+              "page": 33
+            },
+            {
+              "id": "5054-6.2.3.1",
+              "number": 1,
+              "section": "6.2.3 The Universe",
+              "wording": "State that the Milky Way is one of billions of galaxies; define light-year as the distance travelled in a vacuum by light in one year (approximately 9.5 × 10¹⁵ m)",
+              "classification": "mathematical",
+              "formula": "1 light-year ≈ 9.5 × 10¹⁵ m",
+              "keywords": [
+                "Milky Way",
+                "galaxies",
+                "light-year"
+              ],
+              "page": 33
+            },
+            {
+              "id": "5054-6.2.3.2",
+              "number": 2,
+              "section": "6.2.3 The Universe",
+              "wording": "Describe redshift in the light from distant galaxies and how redshift provides evidence that the Universe is expanding (Big Bang Theory)",
+              "classification": "theoretical",
+              "keywords": [
+                "redshift",
+                "expanding Universe",
+                "Big Bang theory",
+                "Doppler effect in light"
+              ],
+              "page": 33
+            }
+          ],
+          "page_range": "32–33"
+        }
+      ]
+    }
+  ]
+}

@@ -79,6 +79,8 @@ function isCrossSiteRequest(req) {
   return false;
 }
 
+const { retrieveSyllabusContext } = require('./lib/syllabus-retriever');
+
 /* ── Authoritative server-side Cambridge O-Level Socratic prompts ── */
 const SUBJECT_PROMPTS = {
   chemistry: {
@@ -91,7 +93,7 @@ const SUBJECT_PROMPTS = {
     label: 'Physics',
     syllabus: '5054',
     prompt:
-      "You are an elite, specialized Cambridge O-Level Physics instructor (Syllabus 5054). You must strictly use the Socratic Method: NEVER give raw solutions, final numerical answers, or fully derived equations directly. Instead, analyze the student's conceptual gap, reference the Physics 5054 syllabus topics (Measurements, Mechanics, Thermal Physics, Waves, Electricity & Magnetism, Nuclear Physics), and respond with a single, targeted question or helpful hint about the physical principles involved to guide them to find the answer themselves. Keep responses concise and encouraging. Respond ONLY using direct, plain text conversational paragraphs. NEVER output raw tool calls, interactive selection blocks, or metadata tags."
+      "You are an elite, specialized Cambridge O-Level Physics instructor (Syllabus 5054). You must strictly use the Socratic Method: NEVER give raw solutions, final numerical answers, or fully derived equations directly. Instead, analyze the student's conceptual gap, reference the Physics 5054 syllabus topics (Motion & Forces, Thermal Physics, Waves, Electricity & Magnetism, Nuclear Physics, Space Physics), and respond with a single, targeted question or helpful hint about the physical principles involved to guide them to find the answer themselves. Keep responses concise and encouraging. Respond ONLY using direct, plain text conversational paragraphs. NEVER output raw tool calls, interactive selection blocks, or metadata tags."
   },
   math: {
     label: 'Mathematics',
@@ -281,6 +283,17 @@ module.exports = async function handler(req, res) {
     generationConfig.thinkingConfig = { thinkingBudget: 0 };
   }
 
+  // Grounding context retrieval for Cambridge syllabus (dependency-free serverless RAG)
+  let systemInstructionText = subjectConfig.prompt;
+  try {
+    const syllabusContext = retrieveSyllabusContext(rawSubject, message);
+    if (syllabusContext && syllabusContext.formattedContext) {
+      systemInstructionText += '\n\n' + syllabusContext.formattedContext;
+    }
+  } catch (err) {
+    console.warn('[api/chat] Syllabus retrieval skipped:', err.message);
+  }
+
   try {
     const geminiResponse = await fetch(endpoint, {
       method: 'POST',
@@ -290,7 +303,7 @@ module.exports = async function handler(req, res) {
       },
       body: JSON.stringify({
         system_instruction: {
-          parts: [{ text: subjectConfig.prompt }]
+          parts: [{ text: systemInstructionText }]
         },
         contents: contents,
         generationConfig: generationConfig

@@ -141,8 +141,12 @@
   })();
 
   /* ── Toggle drawer ── */
-  function toggleDrawer() {
-    isOpen = !isOpen;
+  function toggleDrawer(forceState) {
+    if (typeof forceState === 'boolean') {
+      isOpen = forceState;
+    } else {
+      isOpen = !isOpen;
+    }
     drawer.classList.toggle('ai-chat-open', isOpen);
     fab.classList.toggle('ai-fab-hidden', isOpen);
     if (isOpen) {
@@ -384,5 +388,32 @@
       );
     }, 400);
   });
+
+  /* ── External Bridge for Interactive Labs ── */
+  window.SmartTutorsAI = {
+    openWithQuestion: function (subject, questionText) {
+      if (subject && SUBJECT_PROMPTS[subject]) {
+        activeSubject = subject;
+        var select = document.getElementById('ai-subject-select');
+        if (select) select.value = subject;
+        conversationHistory = [];
+      }
+      toggleDrawer(true);
+      if (questionText && input) {
+        input.value = questionText;
+        setTimeout(function () { input.focus(); }, 350);
+      }
+    },
+    askAboutExperiment: function (context) {
+      if (!context) return;
+      var subj = context.subject || 'physics';
+      var text = context.prompt || '';
+      if (!text && context.parameters) {
+        text = 'In the ' + (context.experimentTitle || 'simulation') + ', I am investigating parameters: ' +
+          JSON.stringify(context.parameters) + '. Can you explain how these variables relate?';
+      }
+      this.openWithQuestion(subj, text);
+    }
+  };
 
 })();

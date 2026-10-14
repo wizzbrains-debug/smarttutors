@@ -95,6 +95,7 @@
   <link rel="stylesheet" href="css/utilities.css" />
   <link rel="stylesheet" href="css/sections.css" />
   <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/labs.css" />
 </head>
 <body class="font-inter bg-white dark:bg-navy-950 text-navy-900 dark:text-white transition-colors duration-500">
 
@@ -191,6 +192,7 @@
           </div>
         </li>
 
+        <li role="none"><a href="#labs" role="menuitem" class="nav-link" data-section="labs">Labs</a></li>
         <li role="none"><a href="success-stories.html" role="menuitem" class="nav-link" data-section="stories">Success Stories</a></li>
         <li role="none"><a href="about.html" role="menuitem" class="nav-link" data-section="about">About Us</a></li>
         <li role="none"><a href="contact.html" role="menuitem" class="nav-link" data-section="contact">Contact</a></li>
@@ -246,6 +248,7 @@
       <!-- Mobile Links -->
       <nav class="mobile-nav-links" aria-label="Mobile Navigation Links">
         <a href="#home" class="mobile-nav-link" data-index="0" data-section="home">Home</a>
+        <a href="#labs" class="mobile-nav-link" data-index="1" data-section="labs">Labs</a>
         <a href="programs.html" class="mobile-nav-link" data-index="1" data-section="programs">Programs</a>
         <a href="success-stories.html" class="mobile-nav-link" data-index="2" data-section="stories">Success Stories</a>
         <a href="about.html" class="mobile-nav-link" data-index="3" data-section="about">About Us</a>
@@ -282,7 +285,7 @@
   <!-- PAGE CONTENT -->
   <main id="main-content">
 
-    <!-- 
+    <!--
          HERO
           -->
     <section id="home" class="hero-placeholder" aria-label="Hero Section">
@@ -334,6 +337,55 @@
           <div class="stat-divider"></div>
           <div class="stat-item"><span class="stat-num">24/7</span><span class="stat-label">Support</span></div>
         </div>
+      </div>
+    </section>
+
+    <!--
+         INTERACTIVE LABS SECTION
+         Decoupled Science Simulation Workbench
+    -->
+    <section id="labs" class="section-block labs-section" aria-label="Interactive Science Labs">
+      <div class="labs-container">
+        <!-- Section Header -->
+        <div class="labs-header">
+          <div class="labs-eyebrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+            Interactive Science Labs
+          </div>
+          <h2 class="labs-title">
+            Experiment, Analyze &amp; <span class="gradient-text">Understand</span>
+          </h2>
+          <p class="labs-subtitle">
+            Bridge abstract theory and practical mastery. Conduct real-time physics simulations aligned with Cambridge syllabuses, adjust experimental parameters, observe mathematical relationships, and consult our Socratic AI tutor.
+          </p>
+        </div>
+
+        <!-- Subject Navigation Tabs -->
+        <div class="labs-subject-tabs" role="tablist" aria-label="Laboratory Subjects">
+          <button type="button" class="labs-tab-btn active" role="tab" aria-selected="true" data-subject="physics">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Physics
+            <span class="labs-tab-badge">Live</span>
+          </button>
+          <button type="button" class="labs-tab-btn" role="tab" aria-selected="false" data-subject="chemistry">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+            Chemistry
+            <span class="labs-tab-badge">Soon</span>
+          </button>
+          <button type="button" class="labs-tab-btn" role="tab" aria-selected="false" data-subject="biology">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Biology
+            <span class="labs-tab-badge">Soon</span>
+          </button>
+          <button type="button" class="labs-tab-btn" role="tab" aria-selected="false" data-subject="math">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+            Mathematics
+            <span class="labs-tab-badge">Soon</span>
+          </button>
+        </div>
+
+        <!-- Active Laboratory Display Container -->
+        <div id="active-lab-container" class="active-lab-area"></div>
       </div>
     </section>
 
@@ -403,7 +455,7 @@
           </div>
           <p class="footer-tagline">Quality O/A Level & IGCSE Education, Anywhere</p>
           <p class="footer-description">Expert tutoring for ambitious students worldwide. Learn from experienced teachers, achieve top grades, and unlock your potential with flexible online classes.</p>
-          
+
           <!-- Trust Badges -->
           <div class="trust-badges">
             <div class="trust-badge">
@@ -543,7 +595,7 @@
     </div><!-- /footer-inner -->
   </footer>
 
-  <!-- 
+  <!--
        ENROLLMENT FORM MODAL
         -->
   <div
@@ -871,7 +923,7 @@
         </div>
 
         <h3 class="success-title">
-          Welcome aboard, <span class="gradient-text" id="success-student-name">Scholar</span>! 
+          Welcome aboard, <span class="gradient-text" id="success-student-name">Scholar</span>!
         </h3>
 
         <p class="success-msg">
@@ -958,6 +1010,80 @@
     </div>
   </div>
 
+  <script src="js/labs/simulation-provider.js"></script>
+  <script src="js/labs/labs-data.js"></script>
+  <script src="js/labs/ohms-law.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const container = document.getElementById('active-lab-container');
+      if (!container || !window.SmartTutorsLabs || !window.SmartTutorsLabs.OhmsLawSimulation) return;
+
+      let currentSim = new window.SmartTutorsLabs.OhmsLawSimulation();
+      currentSim.init(container);
+
+      const tabs = document.querySelectorAll('.labs-tab-btn');
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          const subject = this.getAttribute('data-subject');
+          tabs.forEach(function (t) {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          this.classList.add('active');
+          this.setAttribute('aria-selected', 'true');
+
+          if (subject === 'physics') {
+            if (currentSim) currentSim.destroy();
+            currentSim = new window.SmartTutorsLabs.OhmsLawSimulation();
+            currentSim.init(container);
+          } else {
+            if (currentSim) {
+              currentSim.destroy();
+              currentSim = null;
+            }
+            const placeHolders = {
+              chemistry: {
+                title: 'Acid-Base Titration Lab',
+                desc: 'Investigate neutralization stoichiometry, equivalence points, and pH indicator shifts in a virtual conical flask apparatus. Cambridge IGCSE 0620 / O Level 5070 provisional alignment.',
+                icon: '<path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/>'
+              },
+              biology: {
+                title: 'Photosynthesis Rate Lab',
+                desc: 'Measure oxygen bubble production rates across variable light intensities and temperatures with aquatic plants. Cambridge IGCSE 0610 / O Level 5090 provisional alignment.',
+                icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>'
+              },
+              math: {
+                title: 'Coordinate Geometry & Function Visualizer',
+                desc: 'Explore quadratic functions, trigonometric curves, and vector transformations in real time. Cambridge O Level 4024 provisional alignment.',
+                icon: '<line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>'
+              }
+            };
+            const item = placeHolders[subject] || { title: 'Interactive Science Lab', desc: 'Simulation coming soon.' };
+            container.innerHTML =
+              '<div class="labs-placeholder-card">' +
+                '<div class="labs-placeholder-icon">' +
+                  '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' + item.icon + '</svg>' +
+                '</div>' +
+                '<span class="labs-placeholder-badge">Planned for Phase 2</span>' +
+                '<h3 class="labs-placeholder-title">' + item.title + '</h3>' +
+                '<p class="labs-placeholder-desc">' + item.desc + '</p>' +
+                '<button type="button" class="ohms-btn ohms-btn-ghost" id="return-physics-btn">' +
+                  '&larr; Return to Working Physics Lab' +
+                '</button>' +
+              '</div>';
+
+            const returnBtn = document.getElementById('return-physics-btn');
+            if (returnBtn) {
+              returnBtn.addEventListener('click', function () {
+                const physTab = document.querySelector('.labs-tab-btn[data-subject="physics"]');
+                if (physTab) physTab.click();
+              });
+            }
+          }
+        });
+      });
+    });
+  </script>
   <script src="js/ai-widget.js"></script>
 
 </body>

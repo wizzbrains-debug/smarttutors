@@ -1,0 +1,1067 @@
+/* ================================================================
+   SmartTutors Interactive Science Labs — Scoped Stylesheet
+   Compatible with light and dark themes, glassmorphism design system
+   ================================================================ */
+
+/* Section Outer Block */
+.labs-section {
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.labs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header & Eyebrow */
+.labs-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 40px auto;
+}
+
+.labs-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  color: var(--violet, #7C3AED);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+html.dark .labs-eyebrow {
+  background: rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.4);
+  color: #C4B5FD;
+}
+
+.labs-title {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  color: var(--text-primary, #0F172A);
+}
+
+html.dark .labs-title {
+  color: #F8FAFC;
+}
+
+.labs-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #64748B);
+}
+
+html.dark .labs-subtitle {
+  color: #94A3B8;
+}
+
+/* Subject Navigation Tabs */
+.labs-subject-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.labs-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border, rgba(226, 232, 240, 0.8));
+  background: var(--glass-bg, rgba(255, 255, 255, 0.75));
+  backdrop-filter: blur(12px);
+  color: var(--text-secondary, #64748B);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.labs-tab-btn:hover {
+  color: var(--text-primary, #0F172A);
+  border-color: var(--violet, #7C3AED);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.12);
+}
+
+.labs-tab-btn.active {
+  background: linear-gradient(135deg, var(--violet, #7C3AED), #6D28D9);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.25);
+}
+
+.labs-tab-btn.active .labs-tab-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
+html.dark .labs-tab-btn {
+  background: rgba(30, 41, 59, 0.7);
+  border-color: rgba(51, 65, 85, 0.7);
+  color: #94A3B8;
+}
+
+html.dark .labs-tab-btn:hover {
+  color: #F8FAFC;
+  border-color: #8B5CF6;
+}
+
+html.dark .labs-tab-btn.active {
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+  color: #FFFFFF;
+  border-color: transparent;
+}
+
+.labs-tab-badge {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: rgba(100, 116, 139, 0.12);
+  color: var(--text-secondary, #64748B);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+html.dark .labs-tab-badge {
+  background: rgba(148, 163, 184, 0.15);
+  color: #CBD5E1;
+}
+
+/* ================================================================
+   Ohm's Law Workbench Styles
+   ================================================================ */
+
+.ohms-lab-wrapper {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.85));
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.6));
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 16px 48px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+html.dark .ohms-lab-wrapper {
+  background: rgba(15, 23, 42, 0.82);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Workbench Header */
+.ohms-lab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+html.dark .ohms-lab-header {
+  border-bottom-color: rgba(51, 65, 85, 0.7);
+}
+
+.ohms-badge-physics {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #0284C7;
+  background: rgba(2, 132, 199, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+html.dark .ohms-badge-physics {
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.ohms-lab-title {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+  margin-bottom: 4px;
+}
+
+html.dark .ohms-lab-title {
+  color: #F8FAFC;
+}
+
+.ohms-lab-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #64748B);
+}
+
+html.dark .ohms-lab-subtitle {
+  color: #94A3B8;
+}
+
+.ohms-lab-subtitle code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.88rem;
+  color: var(--violet, #7C3AED);
+  background: rgba(124, 58, 237, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+html.dark .ohms-lab-subtitle code {
+  color: #C4B5FD;
+  background: rgba(124, 58, 237, 0.2);
+}
+
+/* Button Base Styles */
+.ohms-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.ohms-btn-ghost {
+  background: rgba(100, 116, 139, 0.08);
+  color: var(--text-secondary, #475569);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.ohms-btn-ghost:hover {
+  background: rgba(100, 116, 139, 0.15);
+  color: var(--text-primary, #0F172A);
+}
+
+html.dark .ohms-btn-ghost {
+  background: rgba(51, 65, 85, 0.5);
+  color: #CBD5E1;
+  border-color: rgba(71, 85, 105, 0.5);
+}
+
+html.dark .ohms-btn-ghost:hover {
+  background: rgba(71, 85, 105, 0.7);
+  color: #F8FAFC;
+}
+
+/* Main Grid Layout */
+.ohms-workbench-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+}
+
+@media (max-width: 992px) {
+  .ohms-workbench-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Card: Circuit Apparatus */
+.ohms-circuit-card {
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+html.dark .ohms-circuit-card {
+  background: rgba(2, 6, 23, 0.6);
+  border-color: rgba(30, 41, 59, 0.9);
+}
+
+.ohms-circuit-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.ohms-card-heading {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+}
+
+html.dark .ohms-card-heading {
+  color: #F8FAFC;
+}
+
+.ohms-circuit-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  transition: all 0.3s ease;
+}
+
+.ohms-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+.ohms-circuit-status-pill.status-warning {
+  background: rgba(239, 68, 68, 0.1);
+  color: #DC2626;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.ohms-circuit-status-pill.status-warning .ohms-status-dot {
+  background: #EF4444;
+  box-shadow: 0 0 8px #EF4444;
+}
+
+.ohms-circuit-status-pill.status-high-power {
+  background: rgba(245, 158, 11, 0.12);
+  color: #D97706;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.ohms-circuit-status-pill.status-high-power .ohms-status-dot {
+  background: #F59E0B;
+  box-shadow: 0 0 8px #F59E0B;
+}
+
+/* SVG Circuit Container */
+.ohms-svg-container {
+  width: 100%;
+  aspect-ratio: 600 / 360;
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+html.dark .ohms-svg-container {
+  background: #090D16;
+  border-color: rgba(30, 41, 59, 0.8);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+#ohms-circuit-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Circuit Wires */
+.ohms-wire-path {
+  fill: none;
+  stroke: #94A3B8;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+html.dark .ohms-wire-path {
+  stroke: #334155;
+}
+
+.ohms-wire-electrons {
+  fill: none;
+  stroke: var(--violet, #7C3AED);
+  stroke-width: 4;
+  stroke-dasharray: 6 18;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.9;
+}
+
+html.dark .ohms-wire-electrons {
+  stroke: #A78BFA;
+}
+
+.ohms-wire-parallel {
+  fill: none;
+  stroke: #64748B;
+  stroke-width: 2.5;
+  stroke-dasharray: 4 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+html.dark .ohms-wire-parallel {
+  stroke: #475569;
+}
+
+/* Components in SVG */
+.ohms-component {
+  color: var(--text-primary, #0F172A);
+}
+
+html.dark .ohms-component {
+  color: #F8FAFC;
+}
+
+.ohms-component-label {
+  font-family: var(--font-main, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  fill: #64748B;
+  text-anchor: middle;
+}
+
+html.dark .ohms-component-label {
+  fill: #94A3B8;
+}
+
+.ohms-tag-bg {
+  fill: #FFFFFF;
+  stroke: #CBD5E1;
+  stroke-width: 1.5;
+}
+
+html.dark .ohms-tag-bg {
+  fill: #1E293B;
+  stroke: #475569;
+}
+
+.ohms-tag-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  fill: #0F172A;
+  text-anchor: middle;
+}
+
+html.dark .ohms-tag-text {
+  fill: #F8FAFC;
+}
+
+.ohms-symbol-text {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* Ammeter & Voltmeter */
+.ohms-meter-circle {
+  fill: #FFFFFF;
+  stroke: #94A3B8;
+  stroke-width: 2.5;
+}
+
+html.dark .ohms-meter-circle {
+  fill: #1E293B;
+  stroke: #475569;
+}
+
+.ohms-meter-inner {
+  fill: rgba(241, 245, 249, 0.6);
+  stroke: none;
+}
+
+html.dark .ohms-meter-inner {
+  fill: rgba(15, 23, 42, 0.6);
+}
+
+.ohms-meter-badge {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 16px;
+  font-weight: 800;
+  fill: var(--violet, #7C3AED);
+  text-anchor: middle;
+}
+
+.ohms-meter-badge.ohms-volt-color {
+  fill: #0284C7;
+}
+
+html.dark .ohms-meter-badge.ohms-volt-color {
+  fill: #38BDF8;
+}
+
+.ohms-meter-subval {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  fill: #0F172A;
+  text-anchor: middle;
+}
+
+html.dark .ohms-meter-subval {
+  fill: #F8FAFC;
+}
+
+/* Resistor */
+.ohms-resistor-body {
+  fill: #FFFFFF;
+  stroke: #CBD5E1;
+  stroke-width: 1.5;
+}
+
+html.dark .ohms-resistor-body {
+  fill: #1E293B;
+  stroke: #475569;
+}
+
+.ohms-zigzag-path {
+  fill: none;
+  stroke: #D97706;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ohms-resistor-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  fill: #0F172A;
+  text-anchor: middle;
+}
+
+html.dark .ohms-resistor-val {
+  fill: #F8FAFC;
+}
+
+/* Bulb Component */
+.ohms-bulb-halo {
+  transition: all 0.2s ease-out;
+}
+
+.ohms-bulb-glass {
+  fill: rgba(255, 255, 255, 0.4);
+  stroke: #64748B;
+  stroke-width: 2;
+}
+
+html.dark .ohms-bulb-glass {
+  fill: rgba(30, 41, 59, 0.4);
+  stroke: #94A3B8;
+}
+
+.ohms-bulb-filament {
+  fill: none;
+  stroke: #FFD166;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.ohms-bulb-base {
+  fill: #64748B;
+}
+
+.ohms-bulb-power-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  fill: #D97706;
+  text-anchor: middle;
+}
+
+html.dark .ohms-bulb-power-text {
+  fill: #FBBF24;
+}
+
+/* Readouts Bar */
+.ohms-readouts-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 14px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+html.dark .ohms-readouts-bar {
+  background: #090D16;
+  border-color: rgba(30, 41, 59, 0.8);
+}
+
+@media (max-width: 640px) {
+  .ohms-readouts-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .ohms-readout-divider {
+    display: none;
+  }
+}
+
+.ohms-readout-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ohms-readout-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary, #64748B);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+html.dark .ohms-readout-label {
+  color: #94A3B8;
+}
+
+.ohms-readout-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+}
+
+html.dark .ohms-readout-value {
+  color: #F8FAFC;
+}
+
+.ohms-val-current {
+  color: var(--violet, #7C3AED);
+}
+
+html.dark .ohms-val-current {
+  color: #A78BFA;
+}
+
+.ohms-val-power {
+  color: #D97706;
+}
+
+html.dark .ohms-val-power {
+  color: #FBBF24;
+}
+
+.ohms-readout-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(226, 232, 240, 0.9);
+  align-self: center;
+}
+
+html.dark .ohms-readout-divider {
+  background: rgba(51, 65, 85, 0.7);
+}
+
+/* Right Card: Controls & Pedagogy */
+.ohms-controls-card {
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+html.dark .ohms-controls-card {
+  background: rgba(2, 6, 23, 0.6);
+  border-color: rgba(30, 41, 59, 0.9);
+}
+
+.ohms-controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ohms-control-hint {
+  font-size: 0.8rem;
+  color: var(--text-secondary, #64748B);
+}
+
+html.dark .ohms-control-hint {
+  color: #94A3B8;
+}
+
+/* Sliders */
+.ohms-sliders-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ohms-slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ohms-slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ohms-slider-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary, #0F172A);
+  cursor: pointer;
+}
+
+html.dark .ohms-slider-title {
+  color: #F8FAFC;
+}
+
+.ohms-param-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.ohms-dot-volt {
+  background: #0284C7;
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.5);
+}
+
+.ohms-dot-res {
+  background: #D97706;
+  box-shadow: 0 0 6px rgba(217, 119, 6, 0.5);
+}
+
+.ohms-slider-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  color: var(--text-primary, #0F172A);
+}
+
+html.dark .ohms-slider-num {
+  background: #1E293B;
+  border-color: #334155;
+  color: #F8FAFC;
+}
+
+/* Range Inputs */
+.ohms-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #E2E8F0;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+html.dark .ohms-slider {
+  background: #334155;
+}
+
+.ohms-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--violet, #7C3AED);
+  cursor: pointer;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.ohms-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.ohms-slider::-webkit-slider-thumb:active {
+  transform: scale(1.25);
+  background: #6D28D9;
+}
+
+.ohms-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--violet, #7C3AED);
+  cursor: pointer;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+}
+
+.ohms-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-secondary, #94A3B8);
+  font-family: 'JetBrains Mono', monospace;
+  padding: 0 2px;
+}
+
+/* Presets Grid */
+.ohms-presets-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ohms-subheading {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary, #64748B);
+}
+
+html.dark .ohms-subheading {
+  color: #94A3B8;
+}
+
+.ohms-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.ohms-preset-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: #FFFFFF;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.dark .ohms-preset-btn {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+.ohms-preset-btn:hover {
+  border-color: var(--violet, #7C3AED);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+}
+
+.ohms-preset-btn.active {
+  border-color: var(--violet, #7C3AED);
+  background: rgba(124, 58, 237, 0.06);
+  box-shadow: 0 0 0 1.5px var(--violet, #7C3AED);
+}
+
+html.dark .ohms-preset-btn.active {
+  background: rgba(124, 58, 237, 0.18);
+  border-color: #A78BFA;
+  box-shadow: 0 0 0 1.5px #A78BFA;
+}
+
+.ohms-preset-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+  margin-bottom: 2px;
+}
+
+html.dark .ohms-preset-title {
+  color: #F8FAFC;
+}
+
+.ohms-preset-sub {
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-secondary, #64748B);
+}
+
+html.dark .ohms-preset-sub {
+  color: #94A3B8;
+}
+
+/* Guided Pedagogy & AI Bridge */
+.ohms-pedagogy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ohms-pedagogy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ohms-badge-caie {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #D97706;
+  background: rgba(217, 119, 6, 0.1);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+html.dark .ohms-badge-caie {
+  color: #FBBF24;
+  background: rgba(251, 191, 36, 0.12);
+}
+
+.ohms-inquiry-box {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+html.dark .ohms-inquiry-box {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+.ohms-inquiry-prompt {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-primary, #1E293B);
+  font-style: italic;
+}
+
+html.dark .ohms-inquiry-prompt {
+  color: #E2E8F0;
+}
+
+.ohms-btn-ai {
+  width: 100%;
+  background: linear-gradient(135deg, var(--violet, #7C3AED), #4F46E5);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.25);
+  font-size: 0.88rem;
+}
+
+.ohms-btn-ai:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+  background: linear-gradient(135deg, #6D28D9, #4338CA);
+}
+
+/* Placeholder for Planned Subjects */
+.labs-placeholder-card {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.85));
+  backdrop-filter: blur(24px);
+  border: 1px dashed rgba(148, 163, 184, 0.4);
+  border-radius: 24px;
+  padding: 60px 24px;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+html.dark .labs-placeholder-card {
+  background: rgba(15, 23, 42, 0.82);
+  border-color: rgba(71, 85, 105, 0.5);
+}
+
+.labs-placeholder-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px auto;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--violet, #7C3AED);
+}
+
+html.dark .labs-placeholder-icon {
+  background: rgba(124, 58, 237, 0.2);
+  color: #C4B5FD;
+}
+
+.labs-placeholder-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary, #0F172A);
+}
+
+html.dark .labs-placeholder-title {
+  color: #F8FAFC;
+}
+
+.labs-placeholder-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #64748B);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+html.dark .labs-placeholder-desc {
+  color: #94A3B8;
+}
+
+.labs-placeholder-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(217, 119, 6, 0.1);
+  color: #D97706;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+html.dark .labs-placeholder-badge {
+  background: rgba(251, 191, 36, 0.12);
+  color: #FBBF24;
+}
