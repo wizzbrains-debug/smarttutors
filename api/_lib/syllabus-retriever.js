@@ -17,7 +17,7 @@ let cachedPhysicsDataset = null;
 function loadPhysicsDataset() {
   if (cachedPhysicsDataset) return cachedPhysicsDataset;
   try {
-    // 1. Primary serverless bundle location (within api/lib/)
+    // 1. Primary serverless bundle location (within api/_lib/)
     const bundledLibPath = path.join(__dirname, 'physics-5054-2026-2028.json');
     if (fs.existsSync(bundledLibPath)) {
       const raw = fs.readFileSync(bundledLibPath, 'utf8');

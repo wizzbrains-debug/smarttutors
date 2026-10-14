@@ -79,7 +79,7 @@ function isCrossSiteRequest(req) {
   return false;
 }
 
-const { retrieveSyllabusContext } = require('./lib/syllabus-retriever');
+const { retrieveSyllabusContext } = require('./_lib/syllabus-retriever');
 
 /* ── Authoritative server-side Cambridge O-Level Socratic prompts ── */
 const SUBJECT_PROMPTS = {

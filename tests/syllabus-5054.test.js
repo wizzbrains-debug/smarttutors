@@ -54,16 +54,16 @@ console.log(`✔ Dataset validated: 6 topics, ${totalObjectives} discrete object
 
 // 2. Vercel File Inclusion & Serverless Bundling Tests
 console.log('\n--- 2. Testing Vercel File Inclusion & Bundled Fallback ---');
-const bundledPath = path.join(__dirname, '..', 'api', 'lib', 'physics-5054-2026-2028.json');
-assert(fs.existsSync(bundledPath), 'Bundled dataset must exist at api/lib/physics-5054-2026-2028.json for Vercel Serverless Function bundling');
+const bundledPath = path.join(__dirname, '..', 'api', '_lib', 'physics-5054-2026-2028.json');
+assert(fs.existsSync(bundledPath), 'Bundled dataset must exist at api/_lib/physics-5054-2026-2028.json for Vercel Serverless Function bundling');
 const bundledRaw = fs.readFileSync(bundledPath, 'utf8');
 const bundledDataset = JSON.parse(bundledRaw);
 assert.strictEqual(bundledDataset.meta.syllabus_version, 'Version 2.0', 'Bundled dataset version mismatch');
-console.log('✔ Vercel serverless bundle inclusion verified (api/lib/physics-5054-2026-2028.json present & in sync).');
+console.log('✔ Vercel serverless bundle inclusion verified (api/_lib/physics-5054-2026-2028.json present & in sync).');
 
 // 3. Syllabus Retriever Unit Tests & Relevance Limits
 console.log('\n--- 3. Testing Syllabus Retriever Relevance & Hard Limits ---');
-const { retrieveSyllabusContext } = require('../api/lib/syllabus-retriever');
+const { retrieveSyllabusContext } = require('../api/_lib/syllabus-retriever');
 
 // Test 3.1: Ohm's Law and Resistance (Page 26)
 const q1 = "How does current relate to potential difference according to Ohm's Law?";
