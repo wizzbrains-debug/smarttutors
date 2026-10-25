@@ -80,6 +80,7 @@ function isCrossSiteRequest(req) {
 }
 
 const { retrieveSyllabusContext } = require('./_lib/syllabus-retriever');
+const { reserveQuestionQuota, finalizeQuotaReservation } = require('./_lib/supabase-quota');
 
 /* ── Authoritative server-side Cambridge O-Level Socratic prompts ── */
 const SUBJECT_PROMPTS = {
@@ -255,15 +256,71 @@ module.exports = async function handler(req, res) {
     parts: [{ text: message }]
   });
 
-  // 8. Verify server-side API key configuration (never log or return the key)
+  // 8. Server-side Supabase Quota Reservation (Two-Phase Lifecycle — SEC-02)
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  let reservationId = null;
+
+  // Environment mode detection: strictly prevent fallback in production or preview environments
+  const isProductionEnv =
+    process.env.VERCEL_ENV === 'production' ||
+    process.env.NODE_ENV === 'production' ||
+    process.env.VERCEL_ENV === 'preview';
+
+  const allowLocalFallback = Boolean(
+    process.env.ENABLE_LOCAL_DEV_FALLBACK === 'true' && !isProductionEnv
+  );
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    if (!allowLocalFallback) {
+      console.error('[api/chat] Quota service unconfigured in non-development environment. Failing closed.');
+      return res.status(503).json({
+        error: 'AI tutoring service is temporarily unavailable due to quota configuration maintenance.',
+        code: 'quota_service_unconfigured'
+      });
+    }
+    console.warn('[api/chat] WARNING: Local development fallback enabled. Quota reservation bypassed.');
+  } else {
+    const isHttps =
+      (req.headers && req.headers['x-forwarded-proto'] === 'https') ||
+      Boolean(req.socket && req.socket.encrypted);
+
+    const reservation = await reserveQuestionQuota({
+      req,
+      subject: rawSubject,
+      supabaseUrl,
+      serviceRoleKey: supabaseServiceKey,
+      isHttps
+    });
+
+    if (reservation.setCookie) {
+      res.setHeader('Set-Cookie', reservation.setCookie);
+    }
+
+    if (!reservation.allowed) {
+      return res.status(reservation.status || 403).json({
+        error: reservation.error,
+        code: reservation.code,
+        limit: reservation.limit,
+        remaining: reservation.remaining
+      });
+    }
+
+    reservationId = reservation.reservationId;
+  }
+
+  // 9. Verify server-side API key configuration (never log or return the key)
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey || typeof apiKey !== 'string' || !apiKey.trim()) {
+    if (reservationId && supabaseUrl && supabaseServiceKey) {
+      await finalizeQuotaReservation({ supabaseUrl, serviceRoleKey: supabaseServiceKey, reservationId, success: false });
+    }
     return res.status(503).json({
       error: 'AI tutor service is not configured on the server.'
     });
   }
 
-  // 9. Select Gemini model (supports server-side GEMINI_MODEL env override)
+  // 10. Select Gemini model (supports server-side GEMINI_MODEL env override)
   const modelName =
     typeof process.env.GEMINI_MODEL === 'string' && process.env.GEMINI_MODEL.trim()
       ? process.env.GEMINI_MODEL.trim()
@@ -315,6 +372,9 @@ module.exports = async function handler(req, res) {
 
     if (geminiResponse.status === 429) {
       console.warn('[api/chat] Upstream Gemini rate limit (429)');
+      if (reservationId && supabaseUrl && supabaseServiceKey) {
+        await finalizeQuotaReservation({ supabaseUrl, serviceRoleKey: supabaseServiceKey, reservationId, success: false });
+      }
       return res.status(429).json({
         error: 'AI tutor rate limit reached. Please wait a few seconds and try again.'
       });
@@ -322,6 +382,9 @@ module.exports = async function handler(req, res) {
 
     if (!geminiResponse.ok) {
       console.error('[api/chat] Upstream Gemini HTTP error status:', geminiResponse.status);
+      if (reservationId && supabaseUrl && supabaseServiceKey) {
+        await finalizeQuotaReservation({ supabaseUrl, serviceRoleKey: supabaseServiceKey, reservationId, success: false });
+      }
       return res.status(502).json({
         error: 'AI tutor service is temporarily unavailable.'
       });
@@ -335,6 +398,9 @@ module.exports = async function handler(req, res) {
     const finishReason = candidate && candidate.finishReason;
 
     if (blockReason || finishReason === 'SAFETY' || finishReason === 'PROHIBITED_CONTENT') {
+      if (reservationId && supabaseUrl && supabaseServiceKey) {
+        await finalizeQuotaReservation({ supabaseUrl, serviceRoleKey: supabaseServiceKey, reservationId, success: false });
+      }
       const safetyReply =
         'I can only assist with safe, syllabus-aligned Cambridge O-Level study questions. Could you rephrase your question to focus on a specific syllabus concept?';
       if (body.stream === true) {
@@ -366,9 +432,17 @@ module.exports = async function handler(req, res) {
       .trim();
 
     if (!reply) {
+      if (reservationId && supabaseUrl && supabaseServiceKey) {
+        await finalizeQuotaReservation({ supabaseUrl, serviceRoleKey: supabaseServiceKey, reservationId, success: false });
+      }
       return res.status(502).json({
         error: 'Could not generate a tutoring response for that prompt. Please rephrase your question.'
       });
+    }
+
+    // Success! Finalize reservation and commit quota usage
+    if (reservationId && supabaseUrl && supabaseServiceKey) {
+      await finalizeQuotaReservation({ supabaseUrl, serviceRoleKey: supabaseServiceKey, reservationId, success: true });
     }
 
     if (body.stream === true) {
@@ -384,6 +458,9 @@ module.exports = async function handler(req, res) {
     });
   } catch (err) {
     clearTimeout(timeoutId);
+    if (reservationId && supabaseUrl && supabaseServiceKey) {
+      await finalizeQuotaReservation({ supabaseUrl, serviceRoleKey: supabaseServiceKey, reservationId, success: false });
+    }
     if (err && err.name === 'AbortError') {
       console.warn('[api/chat] Upstream Gemini request timed out after ' + REQUEST_TIMEOUT_MS + 'ms');
       return res.status(504).json({

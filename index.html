@@ -583,9 +583,9 @@
           </div>
 
           <div class="footer-legal">
-            <a href="#" class="legal-link">Terms of Service</a>
+            <a href="terms.html" class="legal-link">Terms of Service</a>
             <span class="legal-sep" aria-hidden="true">|</span>
-            <a href="#" class="legal-link">Privacy Policy</a>
+            <a href="privacy.html" class="legal-link">Privacy Policy</a>
             <span class="legal-sep" aria-hidden="true">|</span>
             <a href="#" class="legal-link">Cookie Policy</a>
           </div>
@@ -964,6 +964,15 @@
   </button>
 
   <!-- JS -->
+  <!-- Supabase Staging Client Configuration (Public Anon Key & Staging Project URL only) -->
+  <script>
+    // Configured for isolated staging environment. Never place administrative secret keys here.
+    window.SMARTTUTORS_CONFIG = window.SMARTTUTORS_CONFIG || {};
+    window.SMARTTUTORS_SUPABASE_URL = window.SMARTTUTORS_SUPABASE_URL || window.SMARTTUTORS_CONFIG.supabaseUrl || '';
+    window.SMARTTUTORS_SUPABASE_ANON_KEY = window.SMARTTUTORS_SUPABASE_ANON_KEY || window.SMARTTUTORS_CONFIG.supabaseAnonKey || '';
+  </script>
+  <script src="js/auth.js"></script>
+  <script src="js/auth-ui.js"></script>
   <script src="js/main.js"></script>
   <script src="js/modal.js"></script>
 

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — SmartTutors.online</title>
+  <meta name="description" content="Privacy Policy for SmartTutors educational platform and Socratic AI tutoring service." />
+  <meta name="keywords" content="Privacy Policy, SmartTutors, student data, educational privacy, data protection" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Custom Tailwind config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              50: '#f0f4ff',
+              100: '#dde6ff',
+              500: '#3b5bdb',
+              700: '#1e3a6e',
+              900: '#1E293B',
+              950: '#0f172a',
+            },
+            violet: {
+              brand: '#7C3AED',
+              light: '#A855F7',
+            },
+            coral: {
+              brand: '#FF6B6B',
+              light: '#FF8E8E',
+            },
+            teal: {
+              deep: '#0F4C75',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+</head>
+<body class="font-inter bg-white dark:bg-navy-950 text-navy-900 dark:text-white transition-colors duration-500">
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" aria-label="Main Navigation" class="nav-container">
+    <div class="nav-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Logo -->
+      <a href="index.html" id="nav-logo" class="logo-link" aria-label="SmartTutors Home">
+        <span class="logo-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+            <path d="M16 6L6 11V21L16 26L26 21V11L16 6Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M16 6V26M6 11L26 21M26 11L6 21" stroke="white" stroke-width="1" stroke-opacity="0.4"/>
+            <circle cx="22" cy="8" r="3" fill="white" class="sparkle-dot"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7C3AED"/>
+                <stop offset="1" stop-color="#FF6B6B"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">Smart<span class="logo-accent">Tutors</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul id="desktop-nav" class="nav-links" role="menubar">
+        <li role="none"><a href="index.html" role="menuitem" class="nav-link">Home</a></li>
+        <li role="none"><a href="programs.html" role="menuitem" class="nav-link">Programs</a></li>
+        <li role="none"><a href="success-stories.html" role="menuitem" class="nav-link">Success Stories</a></li>
+        <li role="none"><a href="about.html" role="menuitem" class="nav-link">About Us</a></li>
+        <li role="none"><a href="contact.html" role="menuitem" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Right Section -->
+      <div class="nav-right">
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle" aria-label="Toggle dark mode" class="theme-toggle">
+          <span class="theme-toggle-track">
+            <span class="theme-toggle-thumb">
+              <span class="icon-sun"></span>
+              <span class="icon-moon"></span>
+            </span>
+          </span>
+        </button>
+
+        <!-- CTA Button -->
+        <a href="index.html#enroll" id="cta-btn" class="cta-btn" aria-label="Enroll Now">
+          <span>Get Started</span>
+          <svg class="cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <!-- Header -->
+    <header class="mb-10 text-center">
+      <span class="inline-block py-1 px-3 rounded-full text-xs font-semibold tracking-wider uppercase bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300 mb-3">
+        Privacy & Data Protection
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-navy-950 dark:text-white font-outfit mb-3">
+        Privacy Policy
+      </h1>
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        Effective Date: October 2026 &bull; Version 1.0 (Subject to final human legal review)
+      </p>
+    </header>
+
+    <!-- Prominent Independent Disclaimer Callout -->
+    <div class="p-5 mb-8 rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/40 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-sm leading-relaxed">
+      <strong class="font-bold block mb-1">Independent Educational Platform Notice</strong>
+      SmartTutors is an independent educational platform. SmartTutors is not affiliated with, endorsed by, or sponsored by Cambridge Assessment International Education (CAIE), Pearson Edexcel, or any official examination board.
+    </div>
+
+    <!-- Privacy Body -->
+    <div class="space-y-8 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">1. Overview & Commitment to Student Privacy</h2>
+        <p class="mb-2">
+          SmartTutors values the privacy of students, guardians, and visitors. This Privacy Policy describes how we collect, store, and process personal and academic information when you use our educational website and Socratic AI tutoring assistant.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">2. Information We Collect</h2>
+        <p class="mb-2">We collect only information necessary to deliver educational tutoring and manage daily usage allowances:</p>
+        <ul class="list-disc list-inside space-y-1 pl-2">
+          <li><strong>Student Account Data:</strong> Full name, email address, password hash (processed securely through Supabase Auth), chosen qualification track (Cambridge O-Level or A-Level), and optional mobile number.</li>
+          <li><strong>Terms & Consent Audit Records:</strong> Explicit timestamp records confirming acceptance of service terms and marketing communication preferences.</li>
+          <li><strong>AI Tutoring Inquiries:</strong> The text of student questions, subject selections, and immediate conversation history required to provide contextual Socratic hints.</li>
+          <li><strong>Usage Accounting Data:</strong> Daily question usage counts per student ID, used solely to enforce the 5 free questions/day allowance resetting at midnight PKT.</li>
+          <li><strong>Guest Identifiers:</strong> Ephemeral, HMAC-signed session cookies (e.g. <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800">st_guest_id</code>) and their SHA-256 hashes used to track trial usage without collecting personal identity.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">3. How Information Is Used</h2>
+        <p class="mb-2">We use collected data solely for the following purposes:</p>
+        <ul class="list-disc list-inside space-y-1 pl-2">
+          <li>To authenticate students and secure their account sessions.</li>
+          <li>To generate tailored Socratic learning hints based on Cambridge syllabus topics.</li>
+          <li>To enforce daily question limits fairly across all learners.</li>
+          <li>To send syllabus updates, revision materials, and Cambridge exam preparation guidance <em>only</em> if the student has explicitly opted into marketing communications.</li>
+        </ul>
+        <p class="mt-2">
+          We do not sell student personal information, nor do we share it with third parties for behavioral advertising.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">4. Technical Security & Database Safeguards</h2>
+        <p class="mb-2">SmartTutors employs architectural defense-in-depth measures:</p>
+        <ul class="list-disc list-inside space-y-1 pl-2">
+          <li><strong>Row-Level Security (RLS):</strong> Students can only view their own account profile and usage history.</li>
+          <li><strong>PostgreSQL Column-Level Grants:</strong> Database permissions restrict authenticated students to modifying non-sensitive fields (name, mobile, qualification, marketing consent). Protected columns such as terms acceptance timestamps and minor status cannot be modified via client scripts.</li>
+          <li><strong>Strict Secret Isolation:</strong> Administrative service-role database keys are strictly isolated to serverless execution environments and are never transmitted to client browsers.</li>
+          <li><strong>Token Rotation:</strong> Client sessions use short-lived JWT access tokens with proactive mutex-guarded refresh rotation.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">5. Minor Students & Guardian Awareness</h2>
+        <p class="mb-2">
+          SmartTutors serves secondary education students preparing for Cambridge O-Level and A-Level examinations, many of whom are minors.
+        </p>
+        <p class="mb-2">
+          We treat minor student data with heightened care: accounts record minor status indicators, and guardian consent records are supported in the database schema. Parents or guardians may review or request deletion of their child&rsquo;s account data at any time by contacting our academic support team.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">6. Cookies & Browser Storage</h2>
+        <p class="mb-2">Our platform uses minimal browser storage:</p>
+        <ul class="list-disc list-inside space-y-1 pl-2">
+          <li><strong>Local Storage:</strong> Stores active session access tokens and UI preferences (e.g. dark mode toggle).</li>
+          <li><strong>Secure Cookies:</strong> Guest trial question allowances use secure, HttpOnly, SameSite=Lax HMAC-signed cookies. No third-party tracking cookies are set.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">7. User Rights & Profile Management</h2>
+        <p class="mb-2">
+          Students can view their profile, change their qualification track, and toggle marketing preferences at any time directly through the Student Account drawer.
+        </p>
+        <p>
+          To request full deletion of your student account and associated data, please contact our support team.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">8. Contact & Legal Review Notice</h2>
+        <p class="mb-2">
+          For privacy inquiries or data requests, please contact us via our <a href="contact.html" class="text-violet-600 dark:text-violet-400 underline">Contact Page</a>.
+        </p>
+        <p class="text-xs text-gray-500 italic">
+          [Notice for Human Review: Statutory regulatory references (such as GDPR, UK DPA, or regional child privacy laws), registered company address, exact retention timeframes, and formal Data Protection Officer details must be verified and inserted by legal counsel prior to production launch.]
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-container py-10 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-gray-500 dark:text-gray-400">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p>&copy; 2026 SmartTutors.online. All rights reserved.</p>
+      <div class="flex justify-center gap-4">
+        <a href="terms.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline font-semibold">Terms of Service</a>
+        <span>&bull;</span>
+        <a href="privacy.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline font-semibold">Privacy Policy</a>
+        <span>&bull;</span>
+        <a href="about.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline">About Us</a>
+        <span>&bull;</span>
+        <a href="contact.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/ai-widget.js"></script>
+</body>
+</html>

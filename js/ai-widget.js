@@ -229,11 +229,70 @@
     var historySnapshot = conversationHistory.slice(-MAX_HISTORY_MESSAGES);
 
     try {
+      var requestHeaders = {
+        'Content-Type': 'application/json'
+      };
+
+      if (window.SmartTutorsAuth) {
+        // 1. Resolve configuration if loader is present
+        if (typeof window.SmartTutorsAuth.ensureConfig === 'function') {
+          try {
+            await window.SmartTutorsAuth.ensureConfig();
+          } catch (_cfgErr) {}
+        }
+
+        // 2. Identify if an authenticated session previously existed
+        var hadStoredSession = false;
+        try {
+          hadStoredSession = Boolean(window.localStorage && window.localStorage.getItem('st_auth_session'));
+        } catch (_storageErr) {}
+
+        var hadAuthenticatedSession = Boolean(
+          hadStoredSession ||
+          (typeof window.SmartTutorsAuth.isAuthenticated === 'function' && window.SmartTutorsAuth.isAuthenticated()) ||
+          (typeof window.SmartTutorsAuth.getUser === 'function' && window.SmartTutorsAuth.getUser())
+        );
+
+        // 3. Attempt to retrieve a non-expired access token (proactively refreshes if needed)
+        var token = null;
+        try {
+          if (typeof window.SmartTutorsAuth.getValidAccessToken === 'function') {
+            token = await window.SmartTutorsAuth.getValidAccessToken();
+          } else if (typeof window.SmartTutorsAuth.getAccessToken === 'function') {
+            token = window.SmartTutorsAuth.getAccessToken();
+          }
+        } catch (_tokenErr) {
+          token = null;
+        }
+
+        // 4. Case C & D: If user had an authenticated identity but no valid token can be obtained,
+        // halt immediately to prevent silent fallback into guest quota.
+        if (hadAuthenticatedSession && !token) {
+          hideTyping();
+          renderBubble('Your session has expired. Please sign in again to continue with your student quota.', 'ai');
+          if (!input.value) {
+            input.value = trimmedInput;
+          }
+          isTyping = false;
+          input.disabled = false;
+          sendBtn.disabled = false;
+          input.focus();
+
+          if (window.SmartTutorsAuthUI && typeof window.SmartTutorsAuthUI.openModal === 'function') {
+            window.SmartTutorsAuthUI.openModal('signin');
+          }
+          return;
+        }
+
+        // 5. Case B: Valid authenticated session -> attach Bearer token
+        if (token) {
+          requestHeaders['Authorization'] = 'Bearer ' + token;
+        }
+      }
+
       var response = await fetch(DEEPTUTOR_API_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: requestHeaders,
         body: JSON.stringify({
           message: trimmedInput,
           subject: activeSubject,
@@ -243,22 +302,42 @@
 
       if (!response.ok) {
         var errMsg = '';
+        var errCode = '';
         try {
           var errData = await response.json();
           if (errData && typeof errData.error === 'string') {
             errMsg = errData.error;
           }
+          if (errData && typeof errData.code === 'string') {
+            errCode = errData.code;
+          }
         } catch (_parseErr) {
           // Ignore non-JSON error body
         }
 
-        if (response.status === 400) {
+        if (response.status === 400 || response.status === 401 || response.status === 403) {
           hideTyping();
-          renderBubble(errMsg || 'Please check your question and try again.', 'ai');
+          var displayMsg = errMsg;
+          if (!displayMsg) {
+            displayMsg = response.status === 401
+              ? 'Your session has expired. Please sign in again.'
+              : 'Action cannot be completed. Please check your account status.';
+          }
+          renderBubble(displayMsg, 'ai');
+          if (!input.value) {
+            input.value = trimmedInput;
+          }
           isTyping = false;
           input.disabled = false;
           sendBtn.disabled = false;
           input.focus();
+
+          var isTermsError = response.status === 403 && errCode === 'service_terms_not_accepted';
+          if (isTermsError && window.SmartTutorsAuthUI && typeof window.SmartTutorsAuthUI.openModal === 'function') {
+            window.SmartTutorsAuthUI.openModal('terms');
+          } else if (response.status === 401 && window.SmartTutorsAuthUI && typeof window.SmartTutorsAuthUI.openModal === 'function') {
+            window.SmartTutorsAuthUI.openModal('signin');
+          }
           return;
         }
 
@@ -268,6 +347,9 @@
             errMsg || 'Request limit reached. Please wait a few seconds before sending another question.',
             'ai'
           );
+          if (!input.value) {
+            input.value = trimmedInput;
+          }
           isTyping = false;
           input.disabled = false;
           sendBtn.disabled = false;
@@ -275,6 +357,9 @@
           return;
         }
 
+        if (!input.value) {
+          input.value = trimmedInput;
+        }
         throw new Error(errMsg || 'API responded with status ' + response.status);
       }
 
@@ -343,6 +428,9 @@
 
     } catch (err) {
       hideTyping();
+      if (!input.value) {
+        input.value = trimmedInput;
+      }
       console.warn('[SmartTutors AI] Backend unavailable, using labeled offline fallback hint:', err.message);
       var pool = LOCAL_FALLBACKS[activeSubject] || LOCAL_FALLBACKS.chemistry;
       var idx  = fallbackIndexes[activeSubject] || 0;
@@ -389,7 +477,7 @@
     }, 400);
   });
 
-  /* ── External Bridge for Interactive Labs ── */
+  /* ── External Bridge for Interactive Labs & Testing ── */
   window.SmartTutorsAI = {
     openWithQuestion: function (subject, questionText) {
       if (subject && SUBJECT_PROMPTS[subject]) {
@@ -413,7 +501,8 @@
           JSON.stringify(context.parameters) + '. Can you explain how these variables relate?';
       }
       this.openWithQuestion(subj, text);
-    }
+    },
+    sendMessage: sendMessageToDeepTutor
   };
 
 })();

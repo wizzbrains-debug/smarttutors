@@ -3,3 +3,4 @@ data/*
 !data/syllabus/
 .env*
 !.env.example
+Socialmedia/

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — SmartTutors.online</title>
+  <meta name="description" content="Terms of Service for SmartTutors online educational platform and Cambridge Socratic AI tutoring service." />
+  <meta name="keywords" content="Terms of Service, SmartTutors, educational policy, Cambridge tutoring, AI tutoring terms" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Custom Tailwind config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              50: '#f0f4ff',
+              100: '#dde6ff',
+              500: '#3b5bdb',
+              700: '#1e3a6e',
+              900: '#1E293B',
+              950: '#0f172a',
+            },
+            violet: {
+              brand: '#7C3AED',
+              light: '#A855F7',
+            },
+            coral: {
+              brand: '#FF6B6B',
+              light: '#FF8E8E',
+            },
+            teal: {
+              deep: '#0F4C75',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+</head>
+<body class="font-inter bg-white dark:bg-navy-950 text-navy-900 dark:text-white transition-colors duration-500">
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" aria-label="Main Navigation" class="nav-container">
+    <div class="nav-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Logo -->
+      <a href="index.html" id="nav-logo" class="logo-link" aria-label="SmartTutors Home">
+        <span class="logo-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+            <path d="M16 6L6 11V21L16 26L26 21V11L16 6Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M16 6V26M6 11L26 21M26 11L6 21" stroke="white" stroke-width="1" stroke-opacity="0.4"/>
+            <circle cx="22" cy="8" r="3" fill="white" class="sparkle-dot"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7C3AED"/>
+                <stop offset="1" stop-color="#FF6B6B"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">Smart<span class="logo-accent">Tutors</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul id="desktop-nav" class="nav-links" role="menubar">
+        <li role="none"><a href="index.html" role="menuitem" class="nav-link">Home</a></li>
+        <li role="none"><a href="programs.html" role="menuitem" class="nav-link">Programs</a></li>
+        <li role="none"><a href="success-stories.html" role="menuitem" class="nav-link">Success Stories</a></li>
+        <li role="none"><a href="about.html" role="menuitem" class="nav-link">About Us</a></li>
+        <li role="none"><a href="contact.html" role="menuitem" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Right Section -->
+      <div class="nav-right">
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle" aria-label="Toggle dark mode" class="theme-toggle">
+          <span class="theme-toggle-track">
+            <span class="theme-toggle-thumb">
+              <span class="icon-sun"></span>
+              <span class="icon-moon"></span>
+            </span>
+          </span>
+        </button>
+
+        <!-- CTA Button -->
+        <a href="index.html#enroll" id="cta-btn" class="cta-btn" aria-label="Enroll Now">
+          <span>Get Started</span>
+          <svg class="cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <!-- Header -->
+    <header class="mb-10 text-center">
+      <span class="inline-block py-1 px-3 rounded-full text-xs font-semibold tracking-wider uppercase bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300 mb-3">
+        Legal Policy
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-navy-950 dark:text-white font-outfit mb-3">
+        Terms of Service
+      </h1>
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        Effective Date: October 2026 &bull; Version 1.0 (Subject to final human legal review)
+      </p>
+    </header>
+
+    <!-- Prominent Independent Disclaimer Callout -->
+    <div class="p-5 mb-8 rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/40 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-sm leading-relaxed">
+      <strong class="font-bold block mb-1">Independent Educational Platform Notice</strong>
+      SmartTutors is an independent educational platform. SmartTutors is not affiliated with, endorsed by, or sponsored by Cambridge Assessment International Education (CAIE), Pearson Edexcel, or any official examination board. Subject codes (e.g. Cambridge 5054, 5070, 4024, 5090, 1123) are referenced exclusively for descriptive syllabus categorization.
+    </div>
+
+    <!-- Terms Body -->
+    <div class="space-y-8 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">1. Acceptance of Terms & Affirmative Consent</h2>
+        <p class="mb-2">
+          By accessing the SmartTutors website, registering for a student account, or using our interactive learning tools, you agree to these Terms of Service.
+        </p>
+        <p>
+          Access to quota-protected Cambridge AI Tutoring requires explicit, affirmative acceptance of these terms via your student account portal or initial sign-in review dialog. Clicking external links or browsing informational pages does not constitute acceptance; consent must be explicitly recorded through the provided interface action.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">2. Educational Tutoring Services & Socratic AI Tutoring</h2>
+        <p class="mb-2">
+          SmartTutors provides online educational support, including course outlines, interactive practice simulations, and an automated Socratic AI tutoring assistant.
+        </p>
+        <p class="mb-2">
+          <strong>Socratic Tutoring Methodology:</strong> The AI tutor is engineered to deliver guided learning, conceptual hints, and targeted questions. It is expressly designed <em>not</em> to provide completed homework solutions, essay generation, or direct test answers.
+        </p>
+        <p>
+          <strong>Educational Guidance Only:</strong> All explanations, study tips, and simulation outputs are provided for supplemental educational assistance only. They do not constitute official academic certification, grading, or a guarantee of specific examination outcomes.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">3. Fair Use Allowance & Daily Quota Limits</h2>
+        <p class="mb-2">
+          To maintain reliable platform performance and prevent automated abuse, AI tutoring interactions are governed by a fair use quota system:
+        </p>
+        <ul class="list-disc list-inside space-y-1 pl-2">
+          <li><strong>Registered Students:</strong> Provided a daily allowance of 5 free Socratic tutoring turns per calendar day, resetting at midnight PKT (Asia/Karachi, UTC+5).</li>
+          <li><strong>Guest Visitors:</strong> May receive an initial trial question allowance managed via cryptographic session cookies without account registration.</li>
+          <li><strong>Reservation & Deductions:</strong> Quota is verified and reserved prior to processing each question. Unanswered turns or verified system errors are not deducted from your balance.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">4. Student Accounts & Qualification Tracks</h2>
+        <p class="mb-2">
+          When creating an account, you agree to provide accurate information (full name, email address, password, and chosen qualification track: Cambridge O-Level / IGCSE or Cambridge International A-Level).
+        </p>
+        <p class="mb-2">
+          You may modify your qualification track or marketing preferences at any time through your Student Account drawer.
+        </p>
+        <p>
+          You are responsible for safeguarding your login credentials. If you suspect unauthorized access to your account, please notify us immediately through our contact page.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">5. Academic Integrity & Acceptable Use</h2>
+        <p class="mb-2">
+          Students agree to use SmartTutors in accordance with principles of academic integrity. You agree not to:
+        </p>
+        <ul class="list-disc list-inside space-y-1 pl-2">
+          <li>Attempt to bypass, forge, or tamper with question quotas, cookie identifiers, or authentication tokens.</li>
+          <li>Use automated scripts, scrapers, or bots to query the AI assistant or extract syllabus datasets.</li>
+          <li>Submit unlawful, harassing, defamatory, or abusive content through tutoring chat inputs or contact forms.</li>
+          <li>Attempt to reverse-engineer serverless API endpoints or database functions.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">6. Technical Availability & Third-Party Infrastructure</h2>
+        <p class="mb-2">
+          The SmartTutors platform operates on cloud infrastructure (including Vercel serverless functions, Supabase database storage, and Google Gemini language model APIs).
+        </p>
+        <p>
+          While we strive for continuous availability, service may occasionally be interrupted for scheduled maintenance, updates, or third-party outages. When live AI services are unreachable, labeled local study hints are provided where possible.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">7. Disclaimers & Limitation of Liability</h2>
+        <p class="mb-2">
+          The platform and all educational materials are provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis without warranties of any kind, either express or implied.
+        </p>
+        <p>
+          To the maximum extent permitted by applicable law, SmartTutors shall not be liable for any indirect, incidental, or consequential damages resulting from the use of or inability to use the tutoring services.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-navy-950 dark:text-white font-outfit mb-2">8. Contact & Notice for Human Review</h2>
+        <p class="mb-2">
+          If you have questions regarding these Terms of Service, please reach out via our <a href="contact.html" class="text-violet-600 dark:text-violet-400 underline">Contact Page</a>.
+        </p>
+        <p class="text-xs text-gray-500 italic">
+          [Notice for Human Review: Final corporate entity registration details, registered jurisdiction, and dispute resolution arbitration clauses must be reviewed and inserted by designated legal counsel prior to formal production launch.]
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-container py-10 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-gray-500 dark:text-gray-400">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p>&copy; 2026 SmartTutors.online. All rights reserved.</p>
+      <div class="flex justify-center gap-4">
+        <a href="terms.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline font-semibold">Terms of Service</a>
+        <span>&bull;</span>
+        <a href="privacy.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline font-semibold">Privacy Policy</a>
+        <span>&bull;</span>
+        <a href="about.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline">About Us</a>
+        <span>&bull;</span>
+        <a href="contact.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/ai-widget.js"></script>
+</body>
+</html>
