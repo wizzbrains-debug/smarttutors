@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Test Preparation (IELTS, PTE, SAT) — SmartTutors.online</title>
+  <meta name="description" content="Master IELTS, PTE Academic, and SAT Reading & Writing with expert tutoring, small interactive cohorts, and structured exam strategies. Book a free diagnostic consultation." />
+  <meta name="keywords" content="IELTS preparation, PTE Academic tutoring, SAT Reading Writing, English test prep, online tutoring, band 7.5 IELTS" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Custom Tailwind config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              50: '#f0f4ff',
+              100: '#dde6ff',
+              500: '#3b5bdb',
+              700: '#1e3a6e',
+              900: '#1E293B',
+              950: '#0f172a',
+            },
+            violet: {
+              brand: '#7C3AED',
+              light: '#A855F7',
+            },
+            coral: {
+              brand: '#FF6B6B',
+              light: '#FF8E8E',
+            },
+            teal: {
+              deep: '#0F4C75',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/english-prep.css" />
+</head>
+<body class="font-inter bg-white dark:bg-navy-950 text-navy-900 dark:text-white transition-colors duration-500">
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" aria-label="Main Navigation" class="nav-container">
+    <div class="nav-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Logo -->
+      <a href="index.html" id="nav-logo" class="logo-link" aria-label="SmartTutors Home">
+        <span class="logo-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+            <path d="M16 6L6 11V21L16 26L26 21V11L16 6Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M16 6V26M6 11L26 21M26 11L6 21" stroke="white" stroke-width="1" stroke-opacity="0.4"/>
+            <circle cx="22" cy="8" r="3" fill="white" class="sparkle-dot"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7C3AED"/>
+                <stop offset="1" stop-color="#FF6B6B"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">SmartTutors</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul id="desktop-nav" class="nav-links" role="menubar">
+        <li role="none"><a href="index.html" role="menuitem" class="nav-link" data-section="home">Home</a></li>
+
+        <!-- Programs Dropdown -->
+        <li class="nav-item-dropdown" role="none">
+          <button class="nav-link dropdown-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" id="programs-btn">
+            Programs
+            <svg class="dropdown-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="dropdown-menu" id="programs-dropdown" role="menu" aria-labelledby="programs-btn">
+            <div class="dropdown-grid">
+              <div class="dropdown-col">
+                <a href="programs.html" role="menuitem" class="dropdown-item">
+                  <span class="dropdown-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <div>
+                    <div class="dropdown-item-title">Group Tutoring</div>
+                    <div class="dropdown-item-sub">Cambridge O/A Level</div>
+                  </div>
+                </a>
+                <a href="programs.html" role="menuitem" class="dropdown-item">
+                  <span class="dropdown-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <div>
+                    <div class="dropdown-item-title">One-on-One Tutoring</div>
+                    <div class="dropdown-item-sub">Personalized mentoring</div>
+                  </div>
+                </a>
+                <a href="english-test-prep.html" role="menuitem" class="dropdown-item active-dropdown-item">
+                  <span class="dropdown-icon" style="background: rgba(124, 58, 237, 0.15); color: #7C3AED;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <div>
+                    <div class="dropdown-item-title">English Test Prep</div>
+                    <div class="dropdown-item-sub">IELTS &bull; PTE &bull; SAT</div>
+                  </div>
+                </a>
+              </div>
+              <div class="dropdown-col dropdown-col-accent">
+                <a href="programs.html#subjects" role="menuitem" class="dropdown-item dropdown-item-accent">
+                  <span class="dropdown-icon-sm"></span>
+                  <div>
+                    <div class="dropdown-item-title">All Subjects</div>
+                    <div class="dropdown-item-sub">CAIE curriculum</div>
+                  </div>
+                </a>
+                <a href="programs.html" role="menuitem" class="dropdown-item dropdown-item-accent">
+                  <span class="dropdown-icon-sm"></span>
+                  <div>
+                    <div class="dropdown-item-title">Pricing</div>
+                    <div class="dropdown-item-sub">Secondary tracks</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li role="none"><a href="english-test-prep.html" role="menuitem" class="nav-link active-link">English Test Prep</a></li>
+        <li role="none"><a href="success-stories.html" role="menuitem" class="nav-link" data-section="stories">Success Stories</a></li>
+        <li role="none"><a href="about.html" role="menuitem" class="nav-link" data-section="about">About Us</a></li>
+        <li role="none"><a href="contact.html" role="menuitem" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+
+      <!-- Right Section -->
+      <div class="nav-right">
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle" aria-label="Toggle dark mode" class="theme-toggle">
+          <span class="theme-toggle-track">
+            <span class="theme-toggle-thumb">
+              <span class="icon-sun"></span>
+              <span class="icon-moon"></span>
+            </span>
+          </span>
+        </button>
+
+        <!-- CTA Button -->
+        <a href="#enquire" id="cta-btn" class="cta-btn" aria-label="Book Diagnostic Consultation">
+          <span>Enquire Now</span>
+          <svg class="cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <!-- Hamburger (Mobile) -->
+        <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile Navigation" hidden>
+    <div class="mobile-menu-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-menu-panel" id="mobile-panel">
+      <button id="mobile-close" class="mobile-close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M6 6L18 18M18 6L6 18" stroke="url(#closeGrad)" stroke-width="2" stroke-linecap="round"/>
+          <defs><linearGradient id="closeGrad" x1="6" y1="6" x2="18" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#FF6B6B"/></linearGradient></defs>
+        </svg>
+      </button>
+
+      <div class="mobile-logo">
+        <span class="logo-text">SmartTutors</span>
+      </div>
+
+      <nav class="mobile-nav-links" aria-label="Mobile Navigation Links">
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="programs.html" class="mobile-nav-link">Programs</a>
+        <a href="english-test-prep.html" class="mobile-nav-link active-link">English Test Prep</a>
+        <a href="success-stories.html" class="mobile-nav-link">Success Stories</a>
+        <a href="about.html" class="mobile-nav-link">About Us</a>
+        <a href="contact.html" class="mobile-nav-link">Contact</a>
+      </nav>
+
+      <div class="mobile-bottom">
+        <a href="#enquire" class="cta-btn mobile-cta">
+          <span>Book Diagnostic Consultation</span>
+        </a>
+        <button class="mobile-theme-btn" id="mobile-theme-toggle" aria-label="Toggle dark mode">
+          <span class="mobile-theme-icon"></span>
+          Switch Theme
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main id="etp-content">
+
+    <!-- 1. HERO SECTION -->
+    <section class="etp-hero text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+      <div class="etp-badge">
+        <span>🎯</span>
+        <span>Targeted English Test Preparation</span>
+      </div>
+      <h1 class="etp-title">
+        Master Your Target Score in <br />
+        <span class="gradient-text">IELTS, PTE &amp; SAT</span>
+      </h1>
+      <p class="etp-subtitle">
+        Examiner-aligned preparation engineered to bridge critical language gaps. Benefit from diagnostic baselines, small interactive cohorts, timed drills, and direct faculty feedback.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#enquire" class="cta-btn" style="padding: 14px 28px; font-size: 15px;">
+          <span>Book Free Diagnostic &amp; Consultation</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#courses" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-gray-300 dark:border-gray-700 font-semibold text-sm hover:border-violet-500 transition-colors">
+          Explore Test Tracks
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. DIAGNOSTIC CALLOUT BANNER -->
+    <div class="px-4 sm:px-6 lg:px-8">
+      <div class="etp-banner">
+        <div class="etp-banner-content">
+          <h3>📊 Start With a Personalized Diagnostic Baseline</h3>
+          <p>
+            Before instruction begins, every student completes an initial assessment to benchmark current band/score performance and isolate specific grammar, writing, or reading comprehension weaknesses.
+          </p>
+        </div>
+        <a href="#enquire" class="cta-btn" style="white-space: nowrap;">
+          <span>Schedule Evaluation</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. COURSE TRACKS SECTION -->
+    <section id="courses" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-eyebrow">Targeted Curricula</span>
+        <h2 class="section-title">Specialized <span class="gradient-text">Test Preparation Tracks</span></h2>
+        <p class="section-subtitle">Choose the exam track matching your university admission or immigration goals.</p>
+      </div>
+
+      <div class="etp-cards-grid">
+
+        <!-- Card 1: IELTS Preparation -->
+        <article class="etp-card" aria-label="IELTS Preparation Program">
+          <div class="etp-card-header">
+            <div class="etp-card-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M6 6h10M6 10h10"/></svg>
+            </div>
+            <span class="etp-card-badge">Target Band 7.0–8.5</span>
+          </div>
+          <h3 class="etp-card-title">IELTS Preparation</h3>
+          <p class="etp-card-desc">
+            Complete mastery of both Academic and General Training formats with rigorous rubric breakdown for top university admissions.
+          </p>
+          <ul class="etp-skills-list" aria-label="IELTS Modules">
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Task 1 &amp; Task 2 Writing:</strong> Coherence, lexical resource, and grammatical accuracy.</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Academic Reading:</strong> Skimming, scanning, and True/False/Not Given mastery.</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Listening Drills:</strong> Distractor elimination and multi-accent comprehension.</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>1-on-1 Speaking Practice:</strong> Fluency, pronunciation, and lexical flexibility.</span>
+            </li>
+          </ul>
+
+          <div class="etp-meta-box">
+            <div><strong>Format:</strong> Small cohort interactive live sessions</div>
+            <div><strong>Duration &amp; Schedule:</strong> <em>[To be confirmed by Admissions upon consultation]</em></div>
+            <div><strong>Tuition Fee:</strong> <strong class="text-violet-600 dark:text-violet-400">PKR 25,000</strong> for complete course <span class="text-xs text-gray-500 dark:text-gray-400 font-normal">(approx. $100 USD)</span></div>
+          </div>
+
+          <button type="button" class="cta-btn w-full" data-etp-select="ielts-academic">
+            <span>Enquire for IELTS</span>
+          </button>
+        </article>
+
+        <!-- Card 2: PTE Academic -->
+        <article class="etp-card" aria-label="PTE Academic Program">
+          <div class="etp-card-header">
+            <div class="etp-card-icon" style="background: rgba(16, 185, 129, 0.12); color: #059669;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <span class="etp-card-badge" style="background: rgba(59, 130, 246, 0.1); color: #2563EB; border-color: rgba(59, 130, 246, 0.2);">Pearson Computerized</span>
+          </div>
+          <h3 class="etp-card-title">PTE Academic</h3>
+          <p class="etp-card-desc">
+            Computer-based test strategies engineered specifically for Pearson's automated scoring algorithms and integrated skill format.
+          </p>
+          <ul class="etp-skills-list" aria-label="PTE Modules">
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Speaking &amp; Writing:</strong> Read Aloud, Repeat Sentence, Describe Image, Retell Lecture.</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Reading Mastery:</strong> Re-order paragraphs and Reading &amp; Writing Fill in the Blanks.</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Listening Precision:</strong> Summarize Spoken Text, Highlight Incorrect Words, Write from Dictation.</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Algorithm Alignment:</strong> Oral fluency, pronunciation cadence, and microphone discipline.</span>
+            </li>
+          </ul>
+
+          <div class="etp-meta-box">
+            <div><strong>Format:</strong> Live computer-based practice &amp; mock test drills</div>
+            <div><strong>Duration &amp; Schedule:</strong> <em>[To be confirmed by Admissions upon consultation]</em></div>
+            <div><strong>Tuition Fee:</strong> <strong class="text-violet-600 dark:text-violet-400">PKR 25,000</strong> for complete course <span class="text-xs text-gray-500 dark:text-gray-400 font-normal">(approx. $100 USD)</span></div>
+          </div>
+
+          <button type="button" class="cta-btn w-full" data-etp-select="pte-academic">
+            <span>Enquire for PTE Academic</span>
+          </button>
+        </article>
+
+        <!-- Card 3: SAT Reading & Writing -->
+        <article class="etp-card" aria-label="Digital SAT Reading and Writing Program">
+          <div class="etp-card-header">
+            <div class="etp-card-icon" style="background: rgba(255, 107, 107, 0.12); color: #FF6B6B;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <span class="etp-card-badge" style="background: rgba(245, 158, 11, 0.1); color: #D97706; border-color: rgba(245, 158, 11, 0.2);">Digital SAT (College Board)</span>
+          </div>
+          <h3 class="etp-card-title">SAT Reading &amp; Writing</h3>
+          <p class="etp-card-desc">
+            Strategic mastery for the adaptive Digital SAT Reading &amp; Writing section, focusing on high-difficulty modules and rhetorical skills.
+          </p>
+          <ul class="etp-skills-list" aria-label="SAT Modules">
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Craft &amp; Structure:</strong> Words in context, text structure, purpose, and cross-text connections.</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Information &amp; Ideas:</strong> Central ideas, command of evidence (textual &amp; quantitative).</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Standard English Conventions:</strong> Boundaries, agreement, verb form, modifier rules.</span>
+            </li>
+            <li class="etp-skill-item">
+              <span class="etp-check-icon">✓</span>
+              <span><strong>Expression of Ideas:</strong> Rhetorical synthesis and transitions under strict timing.</span>
+            </li>
+          </ul>
+
+          <div class="etp-meta-box">
+            <div><strong>Format:</strong> Small cohort adaptive drills &amp; passage breakdowns</div>
+            <div><strong>Duration &amp; Schedule:</strong> <em>[To be confirmed by Admissions upon consultation]</em></div>
+            <div><strong>Tuition Fee:</strong> <strong class="text-violet-600 dark:text-violet-400">PKR 25,000</strong> for complete course <span class="text-xs text-gray-500 dark:text-gray-400 font-normal">(approx. $100 USD)</span></div>
+          </div>
+
+          <button type="button" class="cta-btn w-full" data-etp-select="sat-rw">
+            <span>Enquire for SAT</span>
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 4. TRANSPARENT PRICING SECTION -->
+    <section id="pricing" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-16">
+      <div class="text-center mb-12">
+        <span class="section-eyebrow">Clear &amp; Transparent Tuition</span>
+        <h2 class="section-title">Course <span class="gradient-text">Pricing &amp; Enrolment Options</span></h2>
+        <p class="section-subtitle">Straightforward, all-inclusive fees for the complete course duration. No monthly subscriptions, registration fees, or hidden charges.</p>
+      </div>
+
+      <!-- Pricing Cards Grid -->
+      <div class="etp-pricing-grid">
+
+        <!-- Tier 1: Single Course -->
+        <div class="etp-pricing-card">
+          <div class="etp-pricing-card-header">
+            <span class="etp-pricing-badge">Single Course</span>
+            <h3 class="etp-pricing-title">Any 1 Course</h3>
+            <p class="etp-pricing-desc">Choose any one test prep track matching your target exam:</p>
+            <ul class="etp-pricing-tracks">
+              <li><strong>IELTS</strong> (Academic or General Training)</li>
+              <li><strong>PTE Academic</strong></li>
+              <li><strong>SAT</strong> (Reading &amp; Writing)</li>
+            </ul>
+          </div>
+          <div class="etp-pricing-amount-box">
+            <div class="etp-price-primary">PKR 25,000</div>
+            <div class="etp-price-sub">Complete course fee <span class="text-xs text-gray-500 dark:text-gray-400 font-normal">(approx. $100 USD)</span></div>
+          </div>
+          <ul class="etp-pricing-features">
+            <li><span class="etp-check-icon">✓</span> Full curriculum &amp; exam strategy</li>
+            <li><span class="etp-check-icon">✓</span> Diagnostic baseline evaluation</li>
+            <li><span class="etp-check-icon">✓</span> Small cohort live interactive classes</li>
+            <li><span class="etp-check-icon">✓</span> Direct faculty marked feedback</li>
+            <li><span class="etp-check-icon">✓</span> HD session recordings access</li>
+          </ul>
+          <a href="#enquire" class="cta-btn w-full text-center" data-etp-select="ielts-academic">
+            <span>Enquire for 1 Course</span>
+          </a>
+        </div>
+
+        <!-- Tier 2: Any 2 Courses -->
+        <div class="etp-pricing-card etp-pricing-card-featured">
+          <div class="etp-pricing-card-header">
+            <span class="etp-pricing-badge etp-pricing-badge-popular">Dual Track</span>
+            <h3 class="etp-pricing-title">Any 2 Courses</h3>
+            <p class="etp-pricing-desc">Select any combination of two courses of your choice:</p>
+            <ul class="etp-pricing-tracks">
+              <li>e.g. <strong>IELTS + SAT</strong> Reading &amp; Writing</li>
+              <li>e.g. <strong>PTE Academic + SAT</strong> Reading &amp; Writing</li>
+              <li>e.g. <strong>IELTS + PTE Academic</strong></li>
+            </ul>
+          </div>
+          <div class="etp-pricing-amount-box">
+            <div class="etp-price-primary">PKR 50,000</div>
+            <div class="etp-price-sub">Complete courses fee <span class="text-xs text-gray-500 dark:text-gray-400 font-normal">(approx. $200 USD)</span></div>
+          </div>
+          <ul class="etp-pricing-features">
+            <li><span class="etp-check-icon">✓</span> Complete coverage of both selected courses</li>
+            <li><span class="etp-check-icon">✓</span> Individual diagnostic assessment for each exam</li>
+            <li><span class="etp-check-icon">✓</span> Small cohort live interactive classes</li>
+            <li><span class="etp-check-icon">✓</span> Direct faculty marked feedback across both tracks</li>
+            <li><span class="etp-check-icon">✓</span> HD session recordings access for both</li>
+          </ul>
+          <a href="#enquire" class="cta-btn w-full text-center" data-etp-select="undecided">
+            <span>Enquire for 2 Courses</span>
+          </a>
+        </div>
+
+        <!-- Tier 3: All 3 Courses -->
+        <div class="etp-pricing-card">
+          <div class="etp-pricing-card-header">
+            <span class="etp-pricing-badge">Comprehensive</span>
+            <h3 class="etp-pricing-title">All 3 Courses</h3>
+            <p class="etp-pricing-desc">Full preparation across every available exam program:</p>
+            <ul class="etp-pricing-tracks">
+              <li><strong>IELTS</strong> (Academic or General)</li>
+              <li><strong>PTE Academic</strong></li>
+              <li><strong>SAT Reading &amp; Writing</strong></li>
+            </ul>
+          </div>
+          <div class="etp-pricing-amount-box">
+            <div class="etp-price-primary">PKR 75,000</div>
+            <div class="etp-price-sub">Complete courses fee <span class="text-xs text-gray-500 dark:text-gray-400 font-normal">(approx. $300 USD)</span></div>
+          </div>
+          <ul class="etp-pricing-features">
+            <li><span class="etp-check-icon">✓</span> Complete coverage of all 3 exam curricula</li>
+            <li><span class="etp-check-icon">✓</span> Comprehensive diagnostics for each test format</li>
+            <li><span class="etp-check-icon">✓</span> Small cohort live interactive classes</li>
+            <li><span class="etp-check-icon">✓</span> Direct faculty marked feedback on all modules</li>
+            <li><span class="etp-check-icon">✓</span> HD session recordings for all three tracks</li>
+          </ul>
+          <a href="#enquire" class="cta-btn w-full text-center" data-etp-select="undecided">
+            <span>Enquire for All 3 Courses</span>
+          </a>
+        </div>
+
+      </div><!-- /etp-pricing-grid -->
+
+      <!-- Official Pricing Policy Note -->
+      <div class="etp-pricing-note mt-8 p-6 rounded-2xl border border-violet-200 dark:border-violet-900/50 bg-violet-50/70 dark:bg-navy-900/60 max-w-3xl mx-auto text-center">
+        <p class="text-sm sm:text-base font-semibold text-navy-900 dark:text-gray-100 mb-2">
+          All fees cover the complete selected course. Students can enrol in one, two, or all three courses. Each course costs PKR 25,000.
+        </p>
+        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          Course fees cover the full course duration with no monthly charges, recurring subscriptions, or registration fees. Pakistani Rupee (PKR) is the primary tuition currency; USD amounts (~$100 per course) are approximate references for international students.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- 5. DELIVERY & FACULTY SECTION -->
+    <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-16">
+      <div class="text-center mb-12">
+        <span class="section-eyebrow">Academic Delivery</span>
+        <h2 class="section-title">How Our <span class="gradient-text">Program Operates</span></h2>
+      </div>
+
+      <div class="etp-features-grid">
+        <div class="etp-feature-card">
+          <div class="text-2xl mb-3">👥</div>
+          <h4>Small Interactive Cohorts</h4>
+          <p>Strictly capped cohort sizes to ensure active participation, live speaking drills, and individual attention from your instructor.</p>
+        </div>
+        <div class="etp-feature-card">
+          <div class="text-2xl mb-3">📹</div>
+          <h4>Session Recordings Provided</h4>
+          <p>Every live class is recorded and uploaded within 24 hours so you can rewatch complex explanations and grammar reviews anytime.</p>
+        </div>
+        <div class="etp-feature-card">
+          <div class="text-2xl mb-3">✍️</div>
+          <h4>Direct Faculty Marked Feedback</h4>
+          <p>Receive detailed written corrections and examiner rubric breakdowns on every practice essay, summary, and speaking task.</p>
+        </div>
+      </div>
+
+      <!-- Verified Faculty Note -->
+      <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-navy-900 text-center max-w-3xl mx-auto">
+        <h4 class="font-outfit font-bold text-lg mb-2">Faculty &amp; Instructor Qualifications</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+          Our test preparation programs are led by certified English language instructors with proven experience preparing candidates for international university entry.
+        </p>
+        <span class="inline-block py-1 px-3 rounded-full text-xs font-mono bg-violet-100 dark:bg-violet-950 text-violet-700 dark:text-violet-300">
+          Faculty Profiles &amp; Teacher Background: [To be confirmed by SmartTutors Academic Director]
+        </span>
+      </div>
+    </section>
+
+    <!-- 5. DEDICATED ENQUIRY FORM SECTION -->
+    <section id="enquire" class="etp-form-section px-4 sm:px-6 lg:px-8">
+      <div class="etp-form-card">
+
+        <div class="text-center mb-8">
+          <span class="section-eyebrow">Admissions &amp; Consultation</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-outfit text-navy-950 dark:text-white mb-2">
+            Book Your Free <span class="gradient-text">Diagnostic Assessment</span>
+          </h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            Tell us about your target test and timeline. Our admissions team will connect with you via your preferred method to review your baseline evaluation.
+          </p>
+          <!-- Direct WhatsApp Admissions Contact -->
+          <div class="mt-4 flex items-center justify-center">
+            <a href="https://wa.me/923558827641" target="_blank" rel="noopener noreferrer" class="etp-whatsapp-contact-pill" aria-label="Chat with Admissions on WhatsApp">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-emerald-500"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.41a8.16 8.16 0 0 1 2.4 5.83c0 4.54-3.69 8.23-8.23 8.23-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23zm-3.62 4.45c-.2 0-.44.07-.66.32-.23.24-.87.85-.87 2.08 0 1.23.9 2.42 1.02 2.58.13.17 1.74 2.72 4.26 3.77.6.25 1.07.4 1.44.52.6.2 1.15.17 1.59.1.48-.07 1.48-.6 1.69-1.18.2-.59.2-1.09.14-1.19-.06-.1-.23-.17-.48-.29-.26-.13-1.48-.73-1.71-.82-.23-.08-.39-.13-.56.13-.17.25-.66.82-.81.99-.15.17-.3.19-.55.07-.26-.13-1.09-.4-2.07-1.28-.77-.69-1.29-1.54-1.44-1.8-.15-.26-.02-.4.11-.53.11-.11.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.07-.13-.56-1.37-.78-1.88-.2-.49-.42-.42-.58-.43h-.49z"/></svg>
+              <span>Admissions WhatsApp: <strong class="font-bold">0355 8827641</strong></span>
+              <span class="etp-whatsapp-action-tag">Chat Now &rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Cooldown Banner -->
+        <div id="etp-cooldown-banner" class="etp-cooldown-banner" role="status" aria-live="polite">
+          ⏳ You recently submitted an inquiry. Please wait <strong id="etp-cooldown-timer">05:00</strong> before submitting another request.
+        </div>
+
+        <!-- Alert Container -->
+        <div id="etp-form-alert" class="etp-alert" role="alert" aria-live="assertive"></div>
+
+        <!-- Form Body -->
+        <form id="etp-form" novalidate autocomplete="on">
+
+          <!-- Honeypot Bot Trap (Invisible to humans) -->
+          <div class="etp-hp-field" aria-hidden="true">
+            <label for="etp-website">Leave this field blank</label>
+            <input type="text" id="etp-website" name="website_url" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="etp-form-grid">
+
+            <!-- Full Name -->
+            <div class="etp-field">
+              <label for="etp-name" class="etp-label">
+                Full Name <span class="etp-req" aria-hidden="true">*</span>
+              </label>
+              <input type="text" id="etp-name" name="full_name" class="etp-input" placeholder="e.g. Ayesha Khan" required autocomplete="name" />
+              <div id="etp-name-error" class="etp-field-error" aria-live="polite"></div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="etp-field">
+              <label for="etp-email" class="etp-label">
+                Email Address <span class="etp-req" aria-hidden="true">*</span>
+              </label>
+              <input type="email" id="etp-email" name="email" class="etp-input" placeholder="name@example.com" required autocomplete="email" />
+              <div id="etp-email-error" class="etp-field-error" aria-live="polite"></div>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="etp-field">
+              <label for="etp-phone" class="etp-label">
+                WhatsApp / Phone Number <span class="etp-req" aria-hidden="true">*</span>
+              </label>
+              <input type="tel" id="etp-phone" name="phone" class="etp-input" placeholder="e.g. +92 300 1234567" required autocomplete="tel" />
+              <div id="etp-phone-error" class="etp-field-error" aria-live="polite"></div>
+            </div>
+
+            <!-- Target Test Track -->
+            <div class="etp-field">
+              <label for="etp-test" class="etp-label">
+                Target Exam Program <span class="etp-req" aria-hidden="true">*</span>
+              </label>
+              <select id="etp-test" name="target_test" class="etp-select" required>
+                <option value="" disabled selected>Select exam program...</option>
+                <option value="ielts-academic">IELTS Academic</option>
+                <option value="ielts-general">IELTS General Training</option>
+                <option value="pte-academic">PTE Academic</option>
+                <option value="sat-rw">SAT Reading &amp; Writing</option>
+                <option value="undecided">Undecided / Need Guidance</option>
+              </select>
+              <div id="etp-test-error" class="etp-field-error" aria-live="polite"></div>
+            </div>
+
+            <!-- Target Score -->
+            <div class="etp-field">
+              <label for="etp-score" class="etp-label">
+                Target Score / Band <span class="text-xs text-gray-400 font-normal">(Optional)</span>
+              </label>
+              <input type="text" id="etp-score" name="target_score" class="etp-input" placeholder="e.g. Band 7.5+ or 1450+" maxlength="40" />
+            </div>
+
+            <!-- Preparation Timeline -->
+            <div class="etp-field">
+              <label for="etp-timeline" class="etp-label">
+                Target Exam Timeline <span class="etp-req" aria-hidden="true">*</span>
+              </label>
+              <select id="etp-timeline" name="prep_timeline" class="etp-select" required>
+                <option value="under-1-month">Under 1 month (Urgent)</option>
+                <option value="1-3-months" selected>1–3 months (Recommended)</option>
+                <option value="3-6-months">3–6 months</option>
+                <option value="exploring">Just exploring options</option>
+              </select>
+              <div id="etp-timeline-error" class="etp-field-error" aria-live="polite"></div>
+            </div>
+
+            <!-- Contact Preference -->
+            <div class="etp-field etp-field-full">
+              <label for="etp-pref" class="etp-label">
+                Preferred Contact Method <span class="etp-req" aria-hidden="true">*</span>
+              </label>
+              <select id="etp-pref" name="contact_preference" class="etp-select" required>
+                <option value="whatsapp" selected>WhatsApp (Fastest response)</option>
+                <option value="phone-call">Direct Phone Call</option>
+                <option value="email">Email Only</option>
+              </select>
+              <div id="etp-pref-error" class="etp-field-error" aria-live="polite"></div>
+            </div>
+
+            <!-- Specific Notes -->
+            <div class="etp-field etp-field-full">
+              <label for="etp-notes" class="etp-label">
+                Questions or Specific Goals <span class="text-xs text-gray-400 font-normal">(Optional)</span>
+              </label>
+              <textarea id="etp-notes" name="questions_notes" rows="3" class="etp-textarea" placeholder="Tell us about previous test scores, university requirements, or areas you want to focus on..." maxlength="500"></textarea>
+            </div>
+
+          </div><!-- /etp-form-grid -->
+
+          <!-- Privacy Consent Checkbox -->
+          <label class="etp-consent-wrap">
+            <input type="checkbox" id="etp-consent" name="privacy_consent" class="etp-consent-check" required />
+            <span class="etp-consent-text">
+              I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a> and <a href="terms.html" target="_blank">Terms of Service</a>, and consent to SmartTutors contacting me regarding English test preparation and diagnostic assessment.
+            </span>
+          </label>
+          <div id="etp-consent-error" class="etp-field-error mb-4" aria-live="polite"></div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="etp-submit-btn" class="etp-submit-btn">
+            <span class="etp-spinner" aria-hidden="true"></span>
+            <span>Submit Test Prep Inquiry</span>
+          </button>
+        </form>
+
+        <!-- Success State Card -->
+        <div id="etp-success-card" class="etp-success-card" role="region" aria-live="polite">
+          <div class="etp-success-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h3 class="etp-success-title">Inquiry Successfully Received!</h3>
+          <p class="etp-success-msg">
+            Thank you for reaching out. An admissions advisor has received your test track details and will contact you via your preferred method within 24 hours to schedule your diagnostic assessment.
+          </p>
+          <div id="etp-confirmed-sub-id" class="etp-sub-id-box"></div>
+          <p id="etp-duplicate-note" style="display:none; font-size:13px; color:#B45309; margin-bottom:16px;">
+            Notice: We already have an active inquiry from this email address. Our admissions team will follow up on your existing file.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="https://wa.me/923558827641" target="_blank" rel="noopener noreferrer" class="cta-btn" style="padding: 12px 24px; font-size: 14px;">
+              <span>Chat on WhatsApp: 0355 8827641</span>
+            </a>
+            <button type="button" id="etp-reset-btn" style="background:none; border:none; color:#7C3AED; font-size:13px; text-decoration:underline; cursor:pointer;">
+              Submit another inquiry
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. FREQUENTLY ASKED QUESTIONS -->
+    <section id="faq" class="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto my-16">
+      <div class="text-center mb-10">
+        <span class="section-eyebrow">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+      </div>
+
+      <div class="etp-faq-list">
+        <!-- FAQ 1 -->
+        <div class="etp-faq-item">
+          <button class="etp-faq-trigger" aria-expanded="false">
+            <span>How do I know whether to take IELTS or PTE Academic?</span>
+            <svg class="etp-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="etp-faq-panel">
+            Both IELTS and PTE Academic are globally recognized for university admissions and visa applications. IELTS features human-evaluated speaking interviews and handwriting options, whereas PTE Academic is 100% computerized with automated scoring. During your free diagnostic consultation, our advisors evaluate your accent cadence, typing speed, and target university requirements to recommend the optimal test.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="etp-faq-item">
+          <button class="etp-faq-trigger" aria-expanded="false">
+            <span>How does the Digital SAT preparation differ from traditional SAT?</span>
+            <svg class="etp-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="etp-faq-panel">
+            The Digital SAT features shorter, adaptive modules where your performance in Module 1 determines the difficulty level of Module 2. Our course specifically trains you in digital passage pacing, eliminating distractors under time constraints, and mastering high-yield Standard English conventions.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="etp-faq-item">
+          <button class="etp-faq-trigger" aria-expanded="false">
+            <span>What happens during the free diagnostic assessment?</span>
+            <svg class="etp-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="etp-faq-panel">
+            You will complete a representative set of timed reading, grammar, and writing tasks. Your instructor will analyze your response pattern, calculate your estimated starting band or score, and outline the exact number of study weeks required to reach your target.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="etp-faq-item">
+          <button class="etp-faq-trigger" aria-expanded="false">
+            <span>What if I miss a live class session?</span>
+            <svg class="etp-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="etp-faq-panel">
+            Every session is recorded in high definition and made available to enrolled students on our student drive. You can review the lesson, submit your written practice tasks, and receive written instructor feedback even if you could not attend live.
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="etp-faq-item">
+          <button class="etp-faq-trigger" aria-expanded="false">
+            <span>How does the course fee work for single or multiple courses?</span>
+            <svg class="etp-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="etp-faq-panel">
+            Each course costs PKR 25,000 for the complete course (not per month). All fees cover the complete selected course. Students can enrol in one, two, or all three courses. Each course costs PKR 25,000:
+            <ul class="mt-2 space-y-1 list-disc list-inside">
+              <li><strong>Any 1 course:</strong> PKR 25,000 (approx. $100 USD)</li>
+              <li><strong>Any 2 courses:</strong> PKR 50,000 (approx. $200 USD)</li>
+              <li><strong>All 3 courses:</strong> PKR 75,000 (approx. $300 USD)</li>
+            </ul>
+            There are no monthly recurring charges, subscription fees, or separate registration costs.
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="etp-faq-item">
+          <button class="etp-faq-trigger" aria-expanded="false">
+            <span>Can I speak with admissions directly on WhatsApp before submitting?</span>
+            <svg class="etp-faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="etp-faq-panel">
+            Yes. You can contact our admissions advisor directly on WhatsApp at <a href="https://wa.me/923558827641" target="_blank" rel="noopener noreferrer" class="font-semibold text-emerald-600 dark:text-emerald-400 underline">0355 8827641</a>. We are available to help you select between IELTS, PTE, and SAT, explain the diagnostic assessment, and confirm cohort availability.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="site-footer" aria-label="Site Footer" class="footer-container py-12 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-gray-500 dark:text-gray-400">
+    <div class="max-w-7xl mx-auto px-4 space-y-4">
+      <p>&copy; 2026 SmartTutors.online. All rights reserved. Independent educational preparation platform.</p>
+      <div class="flex flex-wrap justify-center gap-4 text-sm">
+        <a href="terms.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline font-semibold">Terms of Service</a>
+        <span>&bull;</span>
+        <a href="privacy.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline font-semibold">Privacy Policy</a>
+        <span>&bull;</span>
+        <a href="programs.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline">Cambridge Programs</a>
+        <span>&bull;</span>
+        <a href="about.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline">About Us</a>
+        <span>&bull;</span>
+        <a href="contact.html" class="hover:text-violet-600 dark:hover:text-violet-400 underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/english-prep.js"></script>
+</body>
+</html>
