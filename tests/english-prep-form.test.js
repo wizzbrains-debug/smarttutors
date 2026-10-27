@@ -284,11 +284,14 @@ async function runAllTests() {
     assert(html.includes('PTE Academic'), 'Must include PTE Academic course');
     assert(html.includes('SAT Reading &amp; Writing'), 'Must include SAT Reading & Writing');
 
-    // Verify confirmed pricing & official WhatsApp contact
-    assert(html.includes('PKR 25,000'), 'Must include PKR 25,000 course pricing');
-    assert(html.includes('PKR 50,000'), 'Must include PKR 50,000 two-course pricing');
-    assert(html.includes('PKR 75,000'), 'Must include PKR 75,000 three-course pricing');
-    assert(html.includes('All fees cover the complete selected course. Students can enrol in one, two, or all three courses. Each course costs PKR 25,000.'), 'Must include exact required pricing note');
+    // Verify removal of Course Pricing & Enrolment Options section per client request
+    assert(!html.includes('id="pricing"'), 'Pricing section id="pricing" must be removed per client request');
+    assert(!html.includes('Course Pricing &amp; Enrolment Options'), 'Course Pricing heading must be removed');
+    assert(!html.includes('Clear &amp; Transparent Tuition'), 'Pricing section eyebrow must be removed');
+    assert(!html.includes('etp-pricing-grid'), 'Pricing grid container must be removed');
+    assert(!html.includes('etp-pricing-note'), 'Pricing policy note box must be removed');
+
+    // Verify official WhatsApp contact remains preserved
     assert(html.includes('https://wa.me/923558827641'), 'Must include official WhatsApp URL');
     assert(html.includes('0355 8827641'), 'Must include official WhatsApp display number');
     assert(!html.includes('15551234567'), 'Must not contain old ETP WhatsApp placeholder');
